@@ -1,0 +1,60 @@
+¿Es este tu teléfono?;Est-ce que c'est ton téléphone ?
+/ɛs kə sɛ tɔ̃ te.le.fɔn/
+¿Es ese el libro de historia?;Est-ce que c'est le livre d'histoire ?
+/ɛs kə sɛ lə livʁ di.stwaʁ/
+¿Es esta la mejor tecnología?;Est-ce que c'est la meilleure technologie ?
+/ɛs kə sɛ la mɛ.jœʁ tɛk.nɔ.lɔ.ʒi/
+¿Ese de ahí es tu amigo?;Est-ce que c'est ton ami ?
+/ɛs kə sɛ tɔ̃.n‿a.mi/
+¿Es esta tu nueva dieta de salud?;Est-ce que c'est ton nouveau régime de santé ?
+/ɛs kə sɛ tɔ̃ nu.vo ʁe.ʒim də sɑ̃.te/
+¿Es este el tren para el viaje?;Est-ce que c'est le train pour le voyage ?
+/ɛs kə sɛ lə tʁɛ̃ puʁ lə vwa.jaʒ/
+¿Es este plato de gastronomía local?;Est-ce que c'est ce plat de gastronomie locale ?
+/ɛs kə sɛ sə pla də ɡas.tʁɔ.nɔ.mi lɔ.kal/
+¿Es esta la lección de educación?;Est-ce que c'est la leçon d'éducation ?
+/ɛs kə sɛ la lə.sɔ̃ de.dy.ka.sjɔ̃/
+¿Es aquel de la derecha tu arquitecto?;Est-ce que c'est celui de droite qui est ton architecte ?
+/ɛs kə sɛ sə.lui də dʁwat ki ɛ tɔ̃.n‿aʁ.ʃi.tɛkt/
+¿Es esta música de este artista?;Est-ce que c'est cette musique de cet artiste ?
+/ɛs kə sɛ sɛt my.zik də sɛ.t‿aʁ.tist/
+No, este no es mi coche de trabajo;Ce n'est pas ma voiture de travail
+/sə nɛ pa ma vwa.tyʁ də tʁa.vaj/
+Aquel no es el libro de literatura;Ce n'est pas celui du livre de littérature
+/sə nɛ pa sə.lui dy livʁ də li.te.ʁa.tyʁ/
+Eso no es moda sostenible;Ce n'est pas de la mode durable
+/sə nɛ pa də la mɔd dy.ʁabl/
+Esta no es mi raqueta de deportes;Ce n'est pas ma raquette de sport
+/sə nɛ pa ma ʁa.kɛt də spɔʁ/
+Aquel cine no es famoso en la historia;Ce n'est pas ce cinéma célèbre dans l'histoire
+/sə nɛ pa sə si.ne.ma se.lɛbʁ dɑ̃ li.stwaʁ/
+Esto no es ciencia real;Ce n'est pas de la vraie science
+/sə nɛ pa də la vʁɛ sjɑ̃s/
+Aquel profesor no es de educación física;Ce n'est pas celui de l'éducation physique
+/sə nɛ pa sə.lui də le.dy.ka.sjɔ̃ fi.zik/
+Esas no son las finanzas del cine;Ce ne sont pas les finances du cinéma
+/sə nə sɔ̃ pa le fi.nɑ̃s dy si.ne.ma/
+Esa comida no es parte de la gastronomía;Ce n'est pas ce repas de la gastronomie
+/sə nɛ pa sə ʁə.pa də la ɡas.tʁɔ.nɔ.mi/
+Ese deporte no es mi favorito;Ce n'est pas ce sport mon préféré
+/sə nɛ pa sə spɔʁ mɔ̃ pʁe.fe.ʁe/
+C'est un acteur de cinéma célèbre;C'est un acteur de cinéma célèbre
+/sɛ tœ̃.n‿ak.tœʁ də si.ne.ma se.lɛbʁ/
+Il est très grand ce joueur de sport;Il est très grand ce joueur de sport
+/i.l‿ɛ tʁɛ ɡʁɑ̃ sə ʒu.œʁ də spɔʁ/
+Ça m'intéresse beaucoup ce projet de technologie;Ça m'intéresse beaucoup ce projet de technologie
+/sa mɛ̃.te.ʁɛs bo.ku sə pʁɔ.ʒɛ də tɛk.nɔ.lɔ.ʒi/
+C'est difficile de voyager dans l'histoire;C'est difficile de voyager dans l'histoire
+/sɛ di.fi.sil də vwa.ja.ʒe dɑ̃ li.stwaʁ/
+Il est important d'aimer la littérature;Il est important d'aimer la littérature
+/i.l‿ɛ̃.pɔʁ.tɑ̃ dɛ.me la li.te.ʁa.tyʁ/
+Celui-ci est meilleur pour la santé;Celui-ci est meilleur pour la santé
+/sə.lui.si ɛ mɛ.jœʁ puʁ la sɑ̃.te/
+Ceux de la mode sont très élégants;Ceux de la mode sont très élégants
+/sø də la mɔd sɔ̃ tʁɛ.z‿e.le.ɡɑ̃/
+Celle-là est ma collègue de travail;Celle-là est ma collègue de travail
+/sɛl.la ɛ ma kɔ.lɛɡ də tʁa.vaj/
+Celui de gauche est pour la météo;Celui de gauche est pour la météo
+/sə.lui də ɡoʃ ɛ puʁ la me.te.o/
+Celles de ce groupe étudient l'architecture;Celles de ce groupe étudient l'architecture
+/sɛl də sə ɡʁup e.ty.di l'aʁ.ʃi.tɛk.tyʁ/

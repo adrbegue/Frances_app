@@ -264,38 +264,34 @@
         }
 
         function parsearCSV(text, filename) {
-            const cleanText = text.replace(/\\n/g, '[[NEWLINE]]');
-            const lines = cleanText.split(/\r?\n/);
-
+            const lines = text.split(/\r?\n/);
             let index = 0;
-            lines.forEach((line) => {
-                line = line.trim();
-                if (!line) return;
 
-                const partes = line.split(';');
-                if (partes.length >= 2) {
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i].trim();
+                if (!line) continue;
+
+                // Si la línea tiene un punto y coma, es una tarjeta nueva
+                if (line.includes(';')) {
+                    const partes = line.split(';');
                     const frente = partes[0].trim();
-                    const dorsoCompleto = partes[1].trim();
+                    const dorso = partes[1].trim();
 
-                    let frances = dorsoCompleto;
-                    let ipa = "";
-
-                    if (dorsoCompleto.includes('[[NEWLINE]]')) {
-                        const partesDorso = dorsoCompleto.split('[[NEWLINE]]');
-                        frances = partesDorso[0].trim();
-                        ipa = partesDorso[1].trim();
-                    }
-
+                    // Guardamos la tarjeta
                     globalFlashcards.push({
                         id: `${filename}_${index}`,
                         mazo: filename,
                         front: frente,
-                        back: frances,
-                        ipa: ipa
+                        back: dorso,
+                        ipa: "" // Por ahora vacío, buscaremos el IPA en la siguiente línea
                     });
                     index++;
                 }
-            });
+                // Si la línea NO tiene ; y tenemos tarjetas, asumimos que es el IPA de la última
+                else if (globalFlashcards.length > 0) {
+                    globalFlashcards[globalFlashcards.length - 1].ipa = line;
+                }
+            }
         }
 
         function renderLobby() {

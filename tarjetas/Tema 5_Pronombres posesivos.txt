@@ -1,0 +1,60 @@
+El coche es el mío.;La voiture est la mienne.
+/la vwatyʁ ɛ la mjɛn/
+Estos libros son los tuyos.;Ces livres sont les tiens.
+/se livʁə sɔ̃ le tjɛ̃/
+Su casa es la nuestra.;Sa maison est la nôtre.
+/sa mɛzɔ̃ ɛ la notʁ/
+Aquellas maletas son las vuestras.;Ces valises sont les vôtres.
+/se valizə sɔ̃ le votʁ/
+La idea es la suya (de él).;L'idée est la sienne.
+/lide ɛ la sjɛn/
+Nuestros proyectos son los suyos (de ellos).;Nos projets sont les leurs.
+/no pʁɔʒɛ sɔ̃ le lœʁ/
+¿Es esta entrada la mía?;Est-ce que ce billet est le mien ?
+/ɛs kə sə bijɛ ɛ lə mjɛ̃/
+¿Son estas flores las tuyas?;Est-ce que ces fleurs sont les tiennes ?
+/ɛs kə se flœʁə sɔ̃ le tjɛn/
+¿Es esta receta la nuestra?;Est-ce que cette recette est la nôtre ?
+/ɛs kə sɛtə ʁəsɛtə ɛ la notʁ/
+¿Son estas herramientas las vuestras?;Est-ce que ces outils sont les vôtres ?
+/ɛs kə se zuti sɔ̃ le votʁ/
+El ordenador no es el mío.;L'ordinateur n'est pas le mien.
+/lɔʁdinatœʁ nɛ pa lə mjɛ̃/
+Este café no es el suyo (de ella).;Ce café n'est pas le sien.
+/sə kafe nɛ pa lə sjɛn/
+Tu opinión no es la nuestra.;Ton avis n'est pas le nôtre.
+/tɔ̃ navi nɛ pa lə notʁ/
+La cena no es la vuestra.;Le dîner n'est pas le vôtre.
+/lə dine nɛ pa lə votʁ/
+Sus archivos no son los suyos (de ellos).;Ses fichiers ne sont pas les leurs.
+/se fiʃje nə sɔ̃ pa le lœʁ/
+Mi móvil no es el suyo.;Mon portable n'est pas le sien.
+/mɔ̃ pɔʁtablə nɛ pa lə sjɛn/
+La noticia no es la nuestra.;La nouvelle n'est pas la nôtre.
+/la nuvɛlə nɛ pa la notʁ/
+Su equipo no es el vuestro.;Son équipe n'est pas la vôtre.
+/sɔ̃ nekipə nɛ pa la votʁ/
+El mapa no es el mío.;La carte n'est pas la mienne.
+/la kaʁtə nɛ pa la mjɛn/
+Nuestro éxito no es el suyo (de ellos).;Notre succès n'est pas le leur.
+/notʁə syksɛ nɛ pa lə lœʁ/
+¿Es este cine el mío?;Est-ce que ce cinéma est le mien ?
+/ɛs kə sə sinema ɛ lə mjɛ̃/
+¿Es este programa de televisión el suyo?;Est-ce que cette émission est la sienne ?
+/ɛs kə sɛtə emisjɔ̃ ɛ la sjɛn/
+¿Es este vuelo el vuestro?;Est-ce que ce vol est le vôtre ?
+/ɛs kə sə vɔl ɛ lə votʁ/
+¿Es este cuadro el nuestro?;Est-ce que ce tableau est le nôtre ?
+/ɛs kə sə tablo ɛ lə notʁ/
+¿Son estas notas las suyas?;Est-ce que ces notes sont les leurs ?
+/ɛs kə se nɔtə sɔ̃ le lœʁ/
+¿Es esta dieta la tuya?;Est-ce que ce régime est le tien ?
+/ɛs kə sə ʁeʒimə ɛ lə tjɛ̃/
+¿Es esta obra de arte la suya?;Est-ce que cette œuvre est la sienne ?
+/ɛs kə sɛtə œvʁə ɛ la sjɛn/
+¿Es este equipo deportivo el nuestro?;Est-ce que ce club est le nôtre ?
+/ɛs kə sə klyb ɛ lə notʁ/
+¿Es este presupuesto el vuestro?;Est-ce que ce budget est le vôtre ?
+/ɛs kə sə byʒɛ ɛ lə votʁ/
+¿Es esta previsión meteorológica la suya?;Est-ce que cette météo est la leur ?
+/ɛs kə sɛtə meteo ɛ la lœʁ/
