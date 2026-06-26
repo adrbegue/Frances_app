@@ -181,7 +181,7 @@
         if (SpeechRecognition) {
             recognition = new SpeechRecognition();
             recognition.continuous = false;
-            recognition.interimResults = true;
+            recognition.interimResults = true; // Habilitado para capturar texto en tiempo real
             recognition.maxAlternatives = 1;
         }
 
@@ -226,18 +226,16 @@
             let cargadosConExito = 0;
 
             try {
-                // CORREGIDO: Ruta adaptada a la mayúscula exacta 'Tarjetas/Temas.json'
-                const responseJson = await fetch('Tarjetas/Temas.json');
+                const responseJson = await fetch('tarjetas/temas.json');
                 if (!responseJson.ok) {
-                    throw new Error("No se pudo acceder a Tarjetas/Temas.json");
+                    throw new Error("No se pudo acceder a tarjetas/temas.json");
                 }
 
                 const indexArchivos = await responseJson.json();
 
                 for (const nombreArchivo of indexArchivos) {
                     try {
-                        // CORREGIDO: Ruta de los archivos TXT adaptada a 'Tarjetas/'
-                        const responseTxt = await fetch(`Tarjetas/${nombreArchivo}`);
+                        const responseTxt = await fetch(`tarjetas/${nombreArchivo}`);
                         if (!responseTxt.ok) {
                             console.error(`❌ No se encontró el archivo de mazo: "${nombreArchivo}".`);
                             continue;
@@ -251,7 +249,7 @@
                     }
                 }
             } catch (err) {
-                console.error("❌ Error crítico al leer el archivo Temas.json:", err);
+                console.error("❌ Error crítico al leer el archivo temas.json:", err);
             }
 
             const statusBadge = document.getElementById('sync-status');
@@ -582,6 +580,7 @@
             canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
 
             function dibujarOnda() {
+                if (!isListening) return;
                 drawVisualId = requestAnimationFrame(dibujarOnda);
                 analyser.getByteFrequencyData(dataArray);
 
@@ -617,7 +616,8 @@
         function inicializarMicrofonoGlobal() {
             if (!recognition) {
                 const errorMsg = "Tu navegador no soporta Speech Recognition (Usa Chrome o Edge).";
-                document.getElementById('btn-global-mic').onclick = () => alert(errorMsg);
+                const micBtn = document.getElementById('btn-global-mic');
+                if (micBtn) micBtn.onclick = () => alert(errorMsg);
                 return;
             }
 
@@ -626,7 +626,6 @@
             const interpretedText = document.getElementById('voice-interpreted-text');
 
             recognition.onstart = () => {
-                isListening = true;
                 micBtn.classList.replace('bg-emerald-600', 'bg-red-600');
                 micBtn.classList.add('ring-4', 'ring-red-200');
 
@@ -638,18 +637,20 @@
 
             recognition.onresult = (event) => {
                 let textAcumulado = '';
-                let isFinal = false;
+                let esFinal = false;
 
                 for (let i = event.resultIndex; i < event.results.length; ++i) {
                     textAcumulado += event.results[i][0].transcript;
                     if (event.results[i].isFinal) {
-                        isFinal = true;
+                        esFinal = true;
                     }
                 }
 
+                // Pintamos inmediatamente lo que interpreta el micro segundo a segundo
                 interpretedText.innerText = `"${textAcumulado}"`;
+                interpretedText.className = "text-sm font-semibold text-indigo-600 italic truncate";
 
-                if (isFinal) {
+                if (esFinal) {
                     const currentCard = state.activeSessionCards[state.currentCardIndex];
                     if (!currentCard) return;
 
@@ -694,6 +695,7 @@
                 e.preventDefault();
                 if (isListening) return;
 
+                isListening = true;
                 recognition.lang = 'fr-FR';
 
                 try {
@@ -709,7 +711,9 @@
             const soltarMicro = (e) => {
                 e.preventDefault();
                 setTimeout(() => {
-                    if (isListening) recognition.stop();
+                    if (isListening) {
+                        recognition.stop();
+                    }
                 }, 250);
             };
 
