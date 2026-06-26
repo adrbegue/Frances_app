@@ -1,0 +1,30 @@
+Él ha comido un filete.;Il a mangé un steak.\n/il a mɑ̃.ʒe œ̃ stɛk/
+Nosotros hemos bebido agua.;Nous avons bu de l'eau.\n/nuz a.vɔ̃ by də lo/
+Tú has pedido la cuenta.;Tu as demandé l'addition.\n/ty a də.mɑ̃.de la.di.sjɔ̃/
+Yo he elegido un postre.;J'ai choisi un dessert.\n/ʒe ʃwa.zi œ̃ de.sɛʁ/
+Ellos han pagado la comida.;Ils ont payé le repas.\n/ilz ɔ̃ pe.je lə ʁə.pa/
+Ella ha tomado un café.;Elle a pris un café.\n/ɛl a pʁi œ̃ ka.fe/
+Ustedes han reservado una mesa.;Vous avez réservé une table.\n/vuz a.ve ʁe.zɛʁ.ve yn tabl/
+Ellas han comido una ensalada.;Elles ont mangé une salade.\n/ɛlz ɔ̃ mɑ̃.ʒe yn sa.lad/
+Nosotros hemos pedido una sopa.;Nous avons commandé une soupe.\n/nuz a.vɔ̃ kɔ.mɑ̃.de yn sup/
+Tú has bebido un vino tinto.;Tu as bu un vin rouge.\n/ty a by œ̃ vɛ̃ ʁuʒ/
+Él no ha comido un filete.;Il n'a pas mangé un steak.\n/il na pɑ mɑ̃.ʒe œ̃ stɛk/
+Nosotros no hemos bebido agua.;Nous n'avons pas bu de l'eau.\n/nu na.vɔ̃ pɑ by də lo/
+Tú no has pedido la cuenta.;Tu n'as pas demandé l'addition.\n/ty na pɑ də.mɑ̃.de la.di.sjɔ̃/
+Yo no he elegido un postre.;Je n'ai pas choisi un dessert.\n/ʒə ne pɑ ʃwa.zi œ̃ de.sɛʁ/
+Ellos no han pagado la comida.;Ils n'ont pas payé le repas.\n/il nɔ̃ pɑ pe.je lə ʁə.pa/
+Ella no ha tomado un café.;Elle n'a pas pris un café.\n/ɛl na pɑ pʁi œ̃ ka.fe/
+Ustedes no han reservado una mesa.;Vous n'avez pas réservé une table.\n/vu na.ve pɑ ʁe.zɛʁ.ve yn tabl/
+Ellas no han comido una ensalada.;Elles n'ont pas mangé une salade.\n/ɛl nɔ̃ pɑ mɑ̃.ʒe yn sa.lad/
+Nosotros no hemos pedido una sopa.;Nous n'avons pas commandé une soupe.\n/nu na.vɔ̃ pɑ kɔ.mɑ̃.de yn sup/
+Tú no has bebido un vino tinto.;Tu n'as pas bu un vin rouge.\n/ty na pɑ by œ̃ vɛ̃ ʁuʒ/
+¿Él ha comido un filete?;Est-ce qu'il a mangé un steak ?\n/ɛs kil a mɑ̃.ʒe œ̃ stɛk/
+¿Nosotros hemos bebido agua?;Est-ce que nous avons bu de l'eau ?\n/ɛs kə nuz a.vɔ̃ by də lo/
+¿Tú has pedido la cuenta?;Est-ce que tu as demandé l'addition ?\n/ɛs kə ty a də.mɑ̃.de la.di.sjɔ̃/
+¿Yo he elegido un postre?;Est-ce que j'ai choisi un dessert ?\n/ɛs kə ʒe ʃwa.zi œ̃ de.sɛʁ/
+¿Ellos han pagado la comida?;Est-ce qu'ils ont payé le repas ?\n/ɛs kilz ɔ̃ pe.je lə ʁə.pa/
+¿Ella ha tomado un café?;Est-ce qu'elle a pris un café ?\n/ɛs kɛl a pʁi œ̃ ka.fe/
+¿Ustedes han reservado una mesa?;Est-ce que vous avez réservé une table ?\n/ɛs kə vuz a.ve ʁe.zɛʁ.ve yn tabl/
+¿Ellas han comido una ensalada?;Est-ce qu'elles ont mangé une salade ?\n/ɛs kɛlz ɔ̃ mɑ̃.ʒe yn sa.lad/
+¿Nosotros hemos pedido una sopa?;Est-ce que nous avons commandé une soupe ?\n/ɛs kə nuz a.vɔ̃ kɔ.mɑ̃.de yn sup/
+¿Tú has bebido un vino tinto?;Est-ce que tu as bu un vin rouge ?\n/ɛs kə ty a by œ̃ vɛ̃ ʁuʒ/
