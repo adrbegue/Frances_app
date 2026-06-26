@@ -613,62 +613,66 @@
         // ========================================================
         //  SISTEMA DE MICRÓFONO GLOBAL OPTIMIZADO EN TIEMPO REAL
         // ========================================================
-        function inicializarMicrofonoGlobal() {
-            if (!recognition) {
-                const errorMsg = "Tu navegador no soporta Speech Recognition (Usa Chrome o Edge).";
-                document.getElementById('btn-global-mic').onclick = () => alert(errorMsg);
-                return;
+export function inicializarMicrofonoGlobal(recognition, state) {
+    if (!recognition) {
+        const errorMsg = "Tu navegador no soporta Speech Recognition (Usa Chrome o Edge).";
+        const micBtn = document.getElementById('btn-global-mic');
+        if (micBtn) micBtn.onclick = () => alert(errorMsg);
+        return;
+    }
+
+    const micBtn = document.getElementById('btn-global-mic');
+    const statusIndicator = document.getElementById('voice-status-indicator');
+    const interpretedText = document.getElementById('voice-interpreted-text');
+
+    recognition.onstart = () => {
+        // Marcamos que está escuchando y cambiamos el botón a Rojo
+        micBtn.classList.replace('bg-emerald-600', 'bg-red-600');
+        micBtn.classList.add('ring-4', 'ring-red-200');
+
+        statusIndicator.innerText = "🎙️ ESCUCHANDO EN FRANCÉS...";
+        statusIndicator.className = "text-[10px] font-bold text-red-500 uppercase tracking-wider block mb-0.5 animate-pulse";
+        interpretedText.innerText = "Habla ahora...";
+        interpretedText.className = "text-sm font-medium text-slate-400 italic truncate";
+    };
+
+    recognition.onresult = (event) => {
+        let textAcumulado = '';
+        let esFinal = false;
+
+        // Recorremos todos los fragmentos capturados por el micrófono
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+            textAcumulado += event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+                esFinal = true;
             }
+        }
 
-            const micBtn = document.getElementById('btn-global-mic');
-            const statusIndicator = document.getElementById('voice-status-indicator');
-            const interpretedText = document.getElementById('voice-interpreted-text');
+        // 🔥 AQUÍ ESTÁ EL TRUCO: Mostramos el texto en pantalla SEGÚN LO VAS DICIENDO
+        interpretedText.innerText = `"${textAcumulado}"`;
+        interpretedText.className = "text-sm font-semibold text-indigo-600 italic truncate";
 
-            recognition.onstart = () => {
-                isListening = true;
-                micBtn.classList.replace('bg-emerald-600', 'bg-red-600');
-                micBtn.classList.add('ring-4', 'ring-red-200');
+        // Solo cuando el motor detecta que has terminado de hablar por completo, valida
+        if (esFinal) {
+            const currentCard = state.activeSessionCards[state.currentCardIndex];
+            if (!currentCard) return;
 
-                statusIndicator.innerText = "🎙️ ESCUCHANDO EN FRANCÉS...";
-                statusIndicator.className = "text-[10px] font-bold text-red-500 uppercase tracking-wider block mb-0.5 animate-pulse";
-                interpretedText.innerText = "Habla ahora...";
-                interpretedText.className = "text-sm font-medium text-slate-400 italic truncate";
-            };
+            const limpiar = (t) => t.toLowerCase()
+                                    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?¿'’]/g," ")
+                                    .replace(/\s+/g, " ")
+                                    .trim();
 
-            recognition.onresult = (event) => {
-                let textAcumulado = '';
-                let isFinal = false;
-
-                for (let i = event.resultIndex; i < event.results.length; ++i) {
-                    textAcumulado += event.results[i][0].transcript;
-                    if (event.results[i].isFinal) {
-                        isFinal = true;
-                    }
-                }
-
-                // Muestra el texto provisional en pantalla de forma reactiva
-                interpretedText.innerText = `"${textAcumulado}"`;
-
-                if (isFinal) {
-                    const currentCard = state.activeSessionCards[state.currentCardIndex];
-                    if (!currentCard) return;
-
-                    const limpiar = (t) => t.toLowerCase()
-                                            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?¿'’]/g," ")
-                                            .replace(/\s+/g, " ")
-                                            .trim();
-
-                    if (limpiar(textAcumulado) === limpiar(currentCard.back)) {
-                        statusIndicator.innerText = "🟢 ¡PRONUNCIACIÓN EXCELENTE!";
-                        statusIndicator.className = "text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-0.5";
-                        interpretedText.className = "text-sm font-bold text-emerald-700 truncate";
-                    } else {
-                        statusIndicator.innerText = "⚠️ REVISA LA FONÉTICA (¡INTÉNTALO OTRA VEZ!)";
-                        statusIndicator.className = "text-[10px] font-bold text-amber-500 uppercase tracking-wider block mb-0.5";
-                        interpretedText.className = "text-sm font-semibold text-slate-700 truncate";
-                    }
-                }
-            };
+            if (limpiar(textAcumulado) === limpiar(currentCard.back)) {
+                statusIndicator.innerText = "🟢 ¡PRONUNCIACIÓN EXCELENTE!";
+                statusIndicator.className = "text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-0.5";
+                interpretedText.className = "text-sm font-bold text-emerald-700 truncate";
+            } else {
+                statusIndicator.innerText = "⚠️ REVISA LA FONÉTICA (¡INTÉNTALO OTRA VEZ!)";
+                statusIndicator.className = "text-[10px] font-bold text-amber-500 uppercase tracking-wider block mb-0.5";
+                interpretedText.className = "text-sm font-semibold text-slate-700 truncate";
+            }
+        }
+    };
 
             recognition.onerror = (e) => {
                 if (e.error !== 'aborted') {
