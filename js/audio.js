@@ -694,19 +694,26 @@ export function inicializarMicrofonoGlobal(recognition, state) {
                 }, 400);
             };
 
-            const pulsarMicro = async (e) => {
+const pulsarMicro = async (e) => {
                 e.preventDefault();
                 if (isListening) return;
 
+                isListening = true;
                 recognition.lang = 'fr-FR';
 
                 try {
+                    // Primero pedimos el micro para la visualización
                     audioStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
                     iniciarVisualizadorDeOndas(audioStream);
-                    recognition.start();
+                    
+                    // Pequeño delay de 100ms para asegurar que Android no bloquee el reconocimiento
+                    setTimeout(() => {
+                        recognition.start();
+                    }, 100);
+                    
                 } catch(err) {
-                    console.error("No se pudo iniciar el canvas de audio", err);
-                    try { recognition.start(); } catch(e){}
+                    console.error("Error al acceder al micro", err);
+                    isListening = false;
                 }
             };
 
