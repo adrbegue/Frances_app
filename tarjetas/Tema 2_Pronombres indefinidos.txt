@@ -1,60 +1,30 @@
-¿Hay alguien en la oficina de finanzas?;Est-ce que il y a quelqu'un au bureau des finances ?
-/ɛs kə i l‿i a kɛl.kœ̃ o by.ʁo de fi.nɑ̃s/
-¿Quieres algo de comer en este restaurante de gastronomía?;Est-ce que tu veux quelque chose à manger dans ce restaurant de gastronomie ?
-/ɛs kə ty vø kɛl.kə ʃoz a mɑ̃.ʒe dɑ̃ sə ʁɛs.tɔ.ʁɑ̃ də ɡas.tʁɔ.nɔ.mi/
-¿Ves a alguien interesante en la clase de historia?;Est-ce que tu vois quelqu'un d'intéressant dans le cours d'histoire ?
-/ɛs kə ty vwa kɛl.kœ̃ dɛ̃.te.ʁɛ.sɑ̃ dɑ̃ lə kuʁ dis.twaʁ/
-¿Haces algo importante para el medio ambiente?;Est-ce que tu fais quelque chose d'important pour l'écologie ?
-/ɛs kə ty fɛ kɛl.kə ʃoz dɛ̃.pɔʁ.tɑ̃ puʁ le.kɔ.lɔ.ʒi/
-¿Hay algunos estudiantes en la clase de ciencia?;Est-ce que il y a quelques-uns des étudiants dans le cours de science ?
-/ɛs kə i l‿i a kɛl.kə.zœ̃ de.ze.ty.djɑ̃ dɑ̃ lə kuʁ də sjɑ̃s/
-¿Ves a alguien en la estación de meteorología?;Est-ce que tu vois quelqu'un à la station de météorologie ?
-/ɛs kə ty vwa kɛl.kœ̃ a la sta.sjɔ̃ də me.te.ɔ.lɔ.ʒi/
-¿Quieres comprar algo bonito en la tienda de moda?;Est-ce que tu veux acheter quelque chose de joli dans le magasin de mode ?
-/ɛs kə ty vø a.ʃe kɛl.kə ʃoz də ʒɔ.li dɑ̃ lə ma.ɡa.zɛ̃ də mɔd/
-¿Hay alguien de la arquitectura en el cine?;Est-ce que il y a quelqu'un de l'architecture au cinéma ?
-/ɛs kə i l‿i a kɛl.kœ̃ də laʁ.ʃi.tɛk.tyʁ o si.ne.ma/
-¿Tienes algo de música interesante para el viaje?;Est-ce que tu as quelque chose de musique intéressante pour le voyage ?
-/ɛs kə ty a kɛl.kə ʃoz də my.zik ɛ̃.te.ʁɛ.sɑ̃t puʁ lə vwa.jaʒ/
-¿Puedes ver a alguien de deportes en la televisión?;Est-ce que tu peux voir quelqu'un de sport à la télévision ?
-/ɛs kə ty pø vwaʁ kɛl.kœ̃ də spɔʁ a la te.le.vi.zjɔ̃/
-No hay nadie en el mundo laboral hoy;Il n'y a personne dans le monde du travail aujourd'hui
-/i n‿i a pɛʁ.sɔn dɑ̃ lə mɔ̃d dy tʁa.vaj o.ʒuʁ.dɥi/
-No quiero nada de tecnología en mi salud;Je ne veux rien de technologie pour ma santé
-/ʒə nə vø ʁjɛ̃ də tɛk.nɔ.lɔ.ʒi puʁ ma sɑ̃.te/
-No queda nada de literatura en esta biblioteca;Il ne reste rien de littérature dans cette bibliothèque
-/i nə ʁɛst ʁjɛ̃ də li.te.ʁa.tyʁ dɑ̃ sɛt bi.bli.jɔ.tɛk/
-No tengo a nadie en mis relaciones de arte;Je n'ai personne dans mes relations d'art
-/ʒə ne pɛʁ.sɔn dɑ̃ me ʁə.la.sjɔ̃ daʁ/
-No hago nada especial en este deporte;Je ne fais rien de spécial dans ce sport
-/ʒə nə fɛ ʁjɛ̃ də spe.sjal dɑ̃ sə spɔʁ/
-No hay ninguna persona en la arquitectura antigua;Il n'y a aucune personne dans l'architecture ancienne
-/i n‿i a o.kyn pɛʁ.sɔn dɑ̃ laʁ.ʃi.tɛk.tyʁ ɑ̃.sjɛn/
-No veo a nadie en este viaje de historia;Je ne vois personne dans ce voyage d'histoire
-/ʒə nə vwa pɛʁ.sɔn dɑ̃ sə vwa.jaʒ dis.twaʁ/
-No quiero nada de meteorología en mi vida cotidiana;Je ne veux rien de météorologie dans ma vie quotidienne
-/ʒə nə vø ʁjɛ̃ də me.te.ɔ.lɔ.ʒi dɑ̃ ma vi kɔ.ti.djɛn/
-No hay nada de ciencia en este cine;Il n'y a rien de science dans ce cinéma
-/i n‿i a ʁjɛ̃ də sjɑ̃s dɑ̃ sə si.ne.ma/
-No queda nada de gastronomía en la cocina;Il ne reste rien de gastronomie dans la cuisine
-/i nə ʁɛst ʁjɛ̃ də ɡas.tʁɔ.nɔ.mi dɑ̃ la kwi.zin/
-Quelqu'un de gentil aide pour l'éducation;Quelqu'un de gentil aide pour l'éducation
-/kɛl.kœ̃ də ʒɑ̃.ti ɛd puʁ le.dy.ka.sjɔ̃/
-Rien de spécial n'arrive dans le monde du travail;Rien de spécial n'arrive dans le monde du travail
-/ʁjɛ̃ də spe.sjal n‿a.ʁiv dɑ̃ lə mɔ̃d dy tʁa.vaj/
-Plusieurs sont intéressés par l'art et la mode;Plusieurs sont intéressés par l'art et la mode
-/ply.zjœʁ sɔ̃ tɛ̃.te.ʁɛ.se paʁ laʁ e la mɔd/
-Chacun a besoin de santé et de sport;Chacun a besoin de santé et de sport
-/ʃa.kœ̃ a bə.zwɛ̃ də sɑ̃.te e də spɔʁ/
-Il y en a quelques-unes de libres pour le voyage;Il y en a quelques-unes de libres pour le voyage
-/i l‿i ɑ̃.n‿a kɛl.kə.zyn də li.bʁə puʁ lə vwa.jaʒ/
-Tu peux manger n'importe quoi avec cette gastronomie;Tu peux manger n'importe quoi avec cette gastronomie
-/ty pø mɑ̃.ʒe nɛ̃.pɔʁt kwa a.vɛk sɛt ɡas.tʁɔ.nɔ.mi/
-Je vais n'importe où pour écouter de la musique;Je vais n'importe où pour écouter de la musique
-/ʒə vɛ nɛ̃.pɔʁt u puʁ e.ku.te də la my.zik/
-Il est le même dans le sport et la vie quotidienne;Il est le même dans le sport et la vie quotidienne
-/i l‿ɛ lə mɛm dɑ̃ lə spɔʁ e la vi kɔ.ti.djɛn/
-Chaque personne veut apprendre la science et la technologie;Chaque personne veut apprendre la science et la technologie
-/ʃak pɛʁ.sɔn vø ta.pʁɑ̃dʁ la sjɑ̃s e la tɛk.nɔ.lɔ.ʒi/
-Aucun ne travaille dans l'architecture et l'histoire;Aucun ne travaille dans l'architecture et l'histoire
-/o.kœ̃ nə tʁa.vaj dɑ̃ laʁ.ʃi.tɛk.tyʁ e lis.twaʁ/
+Es alguien aquí;Il y a quelqu'un ici.;/il i a kɛlkœ̃n isi/
+Todo está bien;Tout est bien.;/tu ɛ bjɛ̃/
+Hay algo interesante;Il y a quelque chose d'intéressant.;/il i a kɛlkə ʃoz d‿ɛ̃teʁesɑ̃/
+Cada uno trabaja;Chacun travaille.;/ʃakœ̃ tʁavaj/
+Todos están contentos;Tout le monde est content.;/tu lə mɔ̃d ɛ kɔ̃tɑ̃/
+Algunos están libres;Quelques-uns sont libres.;/kɛlkøz œ̃ sɔ̃ libʁ/
+Varias personas vienen;Plusieurs personnes viennent.;/plyzjœʁ pɛʁsɔn vjɛn/
+El mismo problema vuelve;Le même problème revient.;/lə mɛm pʁɔblɛm ʁəvjɛ̃/
+Otra solución existe;Une autre solution existe.;/yn otʁ sɔlysjɔ̃ ɛɡzist/
+Alguien quiere ayuda;Quelqu'un veut de l'aide.;/kɛlkœ̃ vø də lɛd/
+No hay nadie aquí;Il n'y a personne ici.;/il n‿ja pɛʁsɔn isi/
+No hay nada;Il n'y a rien.;/il n‿ja ʁjɛ̃/
+Nadie viene hoy;Personne ne vient aujourd'hui.;/pɛʁsɔn nə vjɛ̃ oʒuʁdɥi/
+No quiero nada;Je ne veux rien.;/ʒə nə vø ʁjɛ̃/
+No veo a nadie;Je ne vois personne.;/ʒə nə vwa pɛʁsɔn/
+No hay nada especial;Il n'y a rien de spécial.;/il n‿ja ʁjɛ̃ də spesjal/
+Nadie tiene tiempo;Personne n'a de temps.;/pɛʁsɔn na də tɑ̃/
+Ninguno está listo;Aucun n'est prêt.;/okœ̃ nɛ pʁɛ/
+No hay ninguna solución;Il n'y a aucune solution.;/il n‿ja okyn sɔlysjɔ̃/
+No es lo mismo;Ce n'est pas le même.;/sə nɛ pa lə mɛm/
+¿Hay alguien aquí?;Y a-t-il quelqu'un ici ?;/ja t‿il kɛlkœ̃n isi/
+¿Quieres algo?;Veux-tu quelque chose ?;/vø ty kɛlkə ʃoz/
+¿Todo está bien?;Tout est-il bien ?;/tu ɛt il bjɛ̃/
+¿Alguien viene?;Quelqu'un vient ?;/kɛlkœ̃ vjɛ̃/
+¿No hay nadie?;N'y a-t-il personne ?;/ni a t‿il pɛʁsɔn/
+¿Qué quieres hacer?;Que veux-tu faire ?;/kə vø ty fɛʁ/
+¿Hay algo nuevo?;Y a-t-il quelque chose de nouveau ?;/ja t‿il kɛlkə ʃoz də nuvo/
+¿Cada uno está listo?;Chacun est-il prêt ?;/ʃakœ̃ ɛt il pʁɛ/
+¿Alguien tiene tiempo?;Quelqu'un a-t-il du temps ?;/kɛlkœ̃ a t‿il dy tɑ̃/
+¿No hay nada más?;N'y a-t-il rien d'autre ?;/ni a t‿il ʁjɛ̃ dotʁ/

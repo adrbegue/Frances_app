@@ -1,6 +1,5 @@
 // js/app.js
-// Asegúrate de que tenga el punto:
-import { inicializarMicrofonoGlobal, ejecutarTTS, limpiarCanvasConLineaBase } from '/Adrian_project_frances/js/audio.js';
+import { inicializarMicrofonoGlobal, ejecutarTTS, limpiarCanvasConLineaBase } from './audio.js';
 
 let globalFlashcards = [];
 let state = {
@@ -86,34 +85,22 @@ async function cargarTodosLosMazos() {
 }
 
 function parsearCSV(text, filename) {
-    const cleanText = text.replace(/\\n/g, '[[NEWLINE]]');
-    const lines = cleanText.split(/\r?\n/);
-
+    const lines = text.split(/\r?\n/);
     let index = 0;
+
     lines.forEach((line) => {
         line = line.trim();
         if (!line) return;
 
+        // DIVIDIR POR PUNTO Y COMA (;)
         const partes = line.split(';');
         if (partes.length >= 2) {
-            const frente = partes[0].trim();
-            const dorsoCompleto = partes[1].trim();
-
-            let frances = dorsoCompleto;
-            let ipa = "";
-
-            if (dorsoCompleto.includes('[[NEWLINE]]')) {
-                const partesDorso = dorsoCompleto.split('[[NEWLINE]]');
-                frances = partesDorso[0].trim();
-                ipa = partesDorso[1].trim();
-            }
-
             globalFlashcards.push({
                 id: `${filename}_${index}`,
                 mazo: filename,
-                front: frente,
-                back: frances,
-                ipa: ipa
+                front: partes[0].trim(),
+                back: partes[1].trim(),
+                ipa: partes[2] ? partes[2].trim() : "" // <--- CORRECCIÓN CLAVE AQUÍ
             });
             index++;
         }
@@ -350,7 +337,6 @@ document.getElementById('btn-hard-audio').onclick = () => {
     ejecutarTTS(state.activeSessionCards[state.currentCardIndex].back);
 };
 
-// Función puente para pasarle a la API de voz la frase que debe validar
 function obtenerFraseTarjetaActual() {
     const card = state.activeSessionCards[state.currentCardIndex];
     return card ? card.back : null;

@@ -1,59 +1,30 @@
-Il es importante estudiar tecnología hoy;Il est important d'étudier la technologie aujourd'hui
-/i.l‿ɛ̃.pɔʁ.tɑ̃ de.ty.dje la tɛk.nɔ.lɔ.ʒi o.ʒuʁ.dɥi/
-Il faut manger sain pour la santé;Il faut manger sain pour la santé
-/i fɔ ʁmɑ̃.ʒe sɛ̃ puʁ la sɑ̃.te/
-Il y a beaucoup d'art dans ce cinéma;Il y a beaucoup d'art dans ce cinéma
-/i l‿i a bo.ku daʁ dɑ̃ sə si.ne.ma/
-Il pleut sur le voyage d'histoire;Il pleut sur le voyage d'histoire
-/i plø syʁ lə vwa.jaʒ dis.twaʁ/
-Il est midi et je travaille en finance;Il est midi et je travaille en finance
-/i.l‿ɛ mi.di e ʒə tʁa.vaj ɑ̃ fi.nɑ̃s/
-Il lui achète un livre de littérature;Il lui achète un livre de littérature
-/i lɥi a.ʃɛt œ̃ livʁ də li.te.ʁa.tyʁ/
-Je les vois au concert de musique;Je les vois au concert de musique
-/ʒə le vwa o kɔ̃.sɛʁ də my.zik/
-Elle m'en donne trois pour le sport;Elle m'en donne trois pour le sport
-/ɛl mɑ̃ dɔn tʁwa puʁ lə spɔʁ/
-Nous y sommes allés pour l'écologie;Nous y sommes allés pour l'écologie
-/nu.z‿i sɔm.z‿a.le puʁ le.kɔ.lɔ.ʒi/
-Toi, tu aimes cette architecture moderne;Toi, tu aimes cette architecture moderne
-/twa, ty ɛm sɛt aʁ.ʃi.tɛk.tyʁ mɔ.dɛʁn/
-Il ne pleut pas sur le monde laboral;Il ne pleut pas sur le monde du travail
-/i nə plø pa syʁ lə mɔ̃d dy tʁa.vaj/
-Il ne faut pas ignorer la science;Il ne faut pas ignorer la science
-/i nə fɔ pa zi.ɡnɔ.ʁe la sjɑ̃s/
-Il n'y a personne dans ce club de mode;Il n'y a personne dans ce club de mode
-/i n‿i a pɛʁ.sɔn dɑ̃ sə klœb də mɔd/
-Il n'est pas midi au Japon;Il n'est pas midi au Japon
-/i nɛ pa mi.di o ʒa.pɔ̃/
-Je ne le vois pas au cinéma;Je ne le vois pas au cinéma
-/ʒə nə lə vwa pa o si.ne.ma/
-Il ne lui donne pas de gastronomie;Il ne lui donne pas de gastronomie
-/i nə lɥi dɔn pa də ɡas.tʁɔ.nɔ.mi/
-Nous n'y sommes pas allés pour le sport;Nous n'y sommes pas allés pour le sport
-/nu.n‿i sɔm pa.z‿a.le puʁ lə spɔʁ/
-Je n'en ai pas acheté pour les relations;Je n'en ai pas acheté pour les relations
-/ʒə nɑ̃ ne pa.z‿a.ʃe puʁ le ʁə.la.sjɔ̃/
-Elle ne me parle pas d'éducation;Elle ne me parle pas d'éducation
-/ɛl nə mə paʁl pa de.dy.ka.sjɔ̃/
-Toi, tu ne veux pas d'histoire;Toi, tu ne veux pas d'histoire
-/twa, ty nə vø pa dis.twaʁ/
-Est-ce que il faut travailler en finance ?;Est-ce que il faut travailler en finance ?
-/ɛs kə i fɔ tʁa.va.je ɑ̃ fi.nɑ̃s/
-Est-ce que il y a de la technologie ici ?;Est-ce que il y a de la technologie ici ?
-/ɛs kə i l‿i a də la tɛk.nɔ.lɔ.ʒi i.si/
-Est-ce que il pleut dans ce pays de voyages ?;Est-ce que il pleut dans ce pays de voyages ?
-/ɛs kə i plø dɑ̃ sə pe.i də vwa.jaʒ/
-Est-ce que tu l'achètes pour ton ami ?;Est-ce que tu l'achètes pour ton ami ?
-/ɛs kə ty la.ʃɛt puʁ tɔ̃.n‿a.mi/
-Est-ce que tu lui dis la vérité sur la science ?;Est-ce que tu lui dis la vérité sur la science ?
-/ɛs kə ty lɥi di la ve.ʁi.te syʁ la sjɑ̃s/
-Est-ce que vous y allez pour la musique ?;Est-ce que vous y allez pour la musique ?
-/ɛs kə vu.z‿i a.le puʁ la my.zik/
-Est-ce que tu en veux pour la santé ?;Est-ce que tu en veux pour la santé ?
-/ɛs kə ty ɑ̃ vø puʁ la sɑ̃.te/
-Est-ce que il est midi dans le monde laboral ?;Est-ce que il est midi dans le monde du travail ?
-/ɛs kə i l‿ɛ mi.di dɑ̃ lə mɔ̃d dy tʁa.vaj/
-Est-ce que tu me donnes ce livre d'art ?;Est-ce que tu me donnes ce livre d'art ?
-/ɛs kə ty mə dɔn sə livʁ daʁ/
-Est-ce que vous y habitez en écologie ?;Est-ce que vous y
+Llueve;Il pleut;/il plø/
+Hay un problema;Il y a un problème;/il i a œ̃ pʁɔblɛm/
+Hay que trabajar;Il faut travailler;/il fo tʁavaje/
+Es mediodía;Il est midi;/il ɛ midi/
+Yo hablo francés;Moi, je parle français;/mwa ʒə paʁl fʁɑ̃sɛ/
+Tú trabajas mucho;Toi, tu travailles beaucoup;/twa ty tʁavaj boku/
+Ella me ve;Elle me voit;/ɛl mə vwa/
+Él le da un libro;Il lui donne un livre;/il lɥi dɔn œ̃ livʁ/
+Nosotros vamos allí;Nous y allons;/nu zi alɔ̃/
+Tengo tres;J'en ai trois;/ʒɑ̃ nɛ tʁwa/
+No llueve;Il ne pleut pas;/il nə plø pa/
+No hay problema;Il n'y a pas de problème;/il n‿ja pa də pʁɔblɛm/
+No hay que salir;Il ne faut pas sortir;/il nə fo pa sɔʁtiʁ/
+No es mediodía;Il n'est pas midi;/il nɛ pa midi/
+Yo no lo veo;Je ne le vois pas;/ʒə nə lə vwa pa/
+Tú no me ves;Tu ne me vois pas;/ty nə mə vwa pa/
+Ella no le habla;Elle ne lui parle pas;/ɛl nə lɥi paʁl pa/
+No vamos allí;Nous n'y allons pas;/nu n‿i alɔ̃ pa/
+No quiero nada;Je n'en veux pas;/ʒə nɑ̃ vø pa/
+Él no lo toma;Il ne le prend pas;/il nə lə pʁɑ̃ pa/
+¿Llueve?;Il pleut ?;/il plø/
+¿Hay un problema?;Y a-t-il un problème ?;/ja t‿il œ̃ pʁɔblɛm/
+¿Hay que trabajar?;Faut-il travailler ?;/fo til tʁavaje/
+¿Es mediodía?;Est-il midi ?;/ɛt il midi/
+¿Me ves?;Me vois-tu ?;/mə vwa ty/
+¿Se lo das?;Le lui donnes-tu ?;/lə lɥi dɔn ty/
+¿Vas allí?;Y vas-tu ?;/i va ty/
+¿Tienes algo?;As-tu quelque chose ?;/a ty kɛlkə ʃoz/
+¿No hay nada?;N'y a-t-il rien ?;/ni a t‿il ʁjɛ̃/
+¿Lo quieres?;Le veux-tu ?;/lə vø ty/

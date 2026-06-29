@@ -1,15 +1,47 @@
-// ========================================================
-// VARIABLES GLOBALES DE AUDIO
-// ========================================================
+// js/audio.js
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+export let recognition = null;
+let isListening = false;
+
+// Variables globales para el Analizador de Audio
 let audioCtx = null;
 let analyser = null;
 let audioStream = null;
 let drawVisualId = null;
 
-// ========================================================
-// SISTEMA DE ONDAS DE AUDIO NATIVAS (CANVAS)
-// ========================================================
-export function iniciarVisualizadorDeOndas(stream) {
+if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+}
+
+export function ejecutarTTS(texto) {
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.lang = 'fr-FR';
+    window.speechSynthesis.speak(utterance);
+}
+
+export function limpiarCanvasConLineaBase() {
+    const canvas = document.getElementById('wave-canvas');
+    if (!canvas) return;
+    const canvasCtx = canvas.getContext('2d');
+    canvas.width = canvas.parentNode.offsetWidth;
+    canvas.height = canvas.parentNode.offsetHeight;
+
+    canvasCtx.fillStyle = 'rgb(15, 23, 42)';
+    canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+    canvasCtx.lineWidth = 2;
+    canvasCtx.strokeStyle = 'rgba(16, 185, 129, 0.2)';
+    canvasCtx.beginPath();
+    canvasCtx.moveTo(0, canvas.height / 2);
+    canvasCtx.lineTo(canvas.width, canvas.height / 2);
+    canvasCtx.stroke();
+}
+
+function iniciarVisualizadorDeOndas(stream) {
     const canvas = document.getElementById('wave-canvas');
     const canvasCtx = canvas.getContext('2d');
 
@@ -18,11 +50,6 @@ export function iniciarVisualizadorDeOndas(stream) {
 
     if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-
-    // 🔴 FIX VITAL PARA ANDROID: Forzar el reanudado del contexto de audio
-    if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
     }
 
     analyser = audioCtx.createAnalyser();
@@ -37,7 +64,7 @@ export function iniciarVisualizadorDeOndas(stream) {
     canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
 
     function dibujarOnda() {
-        // La animación corre sola, la cortamos en detenerVisualizadorDeOndas
+        if (!isListening) return;
         drawVisualId = requestAnimationFrame(dibujarOnda);
         analyser.getByteFrequencyData(dataArray);
 
@@ -67,30 +94,9 @@ export function detenerVisualizadorDeOndas() {
     }
 }
 
-export function limpiarCanvasConLineaBase() {
-    const canvas = document.getElementById('wave-canvas');
-    if (!canvas) return;
-    const canvasCtx = canvas.getContext('2d');
-    canvas.width = canvas.parentNode.offsetWidth;
-    canvas.height = canvas.parentNode.offsetHeight;
-
-    canvasCtx.fillStyle = 'rgb(15, 23, 42)';
-    canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-
-    canvasCtx.lineWidth = 2;
-    canvasCtx.strokeStyle = 'rgba(16, 185, 129, 0.2)';
-    canvasCtx.beginPath();
-    canvasCtx.moveTo(0, canvas.height / 2);
-    canvasCtx.lineTo(canvas.width, canvas.height / 2);
-    canvasCtx.stroke();
-}
-
-// ========================================================
-// SISTEMA DE MICRÓFONO GLOBAL OPTIMIZADO PARA PC Y ANDROID
-// ========================================================
-export function inicializarMicrofonoGlobal(recognition, state, isListeningObj) {
+export function inicializarMicrofonoGlobal(obtenerFraseCorrecta) {
     if (!recognition) {
-        const errorMsg = "Tu navegador no soporta Speech Recognition (Usa Chrome o Edge).";
+        const errorMsg = "Tu navegador no soporta Speech Recognition.";
         const micBtn = document.getElementById('btn-global-mic');
         if (micBtn) micBtn.onclick = () => alert(errorMsg);
         return;
@@ -114,29 +120,23 @@ export function inicializarMicrofonoGlobal(recognition, state, isListeningObj) {
         let textAcumulado = '';
         let esFinal = false;
 
-        // 🔴 FIX ANDROID: Recorrer siempre todos los fragmentos
         for (let i = event.resultIndex; i < event.results.length; ++i) {
             textAcumulado += event.results[i][0].transcript;
-            if (event.results[i].isFinal) {
-                esFinal = true;
-            }
+            if (event.results[i].isFinal) esFinal = true;
         }
 
-        // Pintamos el texto en pantalla SEGÚN LO VAS DICIENDO
         interpretedText.innerText = `"${textAcumulado}"`;
         interpretedText.className = "text-sm font-semibold text-indigo-600 italic truncate";
 
-        // Solo validamos cuando detecta el corte final de voz
         if (esFinal) {
-            const currentCard = state.activeSessionCards[state.currentCardIndex];
-            if (!currentCard) return;
+            const fraseCorrecta = obtenerFraseCorrecta();
+            if (!fraseCorrecta) return;
 
             const limpiar = (t) => t.toLowerCase()
                                     .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?¿'’]/g," ")
-                                    .replace(/\s+/g, " ")
-                                    .trim();
+                                    .replace(/\s+/g, " ").trim();
 
-            if (limpiar(textAcumulado) === limpiar(currentCard.back)) {
+            if (limpiar(textAcumulado) === limpiar(fraseCorrecta)) {
                 statusIndicator.innerText = "🟢 ¡PRONUNCIACIÓN EXCELENTE!";
                 statusIndicator.className = "text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-0.5";
                 interpretedText.className = "text-sm font-bold text-emerald-700 truncate";
@@ -152,61 +152,49 @@ export function inicializarMicrofonoGlobal(recognition, state, isListeningObj) {
         if (e.error !== 'aborted') {
             statusIndicator.innerText = "❌ ERROR DE CAPTURA";
             statusIndicator.className = "text-[10px] font-bold text-red-600 uppercase tracking-wider block mb-0.5";
-            interpretedText.innerText = `Error: ${e.error}.`;
+            interpretedText.innerText = `Error: ${e.error}. Comprueba permisos.`;
             interpretedText.className = "text-sm font-medium text-red-500 italic";
         }
     };
 
     recognition.onend = () => {
-        isListeningObj.value = false;
+        isListening = false;
         micBtn.classList.replace('bg-red-600', 'bg-emerald-600');
         micBtn.classList.remove('ring-4', 'ring-red-200');
         detenerVisualizadorDeOndas();
 
         setTimeout(() => {
-            if (!isListeningObj.value) limpiarCanvasConLineaBase();
+            if (!isListening) limpiarCanvasConLineaBase();
         }, 400);
     };
 
     const pulsarMicro = async (e) => {
         e.preventDefault();
-        if (isListeningObj.value) return;
+        if (isListening) return;
 
-        isListeningObj.value = true;
-        
-        // 🔴 FIX ANDROID: Configuración estricta justo antes de arrancar
+        isListening = true;
         recognition.lang = 'fr-FR';
-        recognition.continuous = false;
-        recognition.interimResults = true; 
 
         try {
             audioStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
             iniciarVisualizadorDeOndas(audioStream);
-            
-            // 🔴 FIX ANDROID: Delay para no saturar los procesos paralelos de Chrome móvil
-            setTimeout(() => {
-                try { recognition.start(); } catch(err) {}
-            }, 100);
-            
+            recognition.start();
         } catch(err) {
-            console.error("Error al acceder al micro", err);
-            isListeningObj.value = false;
+            console.error("No se pudo iniciar el canvas de audio", err);
+            try { recognition.start(); } catch(e){}
         }
     };
 
     const soltarMicro = (e) => {
         e.preventDefault();
         setTimeout(() => {
-            if (isListeningObj.value) {
-                recognition.stop();
-            }
+            if (isListening) recognition.stop();
         }, 250);
     };
 
     micBtn.addEventListener('mousedown', pulsarMicro);
     micBtn.addEventListener('mouseup', soltarMicro);
     micBtn.addEventListener('mouseleave', soltarMicro);
-
     micBtn.addEventListener('touchstart', pulsarMicro, { passive: false });
     micBtn.addEventListener('touchend', soltarMicro, { passive: false });
 }
