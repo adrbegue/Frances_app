@@ -3,7 +3,6 @@
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 export let recognition = null;
 let isListening = false;
-let drawVisualId = null;
 
 if (SpeechRecognition) {
     recognition = new SpeechRecognition();
@@ -18,62 +17,7 @@ export function ejecutarTTS(texto) {
     window.speechSynthesis.speak(utterance);
 }
 
-export function limpiarCanvasConLineaBase() {
-    const canvas = document.getElementById('wave-canvas');
-    if (!canvas) return;
-    const canvasCtx = canvas.getContext('2d');
-    canvas.width = canvas.parentNode.offsetWidth;
-    canvas.height = canvas.parentNode.offsetHeight;
-
-    canvasCtx.fillStyle = 'rgb(15, 23, 42)';
-    canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-
-    canvasCtx.lineWidth = 2;
-    canvasCtx.strokeStyle = 'rgba(16, 185, 129, 0.2)';
-    canvasCtx.beginPath();
-    canvasCtx.moveTo(0, canvas.height / 2);
-    canvasCtx.lineTo(canvas.width, canvas.height / 2);
-    canvasCtx.stroke();
-}
-
-// NUEVO: Visualizador simulado matemáticamente para no bloquear el micrófono en Android
-function iniciarVisualizadorSimulado() {
-    const canvas = document.getElementById('wave-canvas');
-    if (!canvas) return;
-    const canvasCtx = canvas.getContext('2d');
-
-    canvas.width = canvas.parentNode.offsetWidth;
-    canvas.height = canvas.parentNode.offsetHeight;
-
-    const bufferLength = 32; // Número de barras simuladas
-    const barWidth = (canvas.width / bufferLength) * 1.5;
-
-    function dibujarOnda() {
-        if (!isListening) return;
-        drawVisualId = requestAnimationFrame(dibujarOnda);
-
-        canvasCtx.fillStyle = 'rgb(15, 23, 42)';
-        canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-
-        let x = 0;
-        for (let i = 0; i < bufferLength; i++) {
-            // Genera una altura aleatoria para dar la sensación visual de captura de voz
-            const randomFactor = Math.random();
-            const barHeight = randomFactor * (canvas.height * 0.7);
-
-            canvasCtx.fillStyle = `rgb(16, 185, 129)`;
-            canvasCtx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);
-            x += barWidth;
-        }
-    }
-    dibujarOnda();
-}
-
-export function detenerVisualizadorDeOndas() {
-    if (drawVisualId) {
-        cancelAnimationFrame(drawVisualId);
-    }
-}
+// Ya no necesitamos funciones de canvas aquí.
 
 export function inicializarMicrofonoGlobal(obtenerFraseCorrecta) {
     if (!recognition) {
@@ -142,15 +86,10 @@ export function inicializarMicrofonoGlobal(obtenerFraseCorrecta) {
         isListening = false;
         micBtn.classList.replace('bg-red-600', 'bg-emerald-600');
         micBtn.classList.remove('ring-4', 'ring-red-200');
-        detenerVisualizadorDeOndas();
-
-        setTimeout(() => {
-            if (!isListening) limpiarCanvasConLineaBase();
-        }, 400);
+        // Eliminada la detención del visualizador y limpieza de canvas.
     };
 
     const pulsarMicro = (e) => {
-        // Importante: prevenir el comportamiento por defecto (scroll/zoom) en móviles
         if (e.cancelable) e.preventDefault();
         if (isListening) return;
 
@@ -158,7 +97,7 @@ export function inicializarMicrofonoGlobal(obtenerFraseCorrecta) {
         recognition.lang = 'fr-FR';
 
         try {
-            iniciarVisualizadorSimulado();
+            // Eliminada la línea de iniciarVisualizadorSimulado();
             recognition.start();
         } catch(err) {
             console.error("Error al iniciar reconocimiento:", err);
@@ -169,14 +108,12 @@ export function inicializarMicrofonoGlobal(obtenerFraseCorrecta) {
         if (e.cancelable) e.preventDefault();
         setTimeout(() => {
             if (isListening) recognition.stop();
-        }, 250); // Pequeño delay para no cortar la última sílaba
+        }, 250);
     };
 
     micBtn.addEventListener('mousedown', pulsarMicro);
     micBtn.addEventListener('mouseup', soltarMicro);
     micBtn.addEventListener('mouseleave', soltarMicro);
-
-    // Eventos táctiles para Android
     micBtn.addEventListener('touchstart', pulsarMicro, { passive: false });
     micBtn.addEventListener('touchend', soltarMicro, { passive: false });
 }

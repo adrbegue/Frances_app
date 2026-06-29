@@ -1,5 +1,5 @@
 // js/app.js
-import { inicializarMicrofonoGlobal, ejecutarTTS, limpiarCanvasConLineaBase } from './audio.js';
+import { inicializarMicrofonoGlobal, ejecutarTTS } from './audio.js';
 
 let globalFlashcards = [];
 let state = {
@@ -226,7 +226,7 @@ function renderCard() {
     document.getElementById('voice-interpreted-text').innerText = "Listo para escuchar...";
     document.getElementById('voice-interpreted-text').className = "text-sm font-medium text-slate-500 italic truncate";
 
-    limpiarCanvasConLineaBase();
+    // ELIMINADA LA LLAMADA A limpiarCanvasConLineaBase();
 }
 
 function resetFlip() {
