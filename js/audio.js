@@ -3,11 +3,6 @@
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 export let recognition = null;
 let isListening = false;
-
-// Variables globales para el Analizador de Audio
-let audioCtx = null;
-let analyser = null;
-let audioStream = null;
 let drawVisualId = null;
 
 if (SpeechRecognition) {
@@ -41,42 +36,31 @@ export function limpiarCanvasConLineaBase() {
     canvasCtx.stroke();
 }
 
-function iniciarVisualizadorDeOndas(stream) {
+// NUEVO: Visualizador simulado matemáticamente para no bloquear el micrófono en Android
+function iniciarVisualizadorSimulado() {
     const canvas = document.getElementById('wave-canvas');
+    if (!canvas) return;
     const canvasCtx = canvas.getContext('2d');
 
     canvas.width = canvas.parentNode.offsetWidth;
     canvas.height = canvas.parentNode.offsetHeight;
 
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 256;
-
-    const source = audioCtx.createMediaStreamSource(stream);
-    source.connect(analyser);
-
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-
-    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    const bufferLength = 32; // Número de barras simuladas
+    const barWidth = (canvas.width / bufferLength) * 1.5;
 
     function dibujarOnda() {
         if (!isListening) return;
         drawVisualId = requestAnimationFrame(dibujarOnda);
-        analyser.getByteFrequencyData(dataArray);
 
         canvasCtx.fillStyle = 'rgb(15, 23, 42)';
         canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
 
-        const barWidth = (canvas.width / bufferLength) * 1.5;
-        let barHeight;
         let x = 0;
-
         for (let i = 0; i < bufferLength; i++) {
-            barHeight = dataArray[i] / 4;
+            // Genera una altura aleatoria para dar la sensación visual de captura de voz
+            const randomFactor = Math.random();
+            const barHeight = randomFactor * (canvas.height * 0.7);
+
             canvasCtx.fillStyle = `rgb(16, 185, 129)`;
             canvasCtx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);
             x += barWidth;
@@ -88,9 +72,6 @@ function iniciarVisualizadorDeOndas(stream) {
 export function detenerVisualizadorDeOndas() {
     if (drawVisualId) {
         cancelAnimationFrame(drawVisualId);
-    }
-    if (audioStream) {
-        audioStream.getTracks().forEach(track => track.stop());
     }
 }
 
@@ -168,33 +149,34 @@ export function inicializarMicrofonoGlobal(obtenerFraseCorrecta) {
         }, 400);
     };
 
-    const pulsarMicro = async (e) => {
-        e.preventDefault();
+    const pulsarMicro = (e) => {
+        // Importante: prevenir el comportamiento por defecto (scroll/zoom) en móviles
+        if (e.cancelable) e.preventDefault();
         if (isListening) return;
 
         isListening = true;
         recognition.lang = 'fr-FR';
 
         try {
-            audioStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-            iniciarVisualizadorDeOndas(audioStream);
+            iniciarVisualizadorSimulado();
             recognition.start();
         } catch(err) {
-            console.error("No se pudo iniciar el canvas de audio", err);
-            try { recognition.start(); } catch(e){}
+            console.error("Error al iniciar reconocimiento:", err);
         }
     };
 
     const soltarMicro = (e) => {
-        e.preventDefault();
+        if (e.cancelable) e.preventDefault();
         setTimeout(() => {
             if (isListening) recognition.stop();
-        }, 250);
+        }, 250); // Pequeño delay para no cortar la última sílaba
     };
 
     micBtn.addEventListener('mousedown', pulsarMicro);
     micBtn.addEventListener('mouseup', soltarMicro);
     micBtn.addEventListener('mouseleave', soltarMicro);
+
+    // Eventos táctiles para Android
     micBtn.addEventListener('touchstart', pulsarMicro, { passive: false });
     micBtn.addEventListener('touchend', soltarMicro, { passive: false });
 }
