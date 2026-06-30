@@ -1,0 +1,155 @@
+{
+  "CONFIGURACION_GLOBAL": {
+    "nivel_cefr": "A2",
+    "total_tarjetas": 30
+  },
+
+  "DISTRIBUCION_FRASES": {
+    "afirmativas": 10,
+    "negativas": 10,
+    "interrogativas": 10,
+    "mezcla": {
+      "modo": "aleatorio",
+      "maximo_consecutivas_mismo_tipo": 2
+    }
+  },
+
+  "REGLAS_TRADUCCION": {
+    "columna_1_idioma": "espanol",
+    "columna_2_idioma": "frances",
+    "permitir_inversiones": false,
+    "mantener_significado": true,
+    "traduccion_literal": true,
+    "evitar_parafrasis": true
+  },
+
+  "CONTROL_CALIDAD": {
+    "verificar_idioma_columna_1": true,
+    "verificar_idioma_columna_2": true,
+    "verificar_correspondencia_traduccion": true,
+    "regenerar_si_hay_errores": true
+  },
+"DIVERSIDAD": {
+  "evitar_repeticion_sujetos": true,
+  "evitar_repeticion_verbos": true,
+  "evitar_repeticion_estructuras": true,
+  "maximo_repeticiones_verbo": 3,
+  "maximo_repeticiones_sujeto": 3
+},
+  "OBJETIVO_PEDAGOGICO": {
+  "una_dificultad_principal_por_tarjeta": true,
+  "evitar_acumulacion_de_estructuras_complejas": true
+},
+  "MOTOR_GRAMATICAL": {
+    "verbos": {
+      "irregulares_frecuentes": [
+        "être",
+        "avoir",
+        "aller",
+        "faire",
+        "prendre",
+        "vouloir",
+        "pouvoir",
+        "dire",
+        "mettre",
+        "voir"
+      ],
+"distribucion": {
+  "unidad": "tarjetas",
+  "irregulares": 60,
+  "regulares": 40
+}
+    }
+  },
+
+"PROGRESION_DIFICULTAD": {
+  "facil": {
+    "cantidad": 10,
+    "maximo_clausulas": 1,
+    "permitir_subordinadas": false
+  },
+  "media": {
+    "cantidad": 10,
+    "maximo_clausulas": 2,
+    "permitir_subordinadas": true
+  },
+  "dificil": {
+    "cantidad": 10,
+    "maximo_clausulas": 3,
+    "permitir_subordinadas": true
+  }
+},
+
+  "VOCABULARIO": {
+    "categorias_obligatorias_por_tarjeta": 1,
+    "categorias": [
+      "vida_cotidiana",
+      "viajes",
+      "gastronomia",
+      "cine",
+      "tecnologia",
+      "ecologia",
+      "mundo_laboral",
+      "salud",
+      "arte",
+      "historia",
+      "moda",
+      "musica",
+      "deportes",
+      "ciencia",
+      "educacion",
+      "relaciones",
+      "arquitectura",
+      "literatura",
+      "finanzas",
+      "meteorologia"
+    ]
+  },
+
+  "FORMATO_SALIDA": {
+    "tipo": "csv",
+    "separador": ";",
+    "columnas": [
+      {
+        "nombre": "espanol",
+        "idioma": "es"
+      },
+      {
+        "nombre": "frances",
+        "idioma": "fr"
+      },
+      {
+        "nombre": "ipa",
+        "idioma": "ipa"
+      }
+    ],
+    "cabeceras": false,
+    "explicaciones": false,
+    "comentarios": false,
+      "estructura_linea": "espanol;frances;ipa",
+  "una_tarjeta_por_linea": true,
+  "sin_lineas_vacias": true
+  },
+"LONGITUD_FRASES": {
+  "facil": {
+    "min_palabras": 4,
+    "max_palabras": 8
+  },
+  "media": {
+    "min_palabras": 6,
+    "max_palabras": 12
+  },
+  "dificil": {
+    "min_palabras": 8,
+    "max_palabras": 16
+  }
+},
+  "VALIDACION_FINAL": {
+    "comprobar_numero_tarjetas": true,
+    "comprobar_distribucion_tipos": true,
+    "comprobar_idiomas": true,
+    "comprobar_formato_csv": true,
+    "comprobar_ipa": true,
+    "formato_ipa": "AFI frances estandar"
+  }
+}

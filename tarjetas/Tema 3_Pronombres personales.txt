@@ -1,30 +1,30 @@
-Llueve;Il pleut;/il plø/
-Hay un problema;Il y a un problème;/il i a œ̃ pʁɔblɛm/
-Hay que trabajar;Il faut travailler;/il fo tʁavaje/
-Es mediodía;Il est midi;/il ɛ midi/
-Yo hablo francés;Moi, je parle français;/mwa ʒə paʁl fʁɑ̃sɛ/
-Tú trabajas mucho;Toi, tu travailles beaucoup;/twa ty tʁavaj boku/
-Ella me ve;Elle me voit;/ɛl mə vwa/
-Él le da un libro;Il lui donne un livre;/il lɥi dɔn œ̃ livʁ/
-Nosotros vamos allí;Nous y allons;/nu zi alɔ̃/
-Tengo tres;J'en ai trois;/ʒɑ̃ nɛ tʁwa/
-No llueve;Il ne pleut pas;/il nə plø pa/
-No hay problema;Il n'y a pas de problème;/il n‿ja pa də pʁɔblɛm/
-No hay que salir;Il ne faut pas sortir;/il nə fo pa sɔʁtiʁ/
-No es mediodía;Il n'est pas midi;/il nɛ pa midi/
-Yo no lo veo;Je ne le vois pas;/ʒə nə lə vwa pa/
-Tú no me ves;Tu ne me vois pas;/ty nə mə vwa pa/
-Ella no le habla;Elle ne lui parle pas;/ɛl nə lɥi paʁl pa/
-No vamos allí;Nous n'y allons pas;/nu n‿i alɔ̃ pa/
-No quiero nada;Je n'en veux pas;/ʒə nɑ̃ vø pa/
-Él no lo toma;Il ne le prend pas;/il nə lə pʁɑ̃ pa/
-¿Llueve?;Il pleut ?;/il plø/
-¿Hay un problema?;Y a-t-il un problème ?;/ja t‿il œ̃ pʁɔblɛm/
-¿Hay que trabajar?;Faut-il travailler ?;/fo til tʁavaje/
-¿Es mediodía?;Est-il midi ?;/ɛt il midi/
-¿Me ves?;Me vois-tu ?;/mə vwa ty/
-¿Se lo das?;Le lui donnes-tu ?;/lə lɥi dɔn ty/
-¿Vas allí?;Y vas-tu ?;/i va ty/
-¿Tienes algo?;As-tu quelque chose ?;/a ty kɛlkə ʃoz/
-¿No hay nada?;N'y a-t-il rien ?;/ni a t‿il ʁjɛ̃/
-¿Lo quieres?;Le veux-tu ?;/lə vø ty/
+¿A ti te gusta viajar en tren por la tarde?;Toi, tu aimes voyager en train l'après-midi ?;[twa ty ɛm vwa.ja.ʒe ɑ̃ tʁɛ̃ la.pʁɛ.mi.di]
+No hay ninguna mesa de gastronomía libre hoy;Il n'y a aucune table de gastronomie libre aujourd'hui;[il nja o.kyn ta.blə də ɡas.tʁɔ.nɔ.mi li.bʁə o.ʒuʁ.dɥi]
+Hace falta estudiar mucho para este examen de ciencia;Il faut beaucoup étudier pour cet examen de science;[il fo bo.ku e.ty.dje puʁ sɛ.t_ɛɡ.zɑ.mɛ̃ də sjɑ̃s]
+¿Tú le compras un libro de literatura a tu amigo?;Tu lui achètes un livre de littérature à ton ami ?;[ty lɥi a.ʃɛt œ̃ li.vʁə də li.te.ʁa.tyʁ a tɔ̃ n_a.mi]
+Él no la ve en el gran museo de arte;Il ne la voit pas dans le grand musée d'art;[il nə la vwa pɑ dɑ̃ lə ɡʁɑ̃ my.ze daʁ]
+Esta hermosa casa de arquitectura es mía;Cette belle maison d'architecture est à moi;[sɛt bɛl mɛ.zɔ̃ daʁ.ʃi.tɛk.tyʁ ɛt_a mwa]
+¿Él compra tres teléfonos de nueva tecnología?;Il en achète trois de nouvelle technologie ?;[il ɑ̃ n_a.ʃɛt tʁwa də nu.vɛl tɛk.nɔ.lɔ.ʒi]
+Nosotros no vamos al estadio para ver deportes;Nous n'y allons pas pour voir des sports;[nu ni a.lɔ̃ pɑ puʁ vwaʁ de spɔʁ]
+Es mediodía y llueve mucho en la ciudad;Il est midi et il pleut beaucoup dans la ville;[il ɛ mi.di e il plø bo.ku dɑ̃ la vil]
+¿Vienes tú de París para tus vacaciones?;Tu en viens pour tes vacances ?;[ty ɑ̃ vjɛ̃ puʁ te vwa.jaʒ]
+Dame un euro para el concierto de música electrónica;Donne-moi un euro pour le concert de musique électronique;[dɔn mwa œ̃ n_ø.ʁo puʁ lə kɔ̃.sɛʁ  də my.zik e.lɛk.tʁɔ.nik]
+Ella no le dice la verdad sobre su trabajo;Elle ne lui dit pas la vérité sur son travail;[ɛl nə lɥi di pɑ la ve.ʁi.te syʁ sɔ̃ tʁa.vaj]
+¿Vosotros pensáis a menudo en este proyecto ecológico?;Vous y pensez souvent à ce projet écologique ?;[vu zi pɑ̃.se su.vɑ̃ a sə pʁɔ.ʒɛ e.kɔ.lɔ.ʒik]
+Ellos tienen muchas películas de cine en casa;Ils en ont beaucoup de films de cinéma à la maison;[il z_ɑ̃ n_ɔ̃ bo.ku də film də si.ne.ma a la mɛ.zɔ̃]
+Yo no lo conozco a este actor famoso;Je no le connais pas, cet acteur célèbre;[ʒə nə lə kɔ.nɛ pɑ sɛ.t_ak.tœʁ se.lɛbʁ]
+¿Es necesario tomar este camino para ir a la escuela?;Faut-il prendre ce chemin pour aller à l'école ?;[fo t_il pʁɑ̃dʁ sə ʃə.mɛ̃ puʁ a.le a le.kɔl]
+A mí me encanta esta chaqueta de moda antigua;Moi, j'adore cette veste de mode ancienne;[mwa ʒa.dɔːʁ sɛt vɛst də mɔd ɑ̃.sjɛn]
+Nosotros no compramos comida en este restaurante caro;Nous n'y achetons pas de nourriture dans ce restaurant cher;[nu ni a.ʃə.tɔ̃ pɑ də nu.ʁi.tyʁ dɑ̃ sə ʁɛs.tɔ.ʁɑ̃ ʃɛʁ]
+¿Cuántos ordenadores quieres para la oficina de finanzas?;Combien en veux-tu pour le bureau des finances ?;[kɔ̃.bjɛ̃ ɑ̃ vø ty puʁ lə by.ʁo de fi.nɑ̃s]
+Él le da una entrada para la obra de teatro;Il lui donne un billet pour la pièce de théâtre;[il lɥi dɔn œ̃ bi.jɛ puʁ la pjɛs də te.ɑːtʁ]
+¿Vives en ese barrio tan bonito de la ciudad?;Tu y vis dans ce joli quartier de la ville ?;[ty i vi dɑ̃ sə ʒɔ.li kaʁ.tje de la vil]
+Ellas no lo ponen en la mesa del comedor;Elles ne le mettent pas sur la table de la salle;[ɛl nə lə mɛt pɑ syʁ la ta.blə də la sal]
+Esta carta de relaciones personales es para ti;Cette lettre de relations personnelles est pour toi;[sɛt lɛtʁ də ʁə.la.sjɔ̃ pɛʁ.sɔ.nɛl ɛ puʁ twa]
+¿Hay alguna farmacia abierta para la salud aquí?;Y a-t-il une pharmacie ouverte pour la santé ici ?;[i a t_il yn faʁ.ma.si u.vɛʁt puʁ la sɑ̃.te i.si]
+Nadie quiere hablar de esa vieja historia familiar;Personne ne quiere en parler de cette vieille histoire familiale;[pɛʁ.sɔn nə vø z_ɑ̃ paʁ.le də sɛt vjɛj is.tɔ.ʁik fa.mi.ljal]
+Ella lo compra para su hija pequeña hoy;Elle l'achète pour sa petite fille aujourd'hui;[ɛl la.ʃɛt puʁ sa pə.tit fij o.ʒuʁ.dɥi]
+¿Vienen tus amigos de ese viaje tan largo por Europa?;Tes amis en viennent de ce long voyage en Europe ?;[te z_a.mi ɑ̃ vjɛ̃ də sə lɔ̃ vwa.jaʒ ɑ̃ n_ø.ʁɔp]
+Para mí, este ejercicio de educación es muy útil;Pour moi, cet exercice d'éducation est très utile;[puʁ mwa sɛ.t_ɛɡ.zɛʁ.sis de.dy.ka.sjɔ̃ ɛ tʁɛ z_y.til]
+El médico no le receta este medicamento para la salud;Le médecin ne lui prescrit pas ce médicament pour la santé;[lə med.sɛ̃ nə lɥi pʁɛs.kʁi pɑ sə me.di.ka.mɑ̃ puʁ la sɑ̃.te]
+¿Quieres poner tus herramientas en el coche de tecnología?;Tu veux y mettre tes outils dans la voiture de technologie ?;[ty vø i mɛtʁ te z_u.ti dɑ̃ la vwa.tyʁ de tɛk.nɔ.lɔ.ʒi]

@@ -1,30 +1,30 @@
-Ese es un actor famoso;C'est un acteur célèbre.;/sɛ t‿œ̃n aktœʁ selɛbʁ/
-Este coche es nuevo;Cette voiture est nouvelle.;/sɛt vwa.tyʁ ɛ nu.vɛl/
-Ese libro es interesante;Ce livre est intéressant.;/sə livʁ ɛt‿ɛ̃teʁesɑ̃/
-Este es mi amigo;Celui-ci est mon ami.;/səlɥi si ɛ mɔ̃n ami/
-Eso es bueno;Ça c'est bien.;/sa sɛ bjɛ̃/
-Esta está aquí;Celle-ci est ici.;/sɛl si ɛt isi/
-Este restaurante es caro;Ce restaurant est cher.;/sə ʁɛstɔʁɑ̃ ɛ ʃɛʁ/
-Ese problema es fácil;Ce problème est facile.;/sə pʁɔblɛm ɛ fasil/
-Este profesor es bueno;Ce professeur est bon.;/sə pʁɔfɛsœʁ ɛ bɔ̃/
-Ese es el mejor;C'est le meilleur.;/sɛ lə mɛjœʁ/
-Ese no es mi coche;Ce n'est pas ma voiture.;/sə nɛ pa ma vwa.tyʁ/
-Este libro no es interesante;Ce livre n'est pas intéressant.;/sə livʁ nɛ pa ɛ̃teʁesɑ̃/
-Esa idea no es buena;Cette idée n'est pas bonne.;/sɛt ide nɛ pa bɔn/
-Este no es mi amigo;Celui-ci n'est pas mon ami.;/səlɥi si nɛ pa mɔ̃n ami/
-Eso no es fácil;Ça ce n'est pas facile.;/sa sə nɛ pa fasil/
-Este restaurante no es caro;Ce restaurant n'est pas cher.;/sə ʁɛstɔʁɑ̃ nɛ pa ʃɛʁ/
-Ese problema no es nuevo;Ce problème n'est pas nouveau.;/sə pʁɔblɛm nɛ pa nuvo/
-Esta chica no está aquí;Celle-ci n'est pas ici.;/sɛl si nɛ pa isi/
-Ese profesor no es bueno;Ce professeur n'est pas bon.;/sə pʁɔfɛsœʁ nɛ pa bɔ̃/
-Ese no es el mejor;Ce n'est pas le meilleur.;/sə nɛ pa lə mɛjœʁ/
-¿Ese es tu libro?;C'est ton livre ?;/sɛ tɔ̃ livʁ/
-¿Este coche es nuevo?;Cette voiture est-elle nouvelle ?;/sɛt vwa.tyʁ ɛt ɛl nu.vɛl/
-¿Ese problema es difícil?;Ce problème est-il difficile ?;/sə pʁɔblɛm ɛt il difisil/
-¿Este es tu amigo?;Celui-ci est-il ton ami ?;/səlɥi si ɛt il tɔ̃n ami/
-¿Eso es correcto?;Ça c'est correct ?;/sa sɛ kɔʁɛkt/
-¿Este restaurante es bueno?;Ce restaurant est-il bon ?;/sə ʁɛstɔʁɑ̃ ɛt il bɔ̃/
-¿Ese libro es interesante?;Ce livre est-il intéressant ?;/sə livʁ ɛt il ɛ̃teʁesɑ̃/
-¿Esta idea es buena?;Cette idée est-elle bonne ?;/sɛt ide ɛt ɛl bɔn/
-¿Ese profesor es español?;Ce professeur est-il espagnol ?;/sə pʁɔfɛsœʁ ɛt il ɛspaɲɔl/
-¿Ese es el mejor?;C'est le meilleur ?;/sɛ lə mɛjœʁ/
+¿Te gusta este coche o prefieres aquel?;Tu aimes cette voiture ou tu préfères celle-là ?;[ty ɛm sɛt vwa.tyʁ u ty pʁe.fɛʁ sɛl.la]
+No entiendo esto, es muy difícil;Je ne comprends pas ça, c'est très difficile;[ʒə nə kɔ̃.pʁɑ̃ pɑ sa sɛ tʁɛ di.fi.sil]
+Este es un actor de cine muy famoso;C'est un acteur de cinéma très célèbre;[sɛ.t_ɛ̃.n_ak.tœʁ də si.ne.ma tʁɛ se.lɛbʁ]
+¿Quién es? Es el nuevo profesor de ciencias;Qui est-ce ? C'est le nouveau professeur de sciences;[ki ɛs sɛ lə nu.vo pʁɔ.fɛ.sœʁ də sjɑ̃s]
+El vino de la izquierda no es caro;Le vin de gauche n'est pas cher;[lə vɛ̃ də ɡoʃ nɛ pɑ ʃɛʁ]
+¿Prefieres este libro o el de la biblioteca?;Tu préfères ce livre u celui de la bibliothèque ?;[ty pʁe.fɛʁ sə li.vʁ‿u sə.lɥi də la bi.bli.jɔ.tɛk]
+Eso no me interesa para nada hoy;Ça ne m'intéresse pas du tout aujourd'hui;[sa nə mɛ̃.te.ʁɛs pɑ dy tu o.ʒuʁ.dɥi]
+Esta canción es hermosa, me encanta;Cette chanson est belle, ça me plaît;[sɛt ʃɑ̃.sɔ̃ ɛ bɛl sa mə plɛ]
+¿Es difícil estudiar física aquí?;Est-il difficile d'étudier la physique ici ?;[ɛ.t_il di.fi.sil de.ty.dje la fi.zik i.si]
+Él no compra esta ropa sino aquella;Il n'achète pas ces vêtements mais ceux-là;[il na.ʃɛt pɑ se vɛt.mɑ̃ mɛ sœ.la]
+¿Quieres estos ordenadores o los de la oficina?;Tu veux ces ordinateurs ou ceux du bureau ?;[ty vø se zɔʁ.di.na.tœʁ u sœ dy by.ʁo]
+Es importante comer bien para la salud;Il est important de bien manger pour la santé;[il ɛ.t_ɛ̃.pɔʁ.tɑ̃ də bjɛ̃ mɑ̃.ʒe puʁ la sɑ̃.te]
+Esta no es mi tableta, es la de mi hermano;Ce n'est pas ma tablette, c'est celle de mon frère;[sə nɛ pɑ ma ta.blɛt sɛ sɛl də mɔ̃ fʁɛʁ]
+¿Es interesante viajar en tren por Europa?;Est-il intéressant de voyager en train en Europe ?;[ɛ.t_il ɛ̃.te.ʁɛ.sɑ̃ də vwa.ja.ʒe ɑ̃ tʁɛ̃ ɑ̃ n_ø.ʁɔp]
+No conozco a este artista, ¿quién es él?;Je ne connais pas cet artiste, qui est-ce ?;[ʒə nə kɔ.nɛ pɑ sɛ.t_aʁ.tist ki ɛs]
+¿Es verdad que este cuadro es el de París?;Est-ce vrai que ce tableau est celui de Paris ?;[ɛs vʁɛ kə sə ta.blo ɛ sə.lɥi də pa.ʁi]
+Esta comida es deliciosa, es un plato típico;Cette nourriture est délicieuse, c'est un plat typique;[sɛt nu.ʁi.tyʁ ɛ de.li.sjøz sɛ.t_ɛ̃ pla ti.pik]
+No me gusta esta chaqueta, prefiero la de cuero;Je n'aime pas cette veste, je préfère celle en cuir;[ʒə nɛm pɑ sɛt vɛst ʒə pʁe.fɛʁ sɛl ɑ̃ kɥiʁ]
+¿Eso te ayuda a aprender las lecciones?;Est-ce que ça t'aide à apprendre les leçons ?;[ɛs kə sa tɛd a a.pʁɑ̃dʁ le lə.sɔ̃]
+Es genial trabajar en este proyecto de ecología;C'est génial de travailler sur ce projet d'écologie;[sɛ ʒe.njal də tʁa.va.je syʁ sə pʁɔ.ʒɛ de.kɔ.lɔ.ʒi]
+Aquellas herramientas de tecnología no funcionan;Ces outils de technologie-là ne fonctionnent pas;[se.z_u.ti də tɛk.nɔ.lɔ.ʒi.la nə fɔ̃k.sjɔn pɑ]
+¿Ves a esos niños? Son los de mi vecina;Tu vois ces enfants ? Ce sont ceux de ma voisine;[ty vwa se z_ɑ̃.fɑ̃ sə sɔ̃ sœ də ma vwa.zin]
+No es fácil vivir en esta ciudad tan grande;Il n'est pas facile de vivre dans cette grande ville;[il nɛ pɑ fa.sil də vi.vʁə dɑ̃ sɛt ɡʁɑ̃d vil]
+Este museo de arte es el que visitamos ayer;Ce musée d'art est celui que nous avons visité hier;[sə my.ze daʁ ɛ sə.lɥi kə nu.z_a.vɔ̃ vi.zi.te jɛʁ]
+¿Crees que esta billetera es la de tu padre?;Tu penses que ce portefeuille est celui de ton père ?;[ty pɑ̃s kə sə pɔʁ.tə.fœj ɛ sə.lɥi də tɔ̃ pɛʁ]
+No hagas eso, es malo para tu salud;Ne fais pas ça, c'est mauvais pour ta santé;[nə fɛ pɑ sa sɛ mɔ.vɛ puʁ ta sɑ̃.te]
+Es una escritora famosa, ella es muy inteligente;C'est une écrivaine célèbre, elle est très intelligente;[sɛ.t_yn e.kʁi.vɛn se.lɛbʁ ɛl ɛ tʁɛ z_ɛ̃.te.li.ʒɑ̃t]
+¿Quieres tomar este camino o el de la derecha?;Tu veux prendre ce chemin ou celui de droite ?;[ty vø pʁɑ̃dʁ sə ʃə.mɛ̃ u sə.lɥi də dʁwat]
+Esos días de lluvia son los peores para viajar;Ces jours de pluie sont les pires pour voyager;[se ʒuʁ də plɥi sɔ̃ le piʁ puʁ vwa.ja.ʒe]
+No quiero comprar este reloj sino el de oro;Je ne veux pas acheter cette montre mais celle en or;[ʒə nə vø pɑ.z_a.ʃə.te sɛt mɔ̃tʁ mɛ sɛl ɑ̃ n_ɔʁ]

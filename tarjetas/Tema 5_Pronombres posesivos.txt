@@ -1,30 +1,30 @@
-El mío es mejor;Le mien est meilleur;/lə mjɛ̃ ɛ mɛjœʁ/
-La mía es nueva;La mienne est nouvelle;/la mjɛn ɛ nuvɛl/
-Los míos están aquí;Les miens sont ici;/le mjɛ̃ sɔ̃t isi/
-Las mías son grandes;Les miennes sont grandes;/le mjɛn sɔ̃ ɡʁɑ̃d/
-El tuyo es rojo;Le tien est rouge;/lə tjɛ̃ ɛ ʁuʒ/
-La tuya es bonita;La tienne est belle;/la tjɛn ɛ bɛl/
-Los tuyos están listos;Les tiens sont prêts;/le tjɛ̃ sɔ̃ pʁɛ/
-El suyo es caro;Le sien est cher;/lə sjɛ̃ ɛ ʃɛʁ/
-La suya es interesante;La sienne est intéressante;/la sjɛn ɛt ɛ̃teʁesɑ̃t/
-Los suyos están aquí;Les siens sont ici;/le sjɛ̃ sɔ̃t isi/
-El mío no es caro;Le mien n'est pas cher;/lə mjɛ̃ nɛ pa ʃɛʁ/
-La mía no es nueva;La mienne n'est pas nouvelle;/la mjɛn nɛ pa nuvɛl/
-Los míos no están aquí;Les miens ne sont pas ici;/le mjɛ̃ nə sɔ̃ pa isi/
-Las mías no son grandes;Les miennes ne sont pas grandes;/le mjɛn nə sɔ̃ pa ɡʁɑ̃d/
-El tuyo no es rojo;Le tien n'est pas rouge;/lə tjɛ̃ nɛ pa ʁuʒ/
-La tuya no es bonita;La tienne n'est pas belle;/la tjɛn nɛ pa bɛl/
-Los tuyos no están listos;Les tiens ne sont pas prêts;/le tjɛ̃ nə sɔ̃ pa pʁɛ/
-El suyo no es caro;Le sien n'est pas cher;/lə sjɛ̃ nɛ pa ʃɛʁ/
-La suya no es interesante;La sienne n'est pas intéressante;/la sjɛn nɛ pa ɛ̃teʁesɑ̃t/
-Los suyos no están aquí;Les siens ne sont pas ici;/le sjɛ̃ nə sɔ̃ pa isi/
-¿Es el mío mejor?;Le mien est-il meilleur ?;/lə mjɛ̃ ɛt il mɛjœʁ/
-¿Es la mía nueva?;La mienne est-elle nouvelle ?;/la mjɛn ɛt ɛl nuvɛl/
-¿Están los míos aquí?;Les miens sont-ils ici ?;/le mjɛ̃ sɔ̃t il isi/
-¿Son las mías grandes?;Les miennes sont-elles grandes ?;/le mjɛn sɔ̃t ɛl ɡʁɑ̃d/
-¿Es el tuyo rojo?;Le tien est-il rouge ?;/lə tjɛ̃ ɛt il ʁuʒ/
-¿Es la tuya bonita?;La tienne est-elle belle ?;/la tjɛn ɛt ɛl bɛl/
-¿Están los tuyos listos?;Les tiens sont-ils prêts ?;/le tjɛ̃ sɔ̃t il pʁɛ/
-¿Es el suyo caro?;Le sien est-il cher ?;/lə sjɛ̃ ɛt il ʃɛʁ/
-¿Es la suya interesante?;La sienne est-elle intéressante ?;/la sjɛn ɛt ɛl ɛ̃teʁesɑ̃t/
-¿Están los suyos aquí?;Les siens sont-ils ici ?;/le sjɛ̃ sɔ̃t il isi/
+¿Este libro de literatura es el tuyo?;Ce livre de littérature est-il le tien ?;[sə li.vʁə də li.te.ʁa.tyʁ ɛt_il lə tjɛ̃]
+Mi chaqueta de moda es más bonita que la tuya;Ma veste de mode est plus belle que la tienne;[ma vɛst də mɔd ɛ ply bɛl kə la tjɛn]
+Ellos no quieren vender su coche de tecnología, prefieren el nuestro;Ils ne veulent pas vendre leur voiture de technologie, ils préfèrent la nôtre;[il nə vœl pɑ vɑ̃dʁ lœʁ vwa.tyʁ de tɛk.nɔ.lɔ.ʒi il pʁe.fɛʁ la notʁ]
+¿Tu proyecto de ecología es más fácil que el suyo?;Ton projet d'écologie est-il plus facile que le sien ?;[tɔ̃ pʁɔ.ʒɛ de.kɔ.lɔ.ʒi ɛt_il ply fa.sil kə lə sjɛ̃]
+Yo no tengo mis herramientas de ciencia, tomé las tuyas;Je n'ai pas mes outils de science, j'ai pris les tiens;[ʒə ne pɑ me z_u.ti də sjɑ̃s ʒe pʁi le tjɛ̃]
+Este cuadro de arte moderno no es el mío;Ce tableau d'art moderne n'est pas le mien;[sə ta.blo daʁ mɔ.dɛʁ nɛ pɑ lə mjɛ̃]
+¿Tus problemas de finanzas son peores que los nuestros?;Tes problèmes de finances sont-ils pires que los nôtres ?;[te pʁɔ.blɛm də fi.nɑ̃s sɔ̃t_il piʁ kə le notʁ]
+Nuestra casa de arquitectura antigua es más grande que la suya;Notre maison d'architecture ancienne est plus grande que la leur;[nɔtʁ mɛ.zɔ̃ daʁ.ʃi.tɛk.tyʁ ɑ̃.sjɛn ɛ ply ɡʁɑ̃d kə la lœʁ]
+Tus lecciones de educación son útiles, pero prefiero las mías;Tes leçons d'éducation sont utiles, mais je préfère les miennes;[te lə.sɔ̃ de.dy.ka.sjɔ̃ sɔ̃t_y.til mɛ ʒə pʁe.fɛʁ le mjɛn]
+¿No encuentras tus llaves de casa? Yo tengo las mías;Tu ne trouves pas tes clés de maison ? Moi, j'ai les miennes;[ty nə tʁuːv pɑ te kle də mɛ.zɔ̃ mwa ʒe le mjɛn]
+Su examen de historia es hoy, el nuestro es mañana;Leur examen d'histoire est aujourd'hui, le nôtre est demain;[lœʁ_ɛɡ.zɑ.mɛ̃ dis.twaʁ ɛ o.ʒuʁ.dɥi lə notʁ ɛ də.mɛ̃]
+Ella no quiere comer su comida, prefiere la tuya;Elle ne veut pas manger su nourriture, elle préfère la tienne;[ɛl nə vø pɑ mɑ̃.ʒe sa nu.ʁi.tyʁ ɛl pʁe.fɛʁ la tjɛn]
+¿Esta billetera de cuero es la suya o la mía?;Ce portefeuille en cuir est-il le sien ou le mien ?;[sə pɔʁ.tə.fœj ɑ̃ kɥiʁ ɛt_il lə sjɛ̃ u lə mjɛ̃]
+Tus amigos de deportes corren rápido, pero los míos ganan;Tes amis de sports courent vite, mais les miens gagnent;[te z_a.mi də spɔʁ kuːʁ vit mɛ le mjɛ̃ ɡaɲ]
+Mi trabajo en el mundo laboral no es igual que el tuyo;Mon travail dans le monde laboral n'est pas le même que le tien;[mɔ̃ tʁa.vaj dɑ̃ lə mɔ̃d la.bɔ.ʁal nɛ pɑ lə mɛm kə lə tjɛ̃]
+¿Esos billetes de viaje son los suyos?;Ces billets de voyage sont-ils les leurs ?;[se bi.jɛ də vwa.jaʒ sɔ̃t_il le lœʁ]
+Vuestra mesa de gastronomía francesa está lista, la nuestra no;Votre table de gastronomie française est prête, la nôtre non;[vɔtʁ ta.blə də ɡas.tʁɔ.nɔ.mi fʁɑ̃.sɛz ɛ pʁɛt la notʁ nɔ̃]
+Yo no uso tu ordenador de oficina, uso el mío;Je n'utilise pas ton ordinateur de bureau, j'utilise le mien;[ʒə n_y.ti.liːz pɑ tɔ̃ ɔʁ.di.na.tœʁ də by.ʁo ʒy.ti.liːz lə mjɛ̃]
+¿Tu música favorita es mejor que la suya?;Ta musique favorite est-elle meilleure que la sienne ?;[ta my.zik fa.vɔ.ʁit ɛt_ɛl mɛ.jœʁ kə la sjɛn]
+Este actor de cine famoso es amigo tuyo, no mío;Cet acteur de cinéma célèbre est un ami mien, pas le mien;[sɛ.t_ak.tœʁ də si.ne.ma se.lɛbʁ ɛt_œ̃ n_a.mi də tjɛ̃ pɑ lə mjɛ̃]
+¿Sus hijos juegan en el jardín y los vuestros van a la escuela?;Leurs enfants jouent dans le jardin et les vôtres vont à l'école ?;[lœʁ z_ɑ̃.fɑ̃ ʒu dɑ̃ lə ʒaʁ.dɛ̃ e le votʁ vɔ̃ a le.kɔl]
+Nuestra salud es buena, pero la suya es excelente;Notre santé est bonne, mais la leur est excellente;[nɔtʁ sɑ̃.te ɛ bɔn mɛ la lœʁ ɛt_ɛk.sɛ.lɑ̃t]
+Yo no compro esta ropa cara, prefiero la tuya;Je n'achète pas ces vêtements chers, je préfère los tiens;[ʒə na.ʃɛt pɑ se vɛt.mɑ̃ ʃɛʁ ʒə pʁe.fɛʁ le tjɛ̃]
+¿Tu vida cotidiana en la ciudad es más interesante que la mía?;Ta vie quotidienne dans la ville est-elle plus intéressante que la mienne ?;[ta vi kɔ.ti.djɛn dɑ̃ la vil ɛt_ɛl ply z_ɛ̃.te.ʁɛ.sɑ̃t kə la mjɛn]
+Su película de cine es divertida, pero la nuestra es aburrida;Leur film de cinéma est amusant, mais le nôtre est ennuyeux;[lœʁ film də si.ne.ma ɛt_a.my.zɑ̃ mɛ lə notʁ ɛ ɑ̃.nɥi.jø]
+Vuestras herramientas de tecnología no son mejores que las mías;Vos outils de technologie no sont pas meilleurs que les miens;[vo z_u.ti də tɛk.nɔ.lɔ.ʒi nə sɔ̃ pɑ mɛ.jœʁ kə le mjɛ̃]
+¿Ese hermoso gato blanco es el tuyo o el de tu vecina?;Ce beau chat blanc est-il le tien ou celui de ta voisine ?;[sə bo ʃa blɑ̃ ɛt_il lə tjɛ̃ u sə.lɥi  də ta vwa.zin]
+Mi reloj de oro funciona bien, pero el suyo no;Ma montre en or fonctionne bien, mais la sienne non;[ma mɔ̃tʁ ɑ̃ n_ɔʁ fɔ̃k.sjɔn bjɛ̃ mɛ la sjɛn nɔ̃]
+¿Vuestra maleta de viajes es más pesada que la nuestra?;Votre valise de voyages est-elle plus lourde que la nôtre ?;[vɔtʁ va.liːz də vwa.jaʒ ɛt_ɛl ply luʁd kə la notʁ]
+Nuestros profesores de ciencia son simpáticos, pero los suyos son estrictos;Nos professeurs de science sont sympathiques, mais les leurs sont stricts;[no pʁɔ.fɛ.sœʁ də sjɑ̃s sɔ̃ sɛ̃.pa.tik mɛ le lœʁ sɔ̃ stʁikt]

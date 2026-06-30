@@ -1,30 +1,30 @@
-Me levanto temprano;Je me lève tôt;/ʒə mə lɛv to/
-Ella se lava las manos;Elle se lave les mains;/ɛl sə lav le mɛ̃/
-Nosotros nos preparamos;Nous nous préparons;/nu nu pʁepaʁɔ̃/
-Tú te vistes rápido;Tu t'habilles vite;/ty t‿abij vit/
-Ellos se sientan aquí;Ils s'assoient ici;/il s‿aswa isi/
-Me llamo Ana;Je m'appelle Ana;/ʒə m‿apɛl ana/
-Él se acuerda de ti;Il se souvient de toi;/il sə suvjɛ̃ də twa/
-Nosotros nos divertimos;Nous nous amusons;/nu nu zamyzɔ̃/
-Ella se maquilla;Elle se maquille;/ɛl sə makij/
-Ellos se pasean por el parque;Ils se promènent dans le parc;/il sə pʁɔmɛn dɑ̃ lə paʁk/
-No me levanto tarde;Je ne me lève pas tard;/ʒə nə mə lɛv pa taʁ/
-Ella no se lava;Elle ne se lave pas;/ɛl nə sə lav pa/
-No nos preparamos;Nous ne nous préparons pas;/nu nə nu pʁepaʁɔ̃ pa/
-Tú no te vistes;Tu ne t'habilles pas;/ty nə t‿abij pa/
-Ellos no se sientan;Ils ne s'assoient pas;/il nə s‿aswa pa/
-No me llamo Juan;Je ne m'appelle pas Juan;/ʒə nə m‿apɛl pa ʒwan/
-Él no se acuerda;Il ne se souvient pas;/il nə sə suvjɛ̃ pa/
-No nos divertimos;Nous ne nous amusons pas;/nu nə nu zamyzɔ̃ pa/
-Ella no se maquilla;Elle ne se maquille pas;/ɛl nə sə makij pa/
-Ellos no se pasean;Ils ne se promènent pas;/il nə sə pʁɔmɛn pa/
-¿Te levantas temprano?;Te lèves-tu tôt ?;/tə lɛv ty to/
-¿Se lava ella las manos?;Se lave-t-elle les mains ?;/sə lav t ɛl le mɛ̃/
-¿Nos preparamos?;Nous nous préparons ?;/nu nu pʁepaʁɔ̃/
-¿Te vistes rápido?;T'habilles-tu vite ?;/t‿abij ty vit/
-¿Se sientan aquí?;S'assoient-ils ici ?;/s‿aswa til isi/
-¿Te llamas Ana?;T'appelles-tu Ana ?;/t‿apɛl ty ana/
-¿Se acuerda de ti?;Se souvient-il de toi ?;/sə suvjɛ̃ til də twa/
-¿Nos divertimos?;Nous nous amusons ?;/nu nu zamyzɔ̃/
-¿Se maquilla ella?;Se maquille-t-elle ?;/sə makij t ɛl/
-¿Se pasean ellos?;Se promènent-ils ?;/sə pʁɔmɛn til/
+¿A qué hora te levantas por la mañana?;À quelle heure tu te lèves le matin ?;[a kɛl œʁ ty də lɛv lə ma.tɛ̃]
+Yo no me visto a la moda hoy;Je ne m'habille pas à la mode aujourd'hui;[ʒə nə ma.bij pɑ z_a la mɔd o.ʒuʁ.dɥi]
+Ellos se divierten mucho en el concierto de música;Ils se divertissent beaucoup au concert de musique;[il sə di.vɛʁ.tis bo.ku o kɔ̃.sɛʁ də my.zik]
+¿Te lavas las manos antes de comer gastronomía francesa?;Tu te laves les mains avant de manger de la gastronomie française ?;[ty də lav le mɛ̃ a.vɑ̃ də mɑ̃.ʒe də la ɡas.tʁɔ.nɔ.mi fʁɑ̃.sɛz]
+Nosotros no nos acostamos tarde durante los viajes;Nous ne nous couchons pas tard pendant les voyages;[nu nə nu ku.ʃɔ̃ pɑ taʁ pɑ̃.dɑ̃ le vwa.jaʒ]
+El científico se concentra en su nuevo proyecto de ciencia;Le scientifique se concentre sur son nouveau projet de science;[lə sjɑ̃.ti.fik sə kɔ̃.sɑ̃tʁ syʁ sɔ̃ nu.vo pʁɔ.ʒɛ de sjɑ̃s]
+¿Se despiertan tus hijos temprano para ir a la escuela?;Tes enfants se réveillent-ils tôt pour aller à l'école ?;[te z_ɑ̃.fɑ̃ sə ʁe.vɛj t_il to puʁ a.le a le.kɔl]
+Ella no se interesa por la ecología moderna;Elle ne s'intéresse pas à l'écologie moderne;[ɛl nə sɛ̃.te.ʁɛs pɑ a le.kɔ.lɔ.ʒi mɔ.dɛʁ]
+Vosotros os preparáis rápido para ir al trabajo;Vous vous préparez vite pour aller au travail;[vu vu pʁe.pa.ʁe vit puʁ a.le o tʁa.vaj]
+¿Por qué te enfadas tanto durante la tormenta?;Pourquoi tu te fâches tant pendant la tempête ?;[puʁ.kwa ty də faʃ tɑ̃ pɑ̃.dɑ̃ la tɑ̃.pɛt]
+Nosotros nos saludamos siempre en la oficina de finanzas;Nous nous saluons toujours au bureau des finances;[nu nu sa.lɥɔ̃ tu.ʒuʁ o by.ʁo de fi.nɑ̃s]
+Él no se acuerda del nombre de este actor de cine;Il ne se souvient pas du nom de cet acteur de cinéma;[il nə sə su.vjɛ̃ pɑ dy nɔ̃ də sɛ.t_ak.tœʁ də si.ne.ma]
+¿Os ducháis vosotros después de hacer deportes por la tarde?;Vous vous douchez après faire des sports l'après-midi ?;[vu vu du.ʃe a.pʁɛ fɛʁ de spɔʁ la.pʁɛ.mi.di]
+Ella se maquilla bien antes del desfile de moda;Elle se maquille bien avant le défilé de mode;[ɛl sə ma.kij bjɛ̃ a.vɑ̃ lə de.fi.le de mɔd]
+Ellas no se hablan desde su última discusión personal;Elles ne se parlent pas depuis leur dernière discussion personnelle;[ɛl nə sə paʁl pɑ də.pɥi lœʁ dɛʁ.njɛʁ dis.ky.sjɔ̃ pɛʁ.sɔ.nɛl]
+¿Te duermes tú rápido cuando lees literatura clásica?;Tu te rendors vite quand tu lis de la littérature classique ?;[ty də ʁɑ̃.dɔːʁ vit kɑ̃ ty li də la li.te.ʁa.tyʁ kla.sik]
+Este edificio de arquitectura antigua se destruye poco a poco;Ce bâtiment d'architecture ancienne se détruit petit à petit;[sə bɑ.ti.mɑ̃ daʁ.ʃi.tɛk.tyʁ ɑ̃.sjɛn sə de.tʁɥi pə.ti a pə.ti]
+Yo no me ocupo de la tecnología de estos ordenadores;Je ne m'occupe pas de la technologie de ces ordinateurs;[ʒə nə mɔ.kyp pɑ də la tɛk.nɔ.lɔ.ʒi də se zɔʁ.di.na.tœʁ]
+¿Se pasean tus amigos por este hermoso parque tecnológico?;Tes amis se promènent-ils dans ce beau parc technologique ?;[te z_a.mi sə pʁɔ.mɛn t_il dɑ̃ sə bo paʁ tɛk.nɔ.lɔ.ʒik]
+Él se cansa mucho cuando trabaja en el jardín;Il se fatigue beaucoup quand il travaille dans le jardin;[il sə fa.tiɡ bo.ku kɑ̃ t_il tʁa.vaj dɑ̃ lə ʒaʁ.dɛ̃]
+¿Os sentáis vosotros cerca de la ventana para ver el paisaje?;Vous vous asseyez près de la fenêtre pour voir le paysage ?;[vu vu z_a.sɛ.je pʁɛ də la fə.nɛːtʁ puʁ vwaʁ lə pe.i.zaʒ]
+Nosotros no nos equivocamos en este ejercicio de educación;Nous ne nous trompons pas dans cet exercice d'éducation;[nu nə nu tʁɔ̃.pɔ̃ pɑ dɑ̃ sɛ.t_ɛɡ.zɛʁ.sis de.dy.ka.sjɔ̃]
+Ellos se miran en el espejo antes de salir a la calle;Ils se regardent dans le miroir avant de sortir dans la rue;[il sə ʁə.ɡaʁd dɑ̃ lə mi.ʁwaʁ a.vɑ̃ də sɔʁ.tiʁ dɑ̃ la ʁy]
+¿No te sientes bien después de tomar este medicamento para la salud?;Tu ne te sens pas bien après prendre ce médicament pour la santé ?;[ty nə də sɑ̃ pɑ bjɛ̃ a.pʁɛ pʁɑ̃dʁ sə me.di.ka.mɑ̃ puʁ la sɑ̃.te]
+El museo de historia se abre al público a las diez;Le musée d'histoire s'ouvre au public à dix heures;[lə my.ze dis.twaʁ su.vʁ‿o py.blik a di z_œʁ]
+Yo no me quejo nunca de mi vida cotidiana en la ciudad;Je ne me plains jamais de ma vie quotidienne dans la ville;[ʒə nə mə plɛ̃ ʒa.mɛ də ma vi kɔ.ti.djɛn dɑ̃ la vil]
+¿Se afeitan los hombres antes de ir a la gran fiesta de arte?;Les hommes se rasent-ils avant d'aller à la grande fête d'art ?;[le z_ɔm sə ʁɑːz t_il a.vɑ̃ da.le a la ɡʁɑ̃d fɛt daʁ]
+Ella se pone una chaqueta roja para protegerse del frío;Elle met une veste rouge pour se protéger du froid;[ɛl mɛt_yn vɛst ʁuːʒ puʁ sə pʁɔ.te.ʒe dy fʁwa]
+Nosotros no nos reímos de los problemas de nuestros amigos;Nous ne nous rions pas des problèmes de nos amis;[nu nə nu ʁi.ɔ̃ pɑ de pʁɔ.blɛm de no z_a.mi]
+¿Te imaginas tú viviendo en este país tan hermoso?;Tu t'imagines vivre dans ce pays si beau ?;[ty ti.ma.ʒin vi.vʁə dɑ̃ sə pe.i si bo]

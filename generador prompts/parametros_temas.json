@@ -1,0 +1,47 @@
+{
+  "tema_1": {
+    "foco": "Pronombres demostrativos",
+    "porcentaje_minimo_tarjetas_con_foco": 100,
+    "instrucciones": [
+      "C'est / il est. ejemplo: C'est un acteur espagnol. / Il est très célèbre.",
+      "ça/ce/il. ejemplo: Ça m'intéresse// C'est intéressant. // Il est intéressant de travailler ici.",
+      "celui, ceux, celle(s), celui-ci/celui-là.ejemplo: Tu préfères celui-ci ou celui-là ?",
+      "Combinación de pronombres demostrativos con preposición. Celui de droite ou celui de gauche ?"
+    ]
+  },
+  "tema_2": {
+    "foco": "Pronombres indefenidos",
+    "porcentaje_minimo_tarjetas_con_foco": 100,
+    "instrucciones": [
+      "quelqu'un/personne, quelque chose/rien, tout.",
+      "quelques-uns, plusieurs, chacun, aucun, autre, (le) même.",
+      "n'importe qui/quoi/où/quand/comment.",
+      "combinación de indefinido con adjetivo. ejemplo: rien de spécial / quelqu'un de gentil/il y en a quelques-unes de libres."
+    ]
+  },
+  "tema_3": {
+    "foco": "Pronombres personales",
+    "porcentaje_minimo_tarjetas_con_foco": 100,
+    "instrucciones": [
+      "IL impersonal. ejemplo: Il pleut, il y a, il faut, il est midi.",
+      "Formas y usos generales (moi, toi...). ejemplo: Toi, tu travailles beaucoup. / Elle est à moi.",
+      "COD- le.../ COI- lui... ejemplo: Il l'achète. / Il lui achète un livre. // Donne-moi un euro.",
+      "y (lugar). ejemplo: Nous y sommes allés.",
+      "en COD y lugar. ejemplo Il en a acheté 3. // Nous en venons."
+    ]
+  },
+    "tema_4": {
+    "foco": "Pronombres reflexivos",
+      "porcentaje_minimo_tarjetas_con_foco": 100,
+    "instrucciones": [
+      "Formas y usos generales. ejemplo: Ils se sont levés tôt."
+    ]
+  },
+      "tema_5": {
+    "foco": "Pronombres posesivos",
+        "porcentaje_minimo_tarjetas_con_foco": 100,
+    "instrucciones": [
+      "Formas y usos generales. ejemplo: Les siennes sont plus belles que les nôtres."
+    ]
+  }
+}

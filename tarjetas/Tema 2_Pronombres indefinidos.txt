@@ -1,30 +1,30 @@
-Es alguien aquí;Il y a quelqu'un ici.;/il i a kɛlkœ̃n isi/
-Todo está bien;Tout est bien.;/tu ɛ bjɛ̃/
-Hay algo interesante;Il y a quelque chose d'intéressant.;/il i a kɛlkə ʃoz d‿ɛ̃teʁesɑ̃/
-Cada uno trabaja;Chacun travaille.;/ʃakœ̃ tʁavaj/
-Todos están contentos;Tout le monde est content.;/tu lə mɔ̃d ɛ kɔ̃tɑ̃/
-Algunos están libres;Quelques-uns sont libres.;/kɛlkøz œ̃ sɔ̃ libʁ/
-Varias personas vienen;Plusieurs personnes viennent.;/plyzjœʁ pɛʁsɔn vjɛn/
-El mismo problema vuelve;Le même problème revient.;/lə mɛm pʁɔblɛm ʁəvjɛ̃/
-Otra solución existe;Une autre solution existe.;/yn otʁ sɔlysjɔ̃ ɛɡzist/
-Alguien quiere ayuda;Quelqu'un veut de l'aide.;/kɛlkœ̃ vø də lɛd/
-No hay nadie aquí;Il n'y a personne ici.;/il n‿ja pɛʁsɔn isi/
-No hay nada;Il n'y a rien.;/il n‿ja ʁjɛ̃/
-Nadie viene hoy;Personne ne vient aujourd'hui.;/pɛʁsɔn nə vjɛ̃ oʒuʁdɥi/
-No quiero nada;Je ne veux rien.;/ʒə nə vø ʁjɛ̃/
-No veo a nadie;Je ne vois personne.;/ʒə nə vwa pɛʁsɔn/
-No hay nada especial;Il n'y a rien de spécial.;/il n‿ja ʁjɛ̃ də spesjal/
-Nadie tiene tiempo;Personne n'a de temps.;/pɛʁsɔn na də tɑ̃/
-Ninguno está listo;Aucun n'est prêt.;/okœ̃ nɛ pʁɛ/
-No hay ninguna solución;Il n'y a aucune solution.;/il n‿ja okyn sɔlysjɔ̃/
-No es lo mismo;Ce n'est pas le même.;/sə nɛ pa lə mɛm/
-¿Hay alguien aquí?;Y a-t-il quelqu'un ici ?;/ja t‿il kɛlkœ̃n isi/
-¿Quieres algo?;Veux-tu quelque chose ?;/vø ty kɛlkə ʃoz/
-¿Todo está bien?;Tout est-il bien ?;/tu ɛt il bjɛ̃/
-¿Alguien viene?;Quelqu'un vient ?;/kɛlkœ̃ vjɛ̃/
-¿No hay nadie?;N'y a-t-il personne ?;/ni a t‿il pɛʁsɔn/
-¿Qué quieres hacer?;Que veux-tu faire ?;/kə vø ty fɛʁ/
-¿Hay algo nuevo?;Y a-t-il quelque chose de nouveau ?;/ja t‿il kɛlkə ʃoz də nuvo/
-¿Cada uno está listo?;Chacun est-il prêt ?;/ʃakœ̃ ɛt il pʁɛ/
-¿Alguien tiene tiempo?;Quelqu'un a-t-il du temps ?;/kɛlkœ̃ a t‿il dy tɑ̃/
-¿No hay nada más?;N'y a-t-il rien d'autre ?;/ni a t‿il ʁjɛ̃ dotʁ/
+¿Alguien quiere visitar este museo de arte?;Quelqu'un veut visiter ce musée d'art ?;[kɛl.k_œ̃ vø vi.zi.te sə my.ze daʁ]
+No hay nada de especial en la televisión;Il n'y a rien de spécial à la télévision;[il nja ʁjɛ̃ də spe.sjal a la te.le.vi.zjɔ̃]
+Cada uno debe elegir un trabajo importante;Chacun doit choisir un travail important;[ʃa.kœ̃ dwa ʃwa.ziʁ œ̃ tʁa.vaj ɛ̃.pɔʁ.tɑ̃]
+¿Tienes algunas herramientas para reparar la tableta?;Tu as quelques-unes des outils pour réparer la tablette ?;[ty a kɛl.kə.zyn de z_u.ti puʁ ʁe.pa.ʁe la ta.blɛt]
+Nadie viaja en tren durante esta tormenta;Personne ne voyage en train pendant cette tempête;[pɛʁ.sɔn nə vwa.jaʒ ɑ̃ tʁɛ̃ pɑ̃.dɑ̃ sɛt tɑ̃.pɛt]
+Cualquier cosa es buena para la salud hoy;N'importe quoi est bon pour la santé aujourd'hui;[nɛ̃.pɔʁ.tə kwa ɛ bɔ̃ puʁ la sɑ̃.te o.ʒuʁ.dɥi]
+¿Quieres comer algo de gastronomía típica francesa?;Tu veux manger quelque chose de gastronomie typique française ?;[ty vø mɑ̃.ʒe kɛl.kə ʃoz də ɡas.tʁɔ.nɔ.mi ti.pik fʁɑ̃.sɛz]
+Varios científicos estudian este gran problema ecológico;Plusieurs scientifiques étudient ce grand problème écologique;[ply.zjœʁ sjɑ̃.ti.fik e.ty.di sə ɡʁɑ̃ pʁɔ.blɛm e.kɔ.lɔ.ʒik]
+Ningún alumno comprende esta lección de historia;Aucun élève ne comprend cette leçon d'histoire;[o.kœ̃ n_e.lɛv nə kɔ̃.pʁɑ̃ sɛt lə.sɔ̃ dis.twaʁ]
+¿Puedes comprar este vestido en cualquier lugar?;Tu peux acheter cette robe n'importe où ?;[ty pø z_a.ʃə.te sɛt ʁɔb nɛ̃.pɔʁ.tə u]
+Todo está listo para el concierto de música;Tout est prêt pour le concert de musique;[tut ɛ pʁɛ puʁ lə kɔ̃.sɛʁ də my.zik]
+Ella no quiere hablar con nadie en la oficina;Elle ne veut parler avec personne au bureau;[ɛl nə vø paʁ.le a.vɛk pɛʁ.sɔn o by.ʁo]
+¿Ves a alguien interesante en el cine?;Tu vois quelqu'un d'intéressant au cinéma ?;[ty vwa kɛl.k_œ̃ dɛ̃.te.ʁe.sɑ̃ o si.ne.ma]
+Compré el mismo libro de literatura ayer;J'ai acheté le même livre de littérature hier;[ʒe a.ʃə.te lə mɛm li.vʁə də li.te.ʁa.tyʁ jɛʁ]
+No tengo ningún interés en las finanzas actuales;Je n'ai aucun intérêt pour les finances actuelles;[ʒə ne o.kœ̃ ɛ̃.te.ʁɛ puʁ le fi.nɑ̃s_ak.tɥɛl]
+¿Puedes hacer este ejercicio de cualquier manera?;Tu peux faire cet exercice n'importe comment ?;[ty pø fɛʁ sɛ.t_ɛɡ.zɛʁ.sis nɛ̃.pɔʁ.tə kɔ.mɑ̃]
+Algunas de estas películas son muy antiguas;Quelques-unes de ces vidéos sont très anciennes;[kɛl.kə.zyn də se vi.de.o sɔ̃ tʁɛ z_ɑ̃.sjɛn]
+No hay nada libre en este hotel de viajes;Il n'y a rien de libre dans cet hôtel de voyages;[il nja ʁjɛ̃ də li.bʁə dɑ̃ sɛ.t_o.tɛl də vwa.jaʒ]
+¿Quieres leer otro libro sobre la ciencia moderna?;Tu veux lire un autre livre sur la science moderne ?;[ty vø liʁ œ̃ n_o.tʁə li.vʁə syʁ la sjɑ̃s mɔ.dɛʁ]
+Navegar por internet a veces no aporta nada;Naviguer sur internet parfois n'apporte rien;[na.vi.ɡe syʁ ɛ̃.tɛʁ.nɛt paʁ.fwa na.pɔʁt ʁjɛ̃]
+¿Cualquiera puede aprender a tocar el piano?;N'importe qui peut apprendre à jouer du piano ?;[nɛ̃.pɔʁ.tə ki pø a.pʁɑ̃dʁ a ʒwe dy pja.no]
+Él conoce a varias personas amables en su barrio;Il connaît plusieurs personnes de gentilles dans son quartier;[il kɔ.nɛ ply.zjœʁ pɛʁ.sɔn də ʒɑ̃.tij dɑ̃ sɔ̃ kaʁ.tje]
+No me gusta este cuadro, prefiero otro;Je n'aime pas ce tableau, je préfère un autre;[ʒə nɛm pɑ sə ta.blo ʒə pʁe.fɛʁ œ̃ n_o.tʁə]
+¿Hay alguna mesa libre de gastronomía italiana aquí?;Y a-t-il quelques-unes de libres pour la gastronomie italienne ici ?;[i a t_il kɛl.kə.zyn de li.bʁə puʁ la ɡas.tʁɔ.nɔ.mi i.ta.ljɛn i.si]
+Cada uno compra su ropa según la moda actual;Chacun achète ses vêtements selon la mode actuelle;[ʃa.kœ̃ n_a.ʃɛt se vɛt.mɑ̃ sə.lɔ̃ la mɔd ak.tɥɛl]
+No puedes viajar a cualquier parte este verano;Tu ne peux pas voyager n'importe où cet été;[ty nə pø pɑ vwa.ja.ʒe nɛ̃.pɔʁ.tə u sɛ.t_e.te]
+¿Alguien de inteligente puede resolver este misterio histórico?;Quelqu'un d'intelligent peut-il résoudre ce mystère historique ?;[kɛl.k_œ̃ dɛ̃.te.li.ʒɑ̃ pø t_il ʁe.zudʁ sə mis.tɛʁ is.tɔ.ʁik]
+Varios amigos van al estadio a ver deportes;Plusieurs amis vont au stade pour voir des sports;[ply.zjœʁ z_a.mi vɔ̃ o stad puʁ vwaʁ de spɔʁ]
+Ella no encuentra sus llaves en ninguna parte;Elle ne trouve ses clés nulle part;[ɛl nə tʁuːv se kle nyl paʁ]
+¿Quieres comprar el mismo coche para tus viajes?;Tu veux acheter la même voiture pour tes voyages ?;[ty vø z_a.ʃə.te la mɛm vwa.tyʁ puʁ te vwa.jaʒ]
