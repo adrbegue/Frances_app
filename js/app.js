@@ -1,11 +1,8 @@
 let themesList = [];
 let currentTheme = null;
-
 let userProgress = JSON.parse(localStorage.getItem('french_app_progress')) || {};
-
 let exerciseQueue = [];
 let currentExIndex = 0;
-
 let selectedWord = null;
 let currentGapAnswers = {};
 let currentGapTarget = {};
@@ -34,14 +31,12 @@ async function loadThemes() {
       loadThemeData(currentTheme);
     }
   } catch (err) {
-    console.error("Error al cargar temas.json:", err);
-    document.getElementById('ex-prompt').innerText = "Error cargando los temas. Asegúrate de ejecutar la app a través de un servidor local (VS Code Live Server o python -m http.server).";
+    alert("Error crítico: No se pueden leer los archivos locales. Si estás abriendo el index.html con doble clic, debes usar un servidor local (ej. python -m http.server).");
   }
 }
 
 function onTemaChange() {
-  const select = document.getElementById('select-tema');
-  currentTheme = select.value;
+  currentTheme = document.getElementById('select-tema').value;
   loadThemeData(currentTheme);
 }
 
@@ -51,22 +46,15 @@ function loadThemeData(themeName) {
   loadGapText(themeName);
 }
 
-// 1. CARGA Y MEMORIA DE EJERCICIOS
 async function loadExercises(themeName) {
   try {
     const res = await fetch(`ejercicios/${themeName}.txt`);
-    if (!res.ok) {
-      document.getElementById('ex-prompt').innerText = "No se encontró el fichero de ejercicios para este tema.";
-      return;
-    }
+    if (!res.ok) return;
     const rawText = await res.text();
-    const lines = rawText.split('\n').filter(l => l.trim().length > 0);
+    const lines = rawText.split('\n').filter(l => l.trim() !== '');
     
     const allEx = lines.map((line, idx) => {
       let parts = line.split('|');
-      if (parts.length < 2) {
-        parts = line.split(';'); // Soporte para separador con punto y coma
-      }
       return {
         id: `${themeName}_${idx}`,
         prompt: parts[0]?.trim() || line,
@@ -74,138 +62,89 @@ async function loadExercises(themeName) {
       };
     });
 
-    // Filtro con memoria: Primero 'hard' o 'unseen', al final 'mastered'
     exerciseQueue = allEx.sort((a, b) => {
-      const statusA = userProgress[a.id]?.status || 'unseen';
-      const statusB = userProgress[b.id]?.status || 'unseen';
-
-      const weight = { 'hard': 0, 'unseen': 1, 'mastered': 2 };
-      return weight[statusA] - weight[statusB];
+      const w = { 'hard': 0, 'unseen': 1, 'mastered': 2 };
+      const statA = userProgress[a.id]?.status || 'unseen';
+      const statB = userProgress[b.id]?.status || 'unseen';
+      return w[statA] - w[statB];
     });
 
     currentExIndex = 0;
     renderCurrentExercise();
-  } catch (err) {
-    console.error("Error cargando ejercicios:", err);
-  }
+  } catch (err) { console.error("Error ejercicios:", err); }
 }
 
 function renderCurrentExercise() {
   if (exerciseQueue.length === 0) return;
   const ex = exerciseQueue[currentExIndex];
-  
-  document.getElementById('ex-counter').innerText = `Ejercicio ${currentExIndex + 1}/${exerciseQueue.length}`;
+  document.getElementById('ex-counter').innerText = `${currentExIndex + 1}/${exerciseQueue.length}`;
   document.getElementById('ex-prompt').innerText = ex.prompt;
   document.getElementById('ex-input').value = '';
   document.getElementById('ex-feedback').innerText = '';
-
-  const status = userProgress[ex.id]?.status || 'Pendiente';
-  const badge = document.getElementById('ex-status');
-  badge.innerText = status.toUpperCase();
+  document.getElementById('ex-status').innerText = (userProgress[ex.id]?.status || 'Pendiente').toUpperCase();
 }
 
 function checkExerciseAnswer() {
   const ex = exerciseQueue[currentExIndex];
   const input = document.getElementById('ex-input').value.trim();
-
-  if (!ex.answer) {
-    document.getElementById('ex-feedback').innerText = "Respuesta guardada.";
-    return;
-  }
+  const feedback = document.getElementById('ex-feedback');
 
   if (input.toLowerCase() === ex.answer.toLowerCase()) {
-    document.getElementById('ex-feedback').innerText = "¡Correcto! 🎉";
-    document.getElementById('ex-feedback').style.color = "green";
+    feedback.innerText = "¡Correcto!";
+    feedback.style.color = "green";
     userProgress[ex.id] = { status: 'mastered' };
   } else {
-    document.getElementById('ex-feedback').innerText = `Incorrecto. Respuesta: ${ex.answer}`;
-    document.getElementById('ex-feedback').style.color = "red";
+    feedback.innerText = `Incorrecto. Respuesta: ${ex.answer}`;
+    feedback.style.color = "red";
     userProgress[ex.id] = { status: 'hard' };
   }
-
   localStorage.setItem('french_app_progress', JSON.stringify(userProgress));
 }
 
 function markAsHard() {
-  const ex = exerciseQueue[currentExIndex];
-  userProgress[ex.id] = { status: 'hard' };
+  userProgress[exerciseQueue[currentExIndex].id] = { status: 'hard' };
   localStorage.setItem('french_app_progress', JSON.stringify(userProgress));
   renderCurrentExercise();
 }
 
-function nextExercise() {
-  if (currentExIndex < exerciseQueue.length - 1) {
-    currentExIndex++;
-    renderCurrentExercise();
-  }
-}
+function nextExercise() { if (currentExIndex < exerciseQueue.length - 1) { currentExIndex++; renderCurrentExercise(); } }
+function prevExercise() { if (currentExIndex > 0) { currentExIndex--; renderCurrentExercise(); } }
 
-function prevExercise() {
-  if (currentExIndex > 0) {
-    currentExIndex--;
-    renderCurrentExercise();
-  }
-}
-
-// 2. TEORÍA (TXT)
 async function loadTheoryTxt(themeName) {
   try {
     const res = await fetch(`teoria/${themeName}.txt`);
-    if (!res.ok) {
-      const msg = "No hay archivo de teoría asignado para este tema aún en la carpeta /teoria.";
-      document.getElementById('main-theory-text').innerText = msg;
-      document.getElementById('embedded-theory-text').innerText = msg;
-      return;
-    }
-    const text = await res.text();
+    const text = res.ok ? await res.text() : "No hay teoría para este tema.";
     document.getElementById('main-theory-text').innerText = text;
     document.getElementById('embedded-theory-text').innerText = text;
-  } catch (err) {
-    console.error("Error cargando teoría:", err);
-  }
+  } catch (err) {}
 }
 
 function toggleEmbeddedTheory() {
-  const container = document.getElementById('embedded-theory-container');
-  const label = document.getElementById('theory-toggle-label');
-  
-  if (container.classList.contains('hidden')) {
-    container.classList.remove('hidden');
-    label.innerText = "Ocultar Teoría del Tema";
-  } else {
-    container.classList.add('hidden');
-    label.innerText = "Mostrar Teoría del Tema";
-  }
+  document.getElementById('embedded-theory-container').classList.toggle('hidden');
 }
 
-// 3. TEXTO CON HUECOS
 async function loadGapText(themeName) {
   try {
     const res = await fetch(`texto/${themeName}.txt`);
-    if (!res.ok) {
-      document.getElementById('text-passage').innerText = "No hay texto disponible para este tema en la carpeta /texto.";
-      document.getElementById('word-bank').innerHTML = '';
-      return;
-    }
+    if (!res.ok) return;
     const rawText = await res.text();
     
     const regex = /\[\[(.*?)\]\]/g;
     let words = [];
     let match;
+    while ((match = regex.exec(rawText)) !== null) words.push(match[1]);
 
-    while ((match = regex.exec(rawText)) !== null) {
-      words.push(match[1]);
-    }
-
-    const shuffledWords = [...words].sort(() => Math.random() - 0.5);
-    
     const bank = document.getElementById('word-bank');
     bank.innerHTML = '';
-    shuffledWords.forEach((word) => {
+    [...words].sort(() => Math.random() - 0.5).forEach((word) => {
       const chip = document.createElement('span');
       chip.className = 'word-chip';
       chip.innerText = word;
-      chip.onclick = () => selectWordChip(chip, word);
+      chip.onclick = () => {
+        document.querySelectorAll('.word-chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+        selectedWord = { element: chip, word };
+      };
       bank.appendChild(chip);
     });
 
@@ -213,24 +152,13 @@ async function loadGapText(themeName) {
     currentGapTarget = {};
     currentGapAnswers = {};
 
-    const renderedText = rawText.replace(regex, (m, p1) => {
+    document.getElementById('text-passage').innerHTML = rawText.replace(regex, (m, p1) => {
       const id = `gap_${gapIndex}`;
       currentGapTarget[id] = p1;
       gapIndex++;
       return `<span id="${id}" class="gap-slot" onclick="placeWordInGap('${id}')"></span>`;
     });
-
-    document.getElementById('text-passage').innerHTML = renderedText;
-    document.getElementById('texto-feedback').innerText = '';
-  } catch (err) {
-    console.error("Error cargando texto con huecos:", err);
-  }
-}
-
-function selectWordChip(element, word) {
-  document.querySelectorAll('.word-chip').forEach(c => c.classList.remove('selected'));
-  element.classList.add('selected');
-  selectedWord = { element, word };
+  } catch (err) {}
 }
 
 function placeWordInGap(gapId) {
@@ -238,45 +166,20 @@ function placeWordInGap(gapId) {
   const gap = document.getElementById(gapId);
   gap.innerText = selectedWord.word;
   currentGapAnswers[gapId] = selectedWord.word;
-  
-  selectedWord.element.style.opacity = '0.3';
-  selectedWord.element.style.pointerEvents = 'none';
+  selectedWord.element.style.display = 'none';
   selectedWord = null;
 }
 
 function checkFillText() {
-  let correct = true;
   Object.keys(currentGapTarget).forEach(gapId => {
     const gapEl = document.getElementById(gapId);
-    if (currentGapAnswers[gapId] === currentGapTarget[gapId]) {
-      gapEl.style.color = 'green';
-      gapEl.style.fontWeight = 'bold';
-    } else {
-      gapEl.style.color = 'red';
-      correct = false;
-    }
+    gapEl.style.color = (currentGapAnswers[gapId] === currentGapTarget[gapId]) ? 'green' : 'red';
   });
-
-  const feedback = document.getElementById('texto-feedback');
-  if (correct) {
-    feedback.innerText = "¡Excelente! Has completado el texto correctamente.";
-    feedback.style.color = "green";
-  } else {
-    feedback.innerText = "Hay huecos incorrectos o vacíos. Revisa e inténtalo de nuevo.";
-    feedback.style.color = "red";
-  }
-}
-
-function resetFillText() {
-  loadGapText(currentTheme);
 }
 
 function switchSubTab(tabName, evt) {
   document.querySelectorAll('.tab-link').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.sub-section').forEach(s => s.classList.remove('active'));
-
-  if (evt && evt.target) {
-    evt.target.classList.add('active');
-  }
+  if (evt) evt.target.classList.add('active');
   document.getElementById(`section-${tabName}`).classList.add('active');
 }

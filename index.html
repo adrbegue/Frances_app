@@ -4,104 +4,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>App Francés</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root { --primary: #0055a5; --bg: #f4f6f9; --text: #2c3e50; --border: #dcdfe6; }
+    body { font-family: sans-serif; background-color: var(--bg); color: var(--text); margin: 0; }
+    .app-header { display: flex; justify-content: space-between; padding: 12px 24px; background: white; border-bottom: 1px solid var(--border); }
+    .btn-ipa, .btn-primary { background-color: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; }
+    .sub-tabs { display: flex; justify-content: center; gap: 8px; background: #eef2f7; padding: 8px; }
+    .tab-link { padding: 10px 20px; border: none; background: transparent; cursor: pointer; font-weight: bold; }
+    .tab-link.active { background: white; color: var(--primary); border-radius: 6px; }
+    .content-container { max-width: 900px; margin: 20px auto; padding: 0 16px; }
+    .sub-section { display: none; }
+    .sub-section.active { display: block; }
+    .card { background: white; padding: 24px; border-radius: 8px; border: 1px solid var(--border); }
+    .input-group { display: flex; gap: 10px; margin: 20px 0; }
+    .input-group input { flex: 1; padding: 10px; font-size: 1rem; }
+    .card-controls { display: flex; justify-content: space-between; margin-top: 24px; }
+    .btn-warning { background-color: #f39c12; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; }
+    .collapsible-theory { margin-top: 24px; }
+    .btn-toggle-theory { width: 100%; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 6px; }
+    .embedded-theory { margin-top: 10px; padding: 15px; background: #f9fbfd; border: 1px solid var(--border); }
+    .hidden { display: none !important; }
+    .word-bank { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .word-chip { padding: 6px 12px; border: 1px solid var(--primary); border-radius: 16px; cursor: pointer; }
+    .word-chip.selected { background: var(--primary); color: white; }
+    .gap-slot { display: inline-block; min-width: 80px; height: 25px; border-bottom: 2px solid var(--primary); margin: 0 5px; cursor: pointer; }
+    /* Modal IPA */
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; }
+    .modal-content { background: white; padding: 20px; border-radius: 8px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; }
+    .ipa-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 20px; }
+    .ipa-btn { padding: 10px; text-align: center; border: 1px solid var(--border); cursor: pointer; border-radius: 6px; }
+  </style>
 </head>
 <body>
 
-  <!-- Encabezado con selector de tema y botón IPA fija arriba a la derecha -->
   <header class="app-header">
     <div class="header-left">
       <h1>🇫🇷 App Francés</h1>
-      <select id="select-tema" onchange="onTemaChange()">
-        <!-- Cargado dinámicamente -->
-      </select>
+      <select id="select-tema" onchange="onTemaChange()"></select>
     </div>
-    <div class="header-right">
-      <button class="btn-ipa" onclick="toggleIpaModal()">🗣️ Pronunciación IPA</button>
-    </div>
+    <button class="btn-ipa" onclick="toggleIpaModal()">🗣️ Pronunciación IPA</button>
   </header>
 
-  <!-- Pestañas del Tema -->
   <nav class="sub-tabs">
     <button class="tab-link active" onclick="switchSubTab('ejercicios', event)">🎴 Ejercicios</button>
     <button class="tab-link" onclick="switchSubTab('texto', event)">✍️ Texto con Huecos</button>
     <button class="tab-link" onclick="switchSubTab('teoria', event)">📄 Teoría</button>
   </nav>
 
-  <!-- Contenedor Principal -->
   <main class="content-container">
-
-    <!-- SUBSECCIÓN 1: EJERCICIOS -->
+    <!-- EJERCICIOS -->
     <section id="section-ejercicios" class="sub-section active">
-      <div id="exercise-card" class="card">
-        <div class="card-header">
-          <span id="ex-counter">Ejercicio 0/0</span>
-          <span id="ex-status" class="badge">Pendiente</span>
-        </div>
-        <p id="ex-prompt" class="prompt">Cargando...</p>
-
+      <div class="card">
+        <div><span id="ex-counter">0/0</span> | <span id="ex-status">Pendiente</span></div>
+        <h3 id="ex-prompt">Cargando...</h3>
         <div class="input-group">
           <input type="text" id="ex-input" placeholder="Escribe en francés..." autocomplete="off">
           <button class="btn-primary" onclick="checkExerciseAnswer()">Comprobar</button>
         </div>
-
-        <p id="ex-feedback" class="feedback"></p>
-
+        <p id="ex-feedback"></p>
         <div class="card-controls">
           <button onclick="prevExercise()">← Anterior</button>
           <button onclick="markAsHard()" class="btn-warning">⭐ Difícil</button>
           <button onclick="nextExercise()">Siguiente →</button>
         </div>
       </div>
-
-      <!-- Pestaña desplegable de Teoría abajo del todo (sin reinicio) -->
       <div class="collapsible-theory">
-        <button class="btn-toggle-theory" onclick="toggleEmbeddedTheory()">
-          📖 <span id="theory-toggle-label">Mostrar Teoría del Tema</span>
-        </button>
+        <button class="btn-toggle-theory" onclick="toggleEmbeddedTheory()">📖 Mostrar/Ocultar Teoría</button>
         <div id="embedded-theory-container" class="embedded-theory hidden">
-          <div id="embedded-theory-text" class="theory-box">Cargando teoría...</div>
+          <div id="embedded-theory-text">Cargando teoría...</div>
         </div>
       </div>
     </section>
 
-    <!-- SUBSECCIÓN 2: TEXTO CON HUECOS -->
+    <!-- TEXTO -->
     <section id="section-texto" class="sub-section">
-      <div class="texto-container card">
-        <h3>Completa el texto en francés</h3>
-        <p class="instructions">Haz clic en una palabra de la lista y luego en el hueco correspondiente para colocarla.</p>
-
+      <div class="card">
+        <h3>Completa el texto</h3>
         <div id="word-bank" class="word-bank"></div>
-        <div id="text-passage" class="text-passage"></div>
-
-        <div class="texto-actions">
-          <button class="btn-primary" onclick="checkFillText()">Comprobar Texto</button>
-          <button onclick="resetFillText()">Reiniciar</button>
-        </div>
-        <p id="texto-feedback" class="feedback"></p>
+        <div id="text-passage" style="line-height: 2;"></div>
+        <br>
+        <button class="btn-primary" onclick="checkFillText()">Comprobar Texto</button>
+        <p id="texto-feedback"></p>
       </div>
     </section>
 
-    <!-- SUBSECCIÓN 3: TEORÍA -->
+    <!-- TEORÍA -->
     <section id="section-teoria" class="sub-section">
       <div class="card">
         <h2>Teoría del Tema</h2>
-        <div id="main-theory-text" class="theory-box">Cargando teoría...</div>
+        <div id="main-theory-text">Cargando teoría...</div>
       </div>
     </section>
-
   </main>
 
-  <!-- MODAL DE PRONUNCIACIÓN IPA -->
   <div id="ipa-modal" class="modal hidden">
     <div class="modal-content">
-      <div class="modal-header">
-        <h2>Pronunciación Fonética Francesa (IPA)</h2>
-        <button class="btn-close" onclick="toggleIpaModal()">✕</button>
+      <div style="display: flex; justify-content: space-between;">
+        <h2>Pronunciación IPA</h2>
+        <button onclick="toggleIpaModal()">✕</button>
       </div>
-      <div class="modal-body">
-        <div id="ipa-grid" class="ipa-grid"></div>
-      </div>
+      <div id="ipa-grid" class="ipa-grid"></div>
     </div>
   </div>
 
