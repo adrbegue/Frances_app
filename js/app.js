@@ -209,10 +209,15 @@ function renderLobby() {
         const tarjetasMazo = globalFlashcards.filter(c => c.mazo === nombreMazo);
         const totalMazo = tarjetasMazo.length;
 
+        // Progreso de ejercicios
         const facilesCompletados = tarjetasMazo.filter(c => state.cardsProgress[c.id]?.easyBox === 3).length;
         const dificilesCompletados = tarjetasMazo.filter(c => state.cardsProgress[c.id]?.hardMastered === true).length;
         const porcFacil = totalMazo > 0 ? Math.round((facilesCompletados / totalMazo) * 100) : 0;
         const porcDificil = totalMazo > 0 ? Math.round((dificilesCompletados / totalMazo) * 100) : 0;
+
+        // Progreso de texto
+        const textoProgress = state.textoProgress || {};
+        const textoCompletado = textoProgress[nombreMazo]?.completed || false;
 
         const nombreSinExtension = nombreMazo.replace('.txt', '');
         let tituloTema = nombreSinExtension;
@@ -223,48 +228,86 @@ function renderLobby() {
             descripcionTema = partes[1].trim();
         }
 
-        const textoProgress = state.textoProgress || {};
-        const textoCompletado = textoProgress[nombreMazo]?.completed || false;
-
         const box = document.createElement('div');
-        box.className = "bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between gap-4";
+        box.className = "bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition flex flex-col gap-4";
+
         box.innerHTML = `
             <div>
                 <h4 class="text-lg font-bold text-slate-800 truncate">${tituloTema}</h4>
                 <p class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">${descripcionTema}</p>
             </div>
+
             <div class="space-y-2">
                 <div class="space-y-1">
                     <div class="flex justify-between text-[11px] font-bold text-slate-500">
                         <span>🟢 EJERCICIOS</span>
                         <span class="font-mono text-slate-700">${facilesCompletados}/${totalMazo}</span>
                     </div>
-                    <div class="w-full bg-slate-100 rounded-full h-1.5"><div class="bg-emerald-500 h-1.5 rounded-full" style="width: ${porcFacil}%"></div></div>
+                    <div class="w-full bg-slate-100 rounded-full h-1.5">
+                        <div class="bg-emerald-500 h-1.5 rounded-full" style="width: ${porcFacil}%"></div>
+                    </div>
                 </div>
                 <div class="space-y-1">
                     <div class="flex justify-between text-[11px] font-bold text-slate-500">
                         <span>📖 TEXTO</span>
                         <span class="font-mono text-slate-700">${textoCompletado ? '✅' : '❌'}</span>
                     </div>
-                    <div class="w-full bg-slate-100 rounded-full h-1.5"><div class="bg-indigo-500 h-1.5 rounded-full" style="width: ${textoCompletado ? '100' : '0'}%"></div></div>
+                    <div class="w-full bg-slate-100 rounded-full h-1.5">
+                        <div class="bg-indigo-500 h-1.5 rounded-full" style="width: ${textoCompletado ? '100' : '0'}%"></div>
+                    </div>
                 </div>
                 <div class="space-y-1">
                     <div class="flex justify-between text-[11px] font-bold text-slate-500">
                         <span>💪 ESCRITURA</span>
                         <span class="font-mono text-slate-700">${dificilesCompletados}/${totalMazo}</span>
                     </div>
-                    <div class="w-full bg-slate-100 rounded-full h-1.5"><div class="bg-amber-500 h-1.5 rounded-full" style="width: ${porcDificil}%"></div></div>
+                    <div class="w-full bg-slate-100 rounded-full h-1.5">
+                        <div class="bg-amber-500 h-1.5 rounded-full" style="width: ${porcDificil}%"></div>
+                    </div>
                 </div>
             </div>
-            <button class="btn-entrar-mazo w-full py-2.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-2xl text-xs font-bold tracking-wide shadow-sm transition" data-mazo="${nombreMazo}">
-                ABRIR SESIÓN
-            </button>
+
+            <!-- Botones directos para cada modo -->
+            <div class="grid grid-cols-3 gap-2">
+                <button
+                    class="btn-modeEjercicios w-full py-2 bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl text-xs font-bold tracking-wide shadow-sm transition"
+                    data-mazo="${nombreMazo}"
+                    data-mode="ejercicios"
+                >
+                    <i data-lucide="book-open" class="w-4 h-4 inline-block mr-1"></i> EJERCICIOS
+                </button>
+                <button
+                    class="btn-modeTexto w-full py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-xl text-xs font-bold tracking-wide shadow-sm transition"
+                    data-mazo="${nombreMazo}"
+                    data-mode="texto"
+                >
+                    <i data-lucide="file-text" class="w-4 h-4 inline-block mr-1"></i> TEXTO
+                </button>
+                <button
+                    class="btn-modeTeoria w-full py-2 bg-purple-600 text-white hover:bg-purple-700 rounded-xl text-xs font-bold tracking-wide shadow-sm transition"
+                    data-mazo="${nombreMazo}"
+                    data-mode="teoria"
+                >
+                    <i data-lucide="book" class="w-4 h-4 inline-block mr-1"></i> TEORÍA
+                </button>
+            </div>
         `;
+
         DOM.mazosContainer.appendChild(box);
     });
 
-    document.querySelectorAll('.btn-entrar-mazo').forEach(b => {
-        b.onclick = (e) => showStudyView(e.target.getAttribute('data-mazo'));
+    // Configurar los botones para cada modo
+    document.querySelectorAll('.btn-modeEjercicios, .btn-modeTexto, .btn-modeTeoria').forEach(b => {
+        b.onclick = (e) => {
+            const mazo = e.target.getAttribute('data-mazo');
+            const mode = e.target.getAttribute('data-mode');
+            state.currentMazo = mazo;
+            state.currentMode = mode;
+            DOM.lobby.classList.add('hidden');
+            DOM.study.classList.remove('hidden');
+            DOM.subtitle.innerText = "Sesión de Estudio";
+            startStudySession(mazo);
+        };
     });
 }
 
@@ -279,6 +322,7 @@ function startStudySession(filtroMazo) {
         return;
     }
 
+    // Modo por defecto: ejercicios
     let tarjetasMazo = globalFlashcards.filter(c => c.mazo === filtroMazo);
     tarjetasMazo.sort((a, b) => {
         const aProgress = state.cardsProgress[a.id] || { easyBox: 0, hardMastered: false };
