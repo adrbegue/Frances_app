@@ -1,13 +1,11 @@
 let themesList = [];
 let currentTheme = null;
 
-// Progreso cargado desde localStorage
 let userProgress = JSON.parse(localStorage.getItem('french_app_progress')) || {};
 
 let exerciseQueue = [];
 let currentExIndex = 0;
 
-// Variables para Texto con huecos
 let selectedWord = null;
 let currentGapAnswers = {};
 let currentGapTarget = {};
@@ -16,10 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
   loadThemes();
 });
 
-// Cargar la lista de temas desde temas.json
 async function loadThemes() {
   try {
     const res = await fetch('temas.json');
+    if (!res.ok) throw new Error("No se pudo cargar temas.json");
     themesList = await res.json();
     
     const select = document.getElementById('select-tema');
@@ -36,7 +34,8 @@ async function loadThemes() {
       loadThemeData(currentTheme);
     }
   } catch (err) {
-    console.error("Error al cargar temas.json", err);
+    console.error("Error al cargar temas.json:", err);
+    document.getElementById('ex-prompt').innerText = "Error cargando los temas. Asegúrate de ejecutar la app a través de un servidor local (VS Code Live Server o python -m http.server).";
   }
 }
 
@@ -46,10 +45,9 @@ function onTemaChange() {
   loadThemeData(currentTheme);
 }
 
-// Cargar contenido de la subsección actual
 function loadThemeData(themeName) {
   loadExercises(themeName);
-  loadTheoryPdf(themeName);
+  loadTheoryTxt(themeName);
   loadGapText(themeName);
 }
 
@@ -57,19 +55,26 @@ function loadThemeData(themeName) {
 async function loadExercises(themeName) {
   try {
     const res = await fetch(`ejercicios/${themeName}.txt`);
+    if (!res.ok) {
+      document.getElementById('ex-prompt').innerText = "No se encontró el fichero de ejercicios para este tema.";
+      return;
+    }
     const rawText = await res.text();
     const lines = rawText.split('\n').filter(l => l.trim().length > 0);
     
     const allEx = lines.map((line, idx) => {
-      const parts = line.split('|');
+      let parts = line.split('|');
+      if (parts.length < 2) {
+        parts = line.split(';'); // Soporte para separador con punto y coma
+      }
       return {
         id: `${themeName}_${idx}`,
-        prompt: parts[0]?.trim(),
-        answer: parts[1]?.trim()
+        prompt: parts[0]?.trim() || line,
+        answer: parts[1]?.trim() || ""
       };
     });
 
-    // Ordenar con memoria: Primero 'unseen' o 'hard', al final 'mastered'
+    // Filtro con memoria: Primero 'hard' o 'unseen', al final 'mastered'
     exerciseQueue = allEx.sort((a, b) => {
       const statusA = userProgress[a.id]?.status || 'unseen';
       const statusB = userProgress[b.id]?.status || 'unseen';
@@ -81,7 +86,7 @@ async function loadExercises(themeName) {
     currentExIndex = 0;
     renderCurrentExercise();
   } catch (err) {
-    console.error("Error cargando ejercicios", err);
+    console.error("Error cargando ejercicios:", err);
   }
 }
 
@@ -102,6 +107,11 @@ function renderCurrentExercise() {
 function checkExerciseAnswer() {
   const ex = exerciseQueue[currentExIndex];
   const input = document.getElementById('ex-input').value.trim();
+
+  if (!ex.answer) {
+    document.getElementById('ex-feedback').innerText = "Respuesta guardada.";
+    return;
+  }
 
   if (input.toLowerCase() === ex.answer.toLowerCase()) {
     document.getElementById('ex-feedback').innerText = "¡Correcto! 🎉";
@@ -137,11 +147,22 @@ function prevExercise() {
   }
 }
 
-// 2. TEORÍA PDF
-function loadTheoryPdf(themeName) {
-  const pdfPath = `teoria/${themeName}.pdf`;
-  document.getElementById('main-pdf-viewer').src = pdfPath;
-  document.getElementById('embedded-pdf-viewer').src = pdfPath;
+// 2. TEORÍA (TXT)
+async function loadTheoryTxt(themeName) {
+  try {
+    const res = await fetch(`teoria/${themeName}.txt`);
+    if (!res.ok) {
+      const msg = "No hay archivo de teoría asignado para este tema aún en la carpeta /teoria.";
+      document.getElementById('main-theory-text').innerText = msg;
+      document.getElementById('embedded-theory-text').innerText = msg;
+      return;
+    }
+    const text = await res.text();
+    document.getElementById('main-theory-text').innerText = text;
+    document.getElementById('embedded-theory-text').innerText = text;
+  } catch (err) {
+    console.error("Error cargando teoría:", err);
+  }
 }
 
 function toggleEmbeddedTheory() {
@@ -161,9 +182,13 @@ function toggleEmbeddedTheory() {
 async function loadGapText(themeName) {
   try {
     const res = await fetch(`texto/${themeName}.txt`);
+    if (!res.ok) {
+      document.getElementById('text-passage').innerText = "No hay texto disponible para este tema en la carpeta /texto.";
+      document.getElementById('word-bank').innerHTML = '';
+      return;
+    }
     const rawText = await res.text();
     
-    // Extraer huecos marcados con [[palabra]]
     const regex = /\[\[(.*?)\]\]/g;
     let words = [];
     let match;
@@ -172,13 +197,11 @@ async function loadGapText(themeName) {
       words.push(match[1]);
     }
 
-    // Mezclar palabras para la barra superior
     const shuffledWords = [...words].sort(() => Math.random() - 0.5);
     
-    // Renderizar banco de palabras
     const bank = document.getElementById('word-bank');
     bank.innerHTML = '';
-    shuffledWords.forEach((word, i) => {
+    shuffledWords.forEach((word) => {
       const chip = document.createElement('span');
       chip.className = 'word-chip';
       chip.innerText = word;
@@ -186,7 +209,6 @@ async function loadGapText(themeName) {
       bank.appendChild(chip);
     });
 
-    // Renderizar texto reemplazando [[...]] por huecos interactivos
     let gapIndex = 0;
     currentGapTarget = {};
     currentGapAnswers = {};
@@ -201,7 +223,7 @@ async function loadGapText(themeName) {
     document.getElementById('text-passage').innerHTML = renderedText;
     document.getElementById('texto-feedback').innerText = '';
   } catch (err) {
-    console.error("Error cargando texto", err);
+    console.error("Error cargando texto con huecos:", err);
   }
 }
 
@@ -240,7 +262,7 @@ function checkFillText() {
     feedback.innerText = "¡Excelente! Has completado el texto correctamente.";
     feedback.style.color = "green";
   } else {
-    feedback.innerText = "Hay algunos huecos incorrectos o vacíos. Revisa e inténtalo de nuevo.";
+    feedback.innerText = "Hay huecos incorrectos o vacíos. Revisa e inténtalo de nuevo.";
     feedback.style.color = "red";
   }
 }
@@ -249,11 +271,12 @@ function resetFillText() {
   loadGapText(currentTheme);
 }
 
-// Navegación de Sub-Pestañas
-function switchSubTab(tabName) {
+function switchSubTab(tabName, evt) {
   document.querySelectorAll('.tab-link').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.sub-section').forEach(s => s.classList.remove('active'));
 
-  event.target.classList.add('active');
+  if (evt && evt.target) {
+    evt.target.classList.add('active');
+  }
   document.getElementById(`section-${tabName}`).classList.add('active');
 }

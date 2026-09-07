@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aprender Francés</title>
+  <title>App Francés</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,9 +23,9 @@
 
   <!-- Pestañas del Tema -->
   <nav class="sub-tabs">
-    <button class="tab-link active" onclick="switchSubTab('ejercicios')">🎴 Ejercicios</button>
-    <button class="tab-link" onclick="switchSubTab('texto')">✍️ Texto con Huecos</button>
-    <button class="tab-link" onclick="switchSubTab('teoria')">📄 Teoría (PDF)</button>
+    <button class="tab-link active" onclick="switchSubTab('ejercicios', event)">🎴 Ejercicios</button>
+    <button class="tab-link" onclick="switchSubTab('texto', event)">✍️ Texto con Huecos</button>
+    <button class="tab-link" onclick="switchSubTab('teoria', event)">📄 Teoría</button>
   </nav>
 
   <!-- Contenedor Principal -->
@@ -60,7 +60,7 @@
           📖 <span id="theory-toggle-label">Mostrar Teoría del Tema</span>
         </button>
         <div id="embedded-theory-container" class="embedded-theory hidden">
-          <iframe id="embedded-pdf-viewer" src="" width="100%" height="450px"></iframe>
+          <div id="embedded-theory-text" class="theory-box">Cargando teoría...</div>
         </div>
       </div>
     </section>
@@ -82,10 +82,11 @@
       </div>
     </section>
 
-    <!-- SUBSECCIÓN 3: TEORÍA (Vista Completa) -->
+    <!-- SUBSECCIÓN 3: TEORÍA -->
     <section id="section-teoria" class="sub-section">
-      <div class="pdf-container card">
-        <iframe id="main-pdf-viewer" src="" width="100%" height="600px"></iframe>
+      <div class="card">
+        <h2>Teoría del Tema</h2>
+        <div id="main-theory-text" class="theory-box">Cargando teoría...</div>
       </div>
     </section>
 
