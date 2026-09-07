@@ -267,28 +267,36 @@ function renderLobby() {
                 </div>
             </div>
 
-            <!-- Botones directos para cada modo -->
-            <div class="grid grid-cols-3 gap-2">
+            <!-- 4 botones directos: Teoría, Ejercicios, Escritura, Texto -->
+            <div class="grid grid-cols-2 gap-2">
                 <button
-                    class="btn-modeEjercicios w-full py-2 bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl text-xs font-bold tracking-wide shadow-sm transition"
+                    class="btn-direct-teoria w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold tracking-wide shadow-sm transition"
+                    data-mazo="${nombreMazo}"
+                    data-mode="teoria"
+                >
+                    <i data-lucide="book" class="w-4 h-4 inline-block mr-1"></i> TEORÍA
+                </button>
+                <button
+                    class="btn-direct-ejercicios w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold tracking-wide shadow-sm transition"
                     data-mazo="${nombreMazo}"
                     data-mode="ejercicios"
                 >
                     <i data-lucide="book-open" class="w-4 h-4 inline-block mr-1"></i> EJERCICIOS
                 </button>
                 <button
-                    class="btn-modeTexto w-full py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-xl text-xs font-bold tracking-wide shadow-sm transition"
+                    class="btn-direct-escritura w-full py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-bold tracking-wide shadow-sm transition"
+                    data-mazo="${nombreMazo}"
+                    data-mode="ejercicios"
+                    data-hard="true"
+                >
+                    <i data-lucide="edit-3" class="w-4 h-4 inline-block mr-1"></i> ESCRITURA
+                </button>
+                <button
+                    class="btn-direct-texto w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold tracking-wide shadow-sm transition"
                     data-mazo="${nombreMazo}"
                     data-mode="texto"
                 >
                     <i data-lucide="file-text" class="w-4 h-4 inline-block mr-1"></i> TEXTO
-                </button>
-                <button
-                    class="btn-modeTeoria w-full py-2 bg-purple-600 text-white hover:bg-purple-700 rounded-xl text-xs font-bold tracking-wide shadow-sm transition"
-                    data-mazo="${nombreMazo}"
-                    data-mode="teoria"
-                >
-                    <i data-lucide="book" class="w-4 h-4 inline-block mr-1"></i> TEORÍA
                 </button>
             </div>
         `;
@@ -297,16 +305,27 @@ function renderLobby() {
     });
 
     // Configurar los botones para cada modo
-    document.querySelectorAll('.btn-modeEjercicios, .btn-modeTexto, .btn-modeTeoria').forEach(b => {
+    document.querySelectorAll('.btn-direct-teoria, .btn-direct-ejercicios, .btn-direct-escritura, .btn-direct-texto').forEach(b => {
         b.onclick = (e) => {
             const mazo = e.target.getAttribute('data-mazo');
             const mode = e.target.getAttribute('data-mode');
+            const isHardMode = e.target.getAttribute('data-hard') === 'true';
+
             state.currentMazo = mazo;
             state.currentMode = mode;
+            state.isHardModeActive = isHardMode;
+
             DOM.lobby.classList.add('hidden');
             DOM.study.classList.remove('hidden');
             DOM.subtitle.innerText = "Sesión de Estudio";
-            startStudySession(mazo);
+
+            if (mode === 'teoria') {
+                showTeoria(mazo);
+            } else if (mode === 'texto') {
+                loadTextoExercise(mazo);
+            } else {
+                startStudySession(mazo);
+            }
         };
     });
 }
