@@ -11,252 +11,9 @@
         .preserve-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
-
-        .ipa-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 8px;
-        }
-
-        .ipa-button {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: monospace;
-            font-size: 16px;
-        }
-
-        .ipa-button:hover {
-            background: #f1f5f9;
-            border-color: #cbd5e1;
-        }
-
-        .hueco {
-            display: inline-block;
-            min-width: 80px;
-            height: 36px;
-            border: 2px dashed #94a3b8;
-            border-radius: 6px;
-            margin: 0 4px;
-            text-align: center;
-            line-height: 36px;
-            cursor: pointer;
-            background: #f8fafc;
-            transition: all 0.2s;
-        }
-
-        .hueco:hover {
-            background: #f1f5f9;
-            border-color: #64748b;
-        }
-
-        .hueco.correct {
-            border: 2px solid #10b981;
-            background: #d1fae5;
-        }
-
-        .hueco.incorrect {
-            border: 2px solid #ef4444;
-            background: #fee2e2;
-        }
-
-        .opcion-texto {
-            display: inline-block;
-            padding: 6px 12px;
-            margin: 4px;
-            background: #e0e7ff;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid #c7d2fe;
-        }
-
-        .opcion-texto:hover {
-            background: #c7d2fe;
-        }
-
-        .opcion-texto.used {
-            background: #f1f5f9;
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            max-width: 90%;
-            max-height: 90%;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .pdf-viewer {
-            width: 100%;
-            height: 600px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            background: #f8fafc;
-        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
-
-    <!-- Modal de pronunciación IPA -->
-    <div id="ipa-modal" class="modal">
-        <div class="modal-content w-full max-w-4xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-slate-900">Guía de Pronunciación IPA (Francés)</h2>
-                <button id="close-ipa-modal" class="p-2 hover:bg-slate-100 rounded-lg">
-                    <i data-lucide="x" class="w-6 h-6 text-slate-600"></i>
-                </button>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="space-y-2">
-                    <h3 class="font-semibold text-indigo-600 text-sm uppercase">Vocales Nasales</h3>
-                    <div class="ipa-grid">
-                        <button class="ipa-button" data-sound="ɑ̃">ɑ̃</button>
-                        <button class="ipa-button" data-sound="ɔ̃">ɔ̃</button>
-                        <button class="ipa-button" data-sound="ɛ̃">ɛ̃</button>
-                        <button class="ipa-button" data-sound="œ̃">œ̃</button>
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <h3 class="font-semibold text-indigo-600 text-sm uppercase">Vocales Orales</h3>
-                    <div class="ipa-grid">
-                        <button class="ipa-button" data-sound="a">a</button>
-                        <button class="ipa-button" data-sound="ɑ">ɑ</button>
-                        <button class="ipa-button" data-sound="e">e</button>
-                        <button class="ipa-button" data-sound="ɛ">ɛ</button>
-                        <button class="ipa-button" data-sound="i">i</button>
-                        <button class="ipa-button" data-sound="o">o</button>
-                        <button class="ipa-button" data-sound="ɔ">ɔ</button>
-                        <button class="ipa-button" data-sound="u">u</button>
-                        <button class="ipa-button" data-sound="y">y</button>
-                        <button class="ipa-button" data-sound="ø">ø</button>
-                        <button class="ipa-button" data-sound="ə">ə</button>
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <h3 class="font-semibold text-indigo-600 text-sm uppercase">Consonantes</h3>
-                    <div class="ipa-grid">
-                        <button class="ipa-button" data-sound="p">p</button>
-                        <button class="ipa-button" data-sound="b">b</button>
-                        <button class="ipa-button" data-sound="t">t</button>
-                        <button class="ipa-button" data-sound="d">d</button>
-                        <button class="ipa-button" data-sound="k">k</button>
-                        <button class="ipa-button" data-sound="ɡ">ɡ</button>
-                        <button class="ipa-button" data-sound="f">f</button>
-                        <button class="ipa-button" data-sound="v">v</button>
-                        <button class="ipa-button" data-sound="s">s</button>
-                        <button class="ipa-button" data-sound="z">z</button>
-                        <button class="ipa-button" data-sound="ʃ">ʃ</button>
-                        <button class="ipa-button" data-sound="ʒ">ʒ</button>
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <h3 class="font-semibold text-indigo-600 text-sm uppercase">Más Consonantes</h3>
-                    <div class="ipa-grid">
-                        <button class="ipa-button" data-sound="ʁ">ʁ</button>
-                        <button class="ipa-button" data-sound="l">l</button>
-                        <button class="ipa-button" data-sound="m">m</button>
-                        <button class="ipa-button" data-sound="n">n</button>
-                        <button class="ipa-button" data-sound="ɲ">ɲ</button>
-                        <button class="ipa-button" data-sound="j">j</button>
-                        <button class="ipa-button" data-sound="w">w</button>
-                        <button class="ipa-button" data-sound="ɥ">ɥ</button>
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <h3 class="font-semibold text-indigo-600 text-sm uppercase">Ejemplos Comunes</h3>
-                    <div class="ipa-grid text-xs">
-                        <button class="ipa-button" data-sound="bonjour">bonjour</button>
-                        <button class="ipa-button" data-sound="merci">merci</button>
-                        <button class="ipa-button" data-sound="pardon">pardon</button>
-                        <button class="ipa-button" data-sound="au revoir">au revoir</button>
-                        <button class="ipa-button" data-sound="s'il vous plaît">s'il vous plaît</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-6 text-center text-sm text-slate-500">
-                <p>Haz clic en cualquier símbolo IPA para escuchar su pronunciación en francés.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de teoría -->
-    <div id="teoria-modal" class="modal">
-        <div class="modal-content w-full max-w-4xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 id="teoria-title" class="text-xl font-bold text-slate-900">Teoría: Tema</h2>
-                <button id="close-teoria-modal" class="p-2 hover:bg-slate-100 rounded-lg">
-                    <i data-lucide="x" class="w-6 h-6 text-slate-600"></i>
-                </button>
-            </div>
-            <div id="teoria-content" class="pdf-viewer bg-white">
-                <div class="p-4 bg-white rounded-lg border border-slate-200 max-h-[600px] overflow-y-auto">
-                    <p class="text-slate-500">Cargando teoría...</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de texto con huecos -->
-    <div id="texto-modal" class="modal">
-        <div class="modal-content w-full max-w-3xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 id="texto-title" class="text-xl font-bold text-slate-900">Texto con Huecos: Tema</h2>
-                <button id="close-texto-modal" class="p-2 hover:bg-slate-100 rounded-lg">
-                    <i data-lucide="x" class="w-6 h-6 text-slate-600"></i>
-                </button>
-            </div>
-            <div id="texto-instrucciones" class="mb-4 p-4 bg-indigo-50 rounded-lg border border-indigo-200">
-                <p class="text-sm text-indigo-800"></p>
-            </div>
-            <div id="texto-contenido" class="space-y-4">
-                <p class="text-slate-500">Cargando ejercicio...</p>
-            </div>
-            <div id="texto-opciones" class="mt-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                <h4 class="font-semibold text-slate-700 mb-2">Opciones:</h4>
-                <div id="opciones-container" class="flex flex-wrap gap-2"></div>
-            </div>
-            <div class="mt-4 flex gap-2">
-                <button id="check-texto-answers" class="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition">
-                    Comprobar Respuestas
-                </button>
-                <button id="reset-texto-exercise" class="flex-1 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-xl transition">
-                    Reiniciar
-                </button>
-            </div>
-        </div>
-    </div>
 
     <header class="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-sm">
         <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center gap-4">
@@ -269,15 +26,9 @@
                     <p id="app-subtitle" class="text-xs text-indigo-600 font-semibold uppercase tracking-wider">Mis Temas de Francés</p>
                 </div>
             </div>
-            <div class="flex items-center gap-4">
-                <button id="btn-ipa-guide" class="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold text-sm transition shadow-sm">
-                    <i data-lucide="volume-2" class="w-4 h-4"></i>
-                    <span>Pronunciación IPA</span>
-                </button>
-                <div id="sync-status" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 text-sm font-medium">
-                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                    <span id="sync-text">Cargando...</span>
-                </div>
+            <div id="sync-status" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 text-sm font-medium">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                <span id="sync-text">Cargando...</span>
             </div>
         </div>
     </header>
@@ -288,7 +39,7 @@
             <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                     <h3 class="text-xl font-bold text-slate-900 mb-1">¡Bonjour! 👋</h3>
-                    <p class="text-sm text-slate-500">Practica tus mazos en modo normal, escritura o texto con huecos.</p>
+                    <p class="text-sm text-slate-500">Practica tus mazos en modo normal o ponte a prueba con el Modo Difícil de escritura.</p>
                 </div>
             </div>
 
@@ -304,7 +55,7 @@
                 </button>
 
                 <div class="flex items-center gap-3 bg-white border border-slate-200 px-4 py-1.5 rounded-xl shadow-sm">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-600">💪 Modo Difícil (Escribir)</span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-600">💪 Modo Dificil (Escribir)</span>
                     <button id="toggle-hard-mode" class="w-11 h-6 bg-slate-200 rounded-full relative inline-flex items-center transition-colors">
                         <span id="toggle-circle" class="w-4 h-4 bg-white rounded-full absolute left-1 transition-transform"></span>
                     </button>
@@ -340,9 +91,7 @@
                                     <p id="card-back-ipa" class="text-base text-emerald-300 font-mono italic"></p>
                                 </div>
                                 <div class="flex justify-center gap-3">
-                                    <button id="btn-audio-speak" class="p-3 bg-indigo-800 hover:bg-indigo-700 rounded-full text-white shadow transition">
-                                        <i data-lucide="volume-2" class="w-5 h-5"></i>
-                                    </button>
+                                    <button id="btn-audio-speak" class="p-3 bg-indigo-800 hover:bg-indigo-700 rounded-full text-white shadow transition"><i data-lucide="volume-2" class="w-5 h-5"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -364,9 +113,7 @@
                         <div id="hard-result-box" class="hidden p-4 rounded-xl flex flex-col gap-2 border">
                             <div class="flex justify-between items-center">
                                 <span id="hard-result-status" class="font-bold text-sm"></span>
-                                <button id="btn-hard-audio" class="p-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 transition">
-                                    <i data-lucide="volume-2" class="w-4 h-4"></i>
-                                </button>
+                                <button id="btn-hard-audio" class="p-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 transition"><i data-lucide="volume-2" class="w-4 h-4"></i></button>
                             </div>
                             <p id="hard-correct-sentence" class="text-base font-bold tracking-wide"></p>
                             <p id="hard-correct-ipa" class="text-xs font-mono italic text-slate-500"></p>
@@ -384,31 +131,27 @@
                         <button id="btn-score-easy" class="bg-emerald-50 text-emerald-700 py-3.5 rounded-xl text-xs font-bold border border-emerald-200 hover:bg-emerald-100 transition">😎 FÁCIL</button>
                     </div>
 
-                    <!-- Botón de teoría -->
-                    <button id="btn-show-teoria" class="w-full py-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded-xl transition border border-indigo-200 flex items-center justify-center gap-2">
-                        <i data-lucide="book-open" class="w-5 h-5"></i>
-                        <span>Mostrar/Ocultar Teoría</span>
-                    </button>
-
-                    <!-- MÓDULO DE PRONUNCIACIÓN -->
+                    <!-- MÓDULO DE PRONUNCIACIÓN INDEPENDIENTE CON CANVAS ONDAS -->
                     <div class="bg-white border border-slate-200 rounded-3xl p-4 flex flex-col gap-3 shadow-sm select-none">
                         <div class="flex items-center gap-4">
+                            <!-- Botón Micro Push-To-Talk -->
                             <button id="btn-global-mic" class="w-14 h-14 bg-emerald-600 text-white rounded-2xl flex flex-shrink-0 items-center justify-center transition-all shadow-md active:scale-95 touch-none">
                                 <i data-lucide="mic" class="w-6 h-6"></i>
                             </button>
+
+                            <!-- Panel de visualización de estado -->
                             <div class="flex-grow min-w-0 bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-center min-h-[56px]">
                                 <span id="voice-status-indicator" class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">🎙️ PRÁCTICA DE ORAL (MANTÉN PULSADO EL MICRO)</span>
                                 <p id="voice-interpreted-text" class="text-sm font-medium text-slate-500 italic truncate">Listo para escuchar...</p>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Archivos JS -->
-    <script type="module" src="./js/audio.js"></script>
-    <script type="module" src="./js/app.js"></script>
+<script type="module" src="./js/app.js"></script>
 </body>
 </html>
