@@ -1,414 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Le Petit Pont - Avanzado</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        .perspective-1000 { perspective: 1000px; }
-        .preserve-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
-
-        .ipa-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 8px;
-        }
-
-        .ipa-button {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: monospace;
-            font-size: 16px;
-        }
-
-        .ipa-button:hover {
-            background: #f1f5f9;
-            border-color: #cbd5e1;
-        }
-
-        .hueco {
-            display: inline-block;
-            min-width: 80px;
-            height: 36px;
-            border: 2px dashed #94a3b8;
-            border-radius: 6px;
-            margin: 0 4px;
-            text-align: center;
-            line-height: 36px;
-            cursor: pointer;
-            background: #f8fafc;
-            transition: all 0.2s;
-        }
-
-        .hueco:hover {
-            background: #f1f5f9;
-            border-color: #64748b;
-        }
-
-        .hueco.correct {
-            border: 2px solid #10b981;
-            background: #d1fae5;
-        }
-
-        .hueco.incorrect {
-            border: 2px solid #ef4444;
-            background: #fee2e2;
-        }
-
-        .opcion-texto {
-            display: inline-block;
-            padding: 6px 12px;
-            margin: 4px;
-            background: #e0e7ff;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid #c7d2fe;
-        }
-
-        .opcion-texto:hover {
-            background: #c7d2fe;
-        }
-
-        .opcion-texto.used {
-            background: #f1f5f9;
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            max-width: 90%;
-            max-height: 90%;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .pdf-viewer {
-            width: 100%;
-            height: 600px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            background: #f8fafc;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aprender Francés</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+<body>
 
-    <!-- Modal de pronunciación IPA -->
-    <div id="ipa-modal" class="modal">
-        <div class="modal-content w-full max-w-4xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-slate-900">Guía de Pronunciación IPA (Francés)</h2>
-                <button id="close-ipa-modal" class="p-2 hover:bg-slate-100 rounded-lg">
-                    <i data-lucide="x" class="w-6 h-6 text-slate-600"></i>
-                </button>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="space-y-2">
-                    <h3 class="font-semibold text-indigo-600 text-sm uppercase">Vocales Nasales</h3>
-                    <div class="ipa-grid">
-                        <button class="ipa-button" data-sound="ɑ̃">ɑ̃</button>
-                        <button class="ipa-button" data-sound="ɔ̃">ɔ̃</button>
-                        <button class="ipa-button" data-sound="ɛ̃">ɛ̃</button>
-                        <button class="ipa-button" data-sound="œ̃">œ̃</button>
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <h3 class="font-semibold text-indigo-600 text-sm uppercase">Vocales Orales</h3>
-                    <div class="ipa-grid">
-                        <button class="ipa-button" data-sound="a">a</button>
-                        <button class="ipa-button" data-sound="ɑ">ɑ</button>
-                        <button class="ipa-button" data-sound="e">e</button>
-                        <button class="ipa-button" data-sound="ɛ">ɛ</button>
-                        <button class="ipa-button" data-sound="i">i</button>
-                        <button class="ipa-button" data-sound="o">o</button>
-                        <button class="ipa-button" data-sound="ɔ">ɔ</button>
-                        <button class="ipa-button" data-sound="u">u</button>
-                        <button class="ipa-button" data-sound="y">y</button>
-                        <button class="ipa-button" data-sound="ø">ø</button>
-                        <button class="ipa-button" data-sound="ə">ə</button>
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <h3 class="font-semibold text-indigo-600 text-sm uppercase">Consonantes</h3>
-                    <div class="ipa-grid">
-                        <button class="ipa-button" data-sound="p">p</button>
-                        <button class="ipa-button" data-sound="b">b</button>
-                        <button class="ipa-button" data-sound="t">t</button>
-                        <button class="ipa-button" data-sound="d">d</button>
-                        <button class="ipa-button" data-sound="k">k</button>
-                        <button class="ipa-button" data-sound="ɡ">ɡ</button>
-                        <button class="ipa-button" data-sound="f">f</button>
-                        <button class="ipa-button" data-sound="v">v</button>
-                        <button class="ipa-button" data-sound="s">s</button>
-                        <button class="ipa-button" data-sound="z">z</button>
-                        <button class="ipa-button" data-sound="ʃ">ʃ</button>
-                        <button class="ipa-button" data-sound="ʒ">ʒ</button>
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <h3 class="font-semibold text-indigo-600 text-sm uppercase">Más Consonantes</h3>
-                    <div class="ipa-grid">
-                        <button class="ipa-button" data-sound="ʁ">ʁ</button>
-                        <button class="ipa-button" data-sound="l">l</button>
-                        <button class="ipa-button" data-sound="m">m</button>
-                        <button class="ipa-button" data-sound="n">n</button>
-                        <button class="ipa-button" data-sound="ɲ">ɲ</button>
-                        <button class="ipa-button" data-sound="j">j</button>
-                        <button class="ipa-button" data-sound="w">w</button>
-                        <button class="ipa-button" data-sound="ɥ">ɥ</button>
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <h3 class="font-semibold text-indigo-600 text-sm uppercase">Ejemplos Comunes</h3>
-                    <div class="ipa-grid text-xs">
-                        <button class="ipa-button" data-sound="bonjour">bonjour</button>
-                        <button class="ipa-button" data-sound="merci">merci</button>
-                        <button class="ipa-button" data-sound="pardon">pardon</button>
-                        <button class="ipa-button" data-sound="au revoir">au revoir</button>
-                        <button class="ipa-button" data-sound="s'il vous plaît">s'il vous plaît</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-6 text-center text-sm text-slate-500">
-                <p>Haz clic en cualquier símbolo IPA para escuchar su pronunciación en francés.</p>
-            </div>
-        </div>
+  <!-- Encabezado con selector de tema y botón IPA fija arriba a la derecha -->
+  <header class="app-header">
+    <div class="header-left">
+      <h1>🇫🇷 App Francés</h1>
+      <select id="select-tema" onchange="onTemaChange()">
+        <!-- Cargado dinámicamente -->
+      </select>
     </div>
-
-    <!-- Modal de teoría -->
-    <div id="teoria-modal" class="modal">
-        <div class="modal-content w-full max-w-4xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 id="teoria-title" class="text-xl font-bold text-slate-900">Teoría: Tema</h2>
-                <button id="close-teoria-modal" class="p-2 hover:bg-slate-100 rounded-lg">
-                    <i data-lucide="x" class="w-6 h-6 text-slate-600"></i>
-                </button>
-            </div>
-            <div id="teoria-content" class="pdf-viewer bg-white">
-                <div class="p-4 bg-white rounded-lg border border-slate-200 max-h-[600px] overflow-y-auto">
-                    <p class="text-slate-500">Cargando teoría...</p>
-                </div>
-            </div>
-        </div>
+    <div class="header-right">
+      <button class="btn-ipa" onclick="toggleIpaModal()">🗣️ Pronunciación IPA</button>
     </div>
+  </header>
 
-    <!-- Modal de texto con huecos -->
-    <div id="texto-modal" class="modal">
-        <div class="modal-content w-full max-w-3xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 id="texto-title" class="text-xl font-bold text-slate-900">Texto con Huecos: Tema</h2>
-                <button id="close-texto-modal" class="p-2 hover:bg-slate-100 rounded-lg">
-                    <i data-lucide="x" class="w-6 h-6 text-slate-600"></i>
-                </button>
-            </div>
-            <div id="texto-instrucciones" class="mb-4 p-4 bg-indigo-50 rounded-lg border border-indigo-200">
-                <p class="text-sm text-indigo-800"></p>
-            </div>
-            <div id="texto-contenido" class="space-y-4">
-                <p class="text-slate-500">Cargando ejercicio...</p>
-            </div>
-            <div id="texto-opciones" class="mt-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                <h4 class="font-semibold text-slate-700 mb-2">Opciones:</h4>
-                <div id="opciones-container" class="flex flex-wrap gap-2"></div>
-            </div>
-            <div class="mt-4 flex gap-2">
-                <button id="check-texto-answers" class="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition">
-                    Comprobar Respuestas
-                </button>
-                <button id="reset-texto-exercise" class="flex-1 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-xl transition">
-                    Reiniciar
-                </button>
-            </div>
+  <!-- Pestañas del Tema -->
+  <nav class="sub-tabs">
+    <button class="tab-link active" onclick="switchSubTab('ejercicios')">🎴 Ejercicios</button>
+    <button class="tab-link" onclick="switchSubTab('texto')">✍️ Texto con Huecos</button>
+    <button class="tab-link" onclick="switchSubTab('teoria')">📄 Teoría (PDF)</button>
+  </nav>
+
+  <!-- Contenedor Principal -->
+  <main class="content-container">
+
+    <!-- SUBSECCIÓN 1: EJERCICIOS -->
+    <section id="section-ejercicios" class="sub-section active">
+      <div id="exercise-card" class="card">
+        <div class="card-header">
+          <span id="ex-counter">Ejercicio 0/0</span>
+          <span id="ex-status" class="badge">Pendiente</span>
         </div>
+        <p id="ex-prompt" class="prompt">Cargando...</p>
+
+        <div class="input-group">
+          <input type="text" id="ex-input" placeholder="Escribe en francés..." autocomplete="off">
+          <button class="btn-primary" onclick="checkExerciseAnswer()">Comprobar</button>
+        </div>
+
+        <p id="ex-feedback" class="feedback"></p>
+
+        <div class="card-controls">
+          <button onclick="prevExercise()">← Anterior</button>
+          <button onclick="markAsHard()" class="btn-warning">⭐ Difícil</button>
+          <button onclick="nextExercise()">Siguiente →</button>
+        </div>
+      </div>
+
+      <!-- Pestaña desplegable de Teoría abajo del todo (sin reinicio) -->
+      <div class="collapsible-theory">
+        <button class="btn-toggle-theory" onclick="toggleEmbeddedTheory()">
+          📖 <span id="theory-toggle-label">Mostrar Teoría del Tema</span>
+        </button>
+        <div id="embedded-theory-container" class="embedded-theory hidden">
+          <iframe id="embedded-pdf-viewer" src="" width="100%" height="450px"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBSECCIÓN 2: TEXTO CON HUECOS -->
+    <section id="section-texto" class="sub-section">
+      <div class="texto-container card">
+        <h3>Completa el texto en francés</h3>
+        <p class="instructions">Haz clic en una palabra de la lista y luego en el hueco correspondiente para colocarla.</p>
+
+        <div id="word-bank" class="word-bank"></div>
+        <div id="text-passage" class="text-passage"></div>
+
+        <div class="texto-actions">
+          <button class="btn-primary" onclick="checkFillText()">Comprobar Texto</button>
+          <button onclick="resetFillText()">Reiniciar</button>
+        </div>
+        <p id="texto-feedback" class="feedback"></p>
+      </div>
+    </section>
+
+    <!-- SUBSECCIÓN 3: TEORÍA (Vista Completa) -->
+    <section id="section-teoria" class="sub-section">
+      <div class="pdf-container card">
+        <iframe id="main-pdf-viewer" src="" width="100%" height="600px"></iframe>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DE PRONUNCIACIÓN IPA -->
+  <div id="ipa-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Pronunciación Fonética Francesa (IPA)</h2>
+        <button class="btn-close" onclick="toggleIpaModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="ipa-grid" class="ipa-grid"></div>
+      </div>
     </div>
+  </div>
 
-    <header class="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-sm">
-        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <div class="bg-indigo-600 text-white p-2.5 rounded-2xl shadow-md flex items-center justify-center">
-                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-xl text-slate-900 tracking-tight">Le Petit Pont</h1>
-                    <p id="app-subtitle" class="text-xs text-indigo-600 font-semibold uppercase tracking-wider">Mis Temas de Francés</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <button id="btn-ipa-guide" class="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold text-sm transition shadow-sm">
-                    <i data-lucide="volume-2" class="w-4 h-4"></i>
-                    <span>Pronunciación IPA</span>
-                </button>
-                <div id="sync-status" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 text-sm font-medium">
-                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                    <span id="sync-text">Cargando...</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
-
-        <section id="section-lobby" class="flex flex-col gap-6">
-            <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-1">¡Bonjour! 👋</h3>
-                    <p class="text-sm text-slate-500">Practica tus mazos en modo normal, escritura o texto con huecos.</p>
-                </div>
-            </div>
-
-            <div id="mazos-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
-        </section>
-
-        <section id="section-study" class="hidden flex flex-col gap-6">
-
-            <div class="flex items-center justify-between gap-4 flex-wrap">
-                <button id="btn-back-to-lobby" class="flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl font-semibold text-sm transition">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                    <span>Volver a Temas</span>
-                </button>
-
-                <div class="flex items-center gap-3 bg-white border border-slate-200 px-4 py-1.5 rounded-xl shadow-sm">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-600">💪 Modo Difícil (Escribir)</span>
-                    <button id="toggle-hard-mode" class="w-11 h-6 bg-slate-200 rounded-full relative inline-flex items-center transition-colors">
-                        <span id="toggle-circle" class="w-4 h-4 bg-white rounded-full absolute left-1 transition-transform"></span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="flex flex-col items-center justify-center py-2 w-full">
-
-                <div id="empty-deck-view" class="hidden max-w-md w-full bg-white rounded-3xl p-8 border border-slate-100 shadow-xl text-center flex-col items-center justify-center gap-4 py-12">
-                    <div class="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center text-4xl mb-2">🎉</div>
-                    <h3 class="text-2xl font-bold text-slate-900">¡Mazo Terminado!</h3>
-                    <p class="text-slate-600 text-sm">Has completado la sesión actual en este modo.</p>
-                    <button id="btn-empty-return" class="mt-2 px-5 py-2.5 bg-indigo-600 text-white font-medium rounded-xl text-sm shadow-md">Volver al Inicio</button>
-                </div>
-
-                <div id="active-card-container" class="w-full max-w-xl hidden flex flex-col gap-5">
-                    <div class="flex justify-between items-center text-xs text-slate-500 px-1">
-                        <span id="card-badge-deck" class="bg-indigo-50 text-indigo-700 font-bold px-2.5 py-1 rounded-full uppercase">TEMA</span>
-                        <span id="card-progress-indicator" class="font-mono">0 / 0</span>
-                    </div>
-
-                    <div id="wrapper-normal-card" class="perspective-1000 cursor-pointer w-full h-72 relative select-none">
-                        <div id="card-inner" class="preserve-3d w-full h-full relative transition-transform duration-500 ease-out">
-                            <div class="backface-hidden absolute inset-0 bg-white rounded-3xl border border-slate-200 p-8 flex flex-col justify-between shadow-lg">
-                                <span class="text-xs font-bold text-slate-400 uppercase">Frente (Español)</span>
-                                <p id="card-front-text" class="text-2xl text-center font-semibold text-slate-800 my-auto px-4"></p>
-                                <span class="text-center text-xs text-slate-400">Haz clic para dar la vuelta</span>
-                            </div>
-                            <div class="backface-hidden rotate-y-180 absolute inset-0 bg-indigo-900 text-white rounded-3xl p-8 flex flex-col justify-between shadow-xl">
-                                <span class="text-xs font-bold text-indigo-300 uppercase">Dorso (Francés + IPA)</span>
-                                <div class="text-center my-auto flex flex-col gap-3 px-2">
-                                    <p id="card-back-text" class="text-2xl font-bold text-white leading-relaxed"></p>
-                                    <p id="card-back-ipa" class="text-base text-emerald-300 font-mono italic"></p>
-                                </div>
-                                <div class="flex justify-center gap-3">
-                                    <button id="btn-audio-speak" class="p-3 bg-indigo-800 hover:bg-indigo-700 rounded-full text-white shadow transition">
-                                        <i data-lucide="volume-2" class="w-5 h-5"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="wrapper-hard-card" class="hidden w-full bg-white rounded-3xl border border-slate-200 p-6 flex flex-col gap-4 shadow-lg">
-                        <span class="text-xs font-bold text-slate-400 uppercase">Escribe en Francés (¡Ojo con los acentos!)</span>
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 min-h-[70px] flex items-center justify-center">
-                            <p id="hard-front-text" class="text-xl text-center font-semibold text-slate-700"></p>
-                        </div>
-
-                        <input type="text" id="input-hard-answer" autocomplete="off" placeholder="Escribe la traducción aquí..." class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-lg transition-colors">
-
-                        <div id="hard-actions-container" class="flex flex-col gap-2">
-                            <button id="btn-hard-check" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm tracking-wide transition shadow-sm">COMPROBAR RESPUESTA</button>
-                            <button id="btn-hard-retry" class="hidden w-full py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl text-sm tracking-wide transition shadow-sm">🔄 REINTENTAR FRASE</button>
-                        </div>
-
-                        <div id="hard-result-box" class="hidden p-4 rounded-xl flex flex-col gap-2 border">
-                            <div class="flex justify-between items-center">
-                                <span id="hard-result-status" class="font-bold text-sm"></span>
-                                <button id="btn-hard-audio" class="p-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 transition">
-                                    <i data-lucide="volume-2" class="w-4 h-4"></i>
-                                </button>
-                            </div>
-                            <p id="hard-correct-sentence" class="text-base font-bold tracking-wide"></p>
-                            <p id="hard-correct-ipa" class="text-xs font-mono italic text-slate-500"></p>
-
-                            <div class="grid grid-cols-2 gap-2 mt-2" id="hard-result-navigation">
-                                <button id="btn-hard-skip" class="py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-lg text-xs tracking-wide transition">SALTAR FRASE</button>
-                                <button id="btn-hard-next" class="py-2 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-lg text-xs tracking-wide transition">SIGUIENTE TARJETA</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="normal-feedback-buttons" class="grid grid-cols-3 gap-3">
-                        <button id="btn-score-again" class="bg-red-50 text-red-700 py-3.5 rounded-xl text-xs font-bold border border-red-200 hover:bg-red-100 transition">🔄 REPETIR</button>
-                        <button id="btn-score-hard" class="bg-amber-50 text-amber-700 py-3.5 rounded-xl text-xs font-bold border border-amber-200 hover:bg-amber-100 transition">😐 DIFÍCIL</button>
-                        <button id="btn-score-easy" class="bg-emerald-50 text-emerald-700 py-3.5 rounded-xl text-xs font-bold border border-emerald-200 hover:bg-emerald-100 transition">😎 FÁCIL</button>
-                    </div>
-
-                    <!-- Botón de teoría -->
-                    <button id="btn-show-teoria" class="w-full py-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded-xl transition border border-indigo-200 flex items-center justify-center gap-2">
-                        <i data-lucide="book-open" class="w-5 h-5"></i>
-                        <span>Mostrar/Ocultar Teoría</span>
-                    </button>
-
-                    <!-- MÓDULO DE PRONUNCIACIÓN -->
-                    <div class="bg-white border border-slate-200 rounded-3xl p-4 flex flex-col gap-3 shadow-sm select-none">
-                        <div class="flex items-center gap-4">
-                            <button id="btn-global-mic" class="w-14 h-14 bg-emerald-600 text-white rounded-2xl flex flex-shrink-0 items-center justify-center transition-all shadow-md active:scale-95 touch-none">
-                                <i data-lucide="mic" class="w-6 h-6"></i>
-                            </button>
-                            <div class="flex-grow min-w-0 bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-center min-h-[56px]">
-                                <span id="voice-status-indicator" class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">🎙️ PRÁCTICA DE ORAL (MANTÉN PULSADO EL MICRO)</span>
-                                <p id="voice-interpreted-text" class="text-sm font-medium text-slate-500 italic truncate">Listo para escuchar...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Archivos JS -->
-    <script type="module" src="./js/audio.js"></script>
-    <script type="module" src="./js/app.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
