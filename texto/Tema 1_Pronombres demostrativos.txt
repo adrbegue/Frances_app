@@ -1,0 +1,19 @@
+TÍTULO: Completa con pronombres demostrativos
+
+INSTRUCCIONES: Elige la opción correcta para completar cada hueco.
+
+---TEXTO---
+1. {1} coche es muy rápido, pero {2} de allí es más económico.
+2. ¿Te gusta {3} vestido? No, prefiero {4} que está en la tienda de al lado.
+3. {5} libros son interesantes, pero {6} que están en la estantería son mejores.
+
+---OPCIONES---
+este|ese|aquel|esta|esa|aquella|estos|esos|aquellos
+
+---SOLUCIONES---
+1: este
+2: aquel
+3: este
+4: aquel
+5: estos
+6: aquellos

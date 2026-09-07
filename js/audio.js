@@ -12,12 +12,19 @@ if (SpeechRecognition) {
 }
 
 export function ejecutarTTS(texto) {
+    window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(texto);
     utterance.lang = 'fr-FR';
+    utterance.rate = 0.9;
     window.speechSynthesis.speak(utterance);
 }
 
-// Ya no necesitamos funciones de canvas aquí.
+export function playIPASound(symbol) {
+    const utterance = new SpeechSynthesisUtterance(symbol);
+    utterance.lang = 'fr-FR';
+    utterance.rate = 0.8;
+    window.speechSynthesis.speak(utterance);
+}
 
 export function inicializarMicrofonoGlobal(obtenerFraseCorrecta) {
     if (!recognition) {
@@ -58,7 +65,7 @@ export function inicializarMicrofonoGlobal(obtenerFraseCorrecta) {
             if (!fraseCorrecta) return;
 
             const limpiar = (t) => t.toLowerCase()
-                                    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?¿'’]/g," ")
+                                    .replace(/[.,\/#!$%^&*;:{}=\-_`~()?¿'']/, " ")
                                     .replace(/\s+/g, " ").trim();
 
             if (limpiar(textAcumulado) === limpiar(fraseCorrecta)) {
@@ -86,18 +93,14 @@ export function inicializarMicrofonoGlobal(obtenerFraseCorrecta) {
         isListening = false;
         micBtn.classList.replace('bg-red-600', 'bg-emerald-600');
         micBtn.classList.remove('ring-4', 'ring-red-200');
-        // Eliminada la detención del visualizador y limpieza de canvas.
     };
 
     const pulsarMicro = (e) => {
         if (e.cancelable) e.preventDefault();
         if (isListening) return;
-
         isListening = true;
         recognition.lang = 'fr-FR';
-
         try {
-            // Eliminada la línea de iniciarVisualizadorSimulado();
             recognition.start();
         } catch(err) {
             console.error("Error al iniciar reconocimiento:", err);
@@ -111,9 +114,44 @@ export function inicializarMicrofonoGlobal(obtenerFraseCorrecta) {
         }, 250);
     };
 
-    micBtn.addEventListener('mousedown', pulsarMicro);
-    micBtn.addEventListener('mouseup', soltarMicro);
-    micBtn.addEventListener('mouseleave', soltarMicro);
-    micBtn.addEventListener('touchstart', pulsarMicro, { passive: false });
-    micBtn.addEventListener('touchend', soltarMicro, { passive: false });
+    if (micBtn) {
+        micBtn.addEventListener('mousedown', pulsarMicro);
+        micBtn.addEventListener('mouseup', soltarMicro);
+        micBtn.addEventListener('mouseleave', soltarMicro);
+        micBtn.addEventListener('touchstart', pulsarMicro, { passive: false });
+        micBtn.addEventListener('touchend', soltarMicro, { passive: false });
+    }
+}
+
+export function inicializarIPAGuide() {
+    const ipaModal = document.getElementById('ipa-modal');
+    const closeBtn = document.getElementById('close-ipa-modal');
+    const btnIPAGuide = document.getElementById('btn-ipa-guide');
+
+    if (btnIPAGuide) {
+        btnIPAGuide.onclick = () => {
+            ipaModal.classList.add('active');
+        };
+    }
+
+    if (closeBtn) {
+        closeBtn.onclick = () => {
+            ipaModal.classList.remove('active');
+        };
+    }
+
+    ipaModal.onclick = (e) => {
+        if (e.target === ipaModal) {
+            ipaModal.classList.remove('active');
+        }
+    };
+
+    document.querySelectorAll('.ipa-button').forEach(button => {
+        button.onclick = () => {
+            const symbol = button.getAttribute('data-sound');
+            if (symbol) {
+                playIPASound(symbol);
+            }
+        };
+    });
 }
