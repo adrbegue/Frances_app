@@ -1,7 +1,7 @@
 Aqui abajo las cosas que quiero implementar
 XXXX Boton con la fonetica para escicharla
 - Meter nuevos tipos de ejercicios para hacerlo mas entretenido
-- Que salgan primero las fichas no resueltas
+XXXX Que salgan primero las fichas no resueltas
 XXXX Entrada de teoria
 XXXX Boton de teoria siempre disponible
 - Cada tema tenga subsecciones
