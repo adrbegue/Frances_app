@@ -25,9 +25,7 @@ let state = {
 
     isFlipped: false,
 
-    currentMazo: null,
-
-    isHardModeActive: false
+    currentMazo: null
 
 };
 
@@ -231,7 +229,11 @@ document
     .onclick = () => {
 
         if (state.currentMazo) {
-            abrirTeoria(state.currentMazo);
+
+            abrirTeoria(
+                state.currentMazo
+            );
+
         }
 
     };
@@ -246,7 +248,10 @@ async function cargarPronunciacion() {
     try {
 
         const response =
-            await fetch('datos/pronunciacion.json');
+            await fetch(
+                'datos/pronunciacion.json'
+            );
+
 
         if (!response.ok) {
 
@@ -256,8 +261,10 @@ async function cargarPronunciacion() {
 
         }
 
+
         pronunciationData =
             await response.json();
+
 
     } catch (error) {
 
@@ -658,6 +665,90 @@ function parsearCSV(
 
 
 // ================================================================
+// OBTENER ESTADO DE TARJETA
+// ================================================================
+
+function getCardStatus(card) {
+
+    const progreso =
+        state.cardsProgress[
+            card.id
+        ];
+
+
+    if (!progreso) {
+
+        return 'new';
+
+    }
+
+
+    // Nuevo formato
+
+    if (progreso.status) {
+
+        return progreso.status;
+
+    }
+
+
+    // Compatibilidad con el formato anterior
+
+    if (
+        progreso.easyBox === 3
+    ) {
+
+        return 'mastered';
+
+    }
+
+
+    if (
+        progreso.easyBox === 1
+    ) {
+
+        return 'failed';
+
+    }
+
+
+    return 'new';
+
+}
+
+
+// ================================================================
+// GUARDAR ESTADO DE TARJETA
+// ================================================================
+
+function setCardStatus(
+    card,
+    status
+) {
+
+    const progresoAnterior =
+        state.cardsProgress[
+            card.id
+        ] || {};
+
+
+    state.cardsProgress[
+        card.id
+    ] = {
+
+        ...progresoAnterior,
+
+        status: status
+
+    };
+
+
+    guardarProgreso();
+
+}
+
+
+// ================================================================
 // RENDER LOBBY
 // ================================================================
 
@@ -695,40 +786,32 @@ function renderLobby() {
             tarjetasMazo.length;
 
 
-        const facilesCompletados =
+        const superadas =
             tarjetasMazo.filter(
                 card =>
-                    state.cardsProgress[
-                        card.id
-                    ]?.easyBox === 3
+                    getCardStatus(card) === 'mastered'
             ).length;
 
 
-        const dificilesCompletados =
+        const incorrectas =
             tarjetasMazo.filter(
                 card =>
-                    state.cardsProgress[
-                        card.id
-                    ]?.hardMastered === true
+                    getCardStatus(card) === 'failed'
             ).length;
 
 
-        const porcFacil =
+        const noEstudiadas =
+            tarjetasMazo.filter(
+                card =>
+                    getCardStatus(card) === 'new'
+            ).length;
+
+
+        const porcentaje =
             totalMazo > 0
                 ? Math.round(
                     (
-                        facilesCompletados /
-                        totalMazo
-                    ) * 100
-                )
-                : 0;
-
-
-        const porcDificil =
-            totalMazo > 0
-                ? Math.round(
-                    (
-                        dificilesCompletados /
+                        superadas /
                         totalMazo
                     ) * 100
                 )
@@ -792,54 +875,38 @@ function renderLobby() {
 
             <div class="space-y-3">
 
-                <div class="space-y-1">
+                <div class="flex justify-between items-center text-[11px] font-bold">
 
-                    <div class="flex justify-between text-[11px] font-bold text-slate-500">
+                    <span class="text-emerald-600">
+                        🟢 ${superadas} superadas
+                    </span>
 
-                        <span>
-                            🟢 MODO TARJETAS
-                        </span>
+                    <span class="font-mono text-slate-500">
+                        ${superadas}/${totalMazo}
+                    </span>
 
-                        <span class="font-mono text-slate-700">
-                            ${facilesCompletados}/${totalMazo}
-                        </span>
+                </div>
 
-                    </div>
 
-                    <div class="w-full bg-slate-100 rounded-full h-1.5">
+                <div class="w-full bg-slate-100 rounded-full h-2">
 
-                        <div
-                            class="bg-emerald-500 h-1.5 rounded-full"
-                            style="width: ${porcFacil}%">
-                        </div>
-
+                    <div
+                        class="bg-emerald-500 h-2 rounded-full transition-all"
+                        style="width: ${porcentaje}%">
                     </div>
 
                 </div>
 
 
-                <div class="space-y-1">
+                <div class="flex justify-between text-[10px] font-semibold">
 
-                    <div class="flex justify-between text-[11px] font-bold text-slate-500">
+                    <span class="text-red-500">
+                        🔴 ${incorrectas} incorrectas
+                    </span>
 
-                        <span>
-                            💪 MODO ESCRITURA
-                        </span>
-
-                        <span class="font-mono text-slate-700">
-                            ${dificilesCompletados}/${totalMazo}
-                        </span>
-
-                    </div>
-
-                    <div class="w-full bg-slate-100 rounded-full h-1.5">
-
-                        <div
-                            class="bg-indigo-600 h-1.5 rounded-full"
-                            style="width: ${porcDificil}%">
-                        </div>
-
-                    </div>
+                    <span class="text-slate-400">
+                        ⚪ ${noEstudiadas} no estudiadas
+                    </span>
 
                 </div>
 
@@ -928,11 +995,34 @@ function startStudySession(
     filtroMazo
 ) {
 
-    state.activeSessionCards =
+    const tarjetasMazo =
         globalFlashcards.filter(
             card =>
                 card.mazo === filtroMazo
         );
+
+
+    const tarjetasNuevas =
+        tarjetasMazo.filter(
+            card =>
+                getCardStatus(card) === 'new'
+        );
+
+
+    const tarjetasIncorrectas =
+        tarjetasMazo.filter(
+            card =>
+                getCardStatus(card) === 'failed'
+        );
+
+
+    // Primero las no estudiadas y después
+    // las que estaban incorrectas.
+
+    state.activeSessionCards = [
+        ...tarjetasNuevas,
+        ...tarjetasIncorrectas
+    ];
 
 
     state.currentCardIndex =
@@ -1019,124 +1109,76 @@ function renderCard() {
         `${state.currentCardIndex + 1} / ${state.activeSessionCards.length}`;
 
 
-    if (
-        state.isHardModeActive
-    ) {
+    // ============================================================
+    // ESTADO DE LA TARJETA
+    // ============================================================
 
-        document
-            .getElementById(
-                'wrapper-normal-card'
-            )
-            .classList.add('hidden');
+    const status =
+        getCardStatus(card);
 
-
-        document
-            .getElementById(
-                'normal-feedback-buttons'
-            )
-            .classList.add('hidden');
-
-
-        document
-            .getElementById(
-                'wrapper-hard-card'
-            )
-            .classList.remove('hidden');
-
-
+    const statusElement =
         document.getElementById(
-            'hard-front-text'
-        ).innerText =
-            card.front;
+            'card-status-indicator'
+        );
 
 
-        const inputElement =
-            document.getElementById(
-                'input-hard-answer'
-            );
+    if (status === 'new') {
+
+        statusElement.innerText =
+            '⚪ NO ESTUDIADA';
+
+        statusElement.className =
+            'font-bold px-3 py-1.5 rounded-full uppercase tracking-wide bg-slate-100 text-slate-500';
 
 
-        inputElement.value = '';
-        inputElement.disabled = false;
+    } else if (status === 'failed') {
 
+        statusElement.innerText =
+            '🔴 INCORRECTA';
 
-        inputElement.className =
-            'w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-lg transition-colors';
-
-
-        document
-            .getElementById(
-                'hard-result-box'
-            )
-            .classList.add('hidden');
-
-
-        document
-            .getElementById(
-                'btn-hard-check'
-            )
-            .classList.remove('hidden');
-
-
-        document
-            .getElementById(
-                'btn-hard-retry'
-            )
-            .classList.add('hidden');
-
-
-        document
-            .getElementById(
-                'btn-hard-skip'
-            )
-            .classList.remove('hidden');
+        statusElement.className =
+            'font-bold px-3 py-1.5 rounded-full uppercase tracking-wide bg-red-50 text-red-600';
 
 
     } else {
 
-        document
-            .getElementById(
-                'wrapper-hard-card'
-            )
-            .classList.add('hidden');
+        statusElement.innerText =
+            '🟢 SUPERADA';
 
-
-        document
-            .getElementById(
-                'wrapper-normal-card'
-            )
-            .classList.remove('hidden');
-
-
-        document
-            .getElementById(
-                'normal-feedback-buttons'
-            )
-            .classList.remove('hidden');
-
-
-        document.getElementById(
-            'card-front-text'
-        ).innerText =
-            card.front;
-
-
-        document.getElementById(
-            'card-back-text'
-        ).innerText =
-            card.back;
-
-
-        document.getElementById(
-            'card-back-ipa'
-        ).innerText =
-            card.ipa;
-
-
-        resetFlip();
+        statusElement.className =
+            'font-bold px-3 py-1.5 rounded-full uppercase tracking-wide bg-emerald-50 text-emerald-600';
 
     }
 
+
+    // ============================================================
+    // CONTENIDO
+    // ============================================================
+
+    document.getElementById(
+        'card-front-text'
+    ).innerText =
+        card.front;
+
+
+    document.getElementById(
+        'card-back-text'
+    ).innerText =
+        card.back;
+
+
+    document.getElementById(
+        'card-back-ipa'
+    ).innerText =
+        card.ipa;
+
+
+    resetFlip();
+
+
+    // ============================================================
+    // PRÁCTICA ORAL
+    // ============================================================
 
     document.getElementById(
         'voice-status-indicator'
@@ -1207,15 +1249,6 @@ document
         }
 
 
-        if (
-            state.isHardModeActive
-        ) {
-
-            return;
-
-        }
-
-
         state.isFlipped =
             !state.isFlipped;
 
@@ -1233,10 +1266,10 @@ document
 
 
 // ================================================================
-// RESPUESTA NORMAL
+// RESPUESTA: INCORRECTA
 // ================================================================
 
-function responderNormal(tipo) {
+function marcarIncorrecta() {
 
     const card =
         state.activeSessionCards[
@@ -1244,52 +1277,15 @@ function responderNormal(tipo) {
         ];
 
 
-    if (
-        !state.cardsProgress[
-            card.id
-        ]
-    ) {
-
-        state.cardsProgress[
-            card.id
-        ] = {
-
-            easyBox: 0,
-
-            hardMastered: false
-
-        };
-
+    if (!card) {
+        return;
     }
 
 
-    if (tipo === 'easy') {
-
-        state.cardsProgress[
-            card.id
-        ].easyBox = 3;
-
-    }
-
-    else if (tipo === 'hard') {
-
-        state.cardsProgress[
-            card.id
-        ].easyBox = 1;
-
-    }
-
-
-    guardarProgreso();
-
-
-    if (tipo === 'again') {
-
-        state.activeSessionCards.push(
-            card
-        );
-
-    }
+    setCardStatus(
+        card,
+        'failed'
+    );
 
 
     state.currentCardIndex++;
@@ -1300,328 +1296,63 @@ function responderNormal(tipo) {
 
 
 // ================================================================
-// BOTONES NORMAL
+// RESPUESTA: SUPERADA
+// ================================================================
+
+function marcarSuperada() {
+
+    const card =
+        state.activeSessionCards[
+            state.currentCardIndex
+        ];
+
+
+    if (!card) {
+        return;
+    }
+
+
+    setCardStatus(
+        card,
+        'mastered'
+    );
+
+
+    state.currentCardIndex++;
+
+    renderCard();
+
+}
+
+
+// ================================================================
+// BOTÓN INCORRECTA
 // ================================================================
 
 document
-    .getElementById('btn-score-again')
+    .getElementById('btn-score-wrong')
     .onclick =
     event => {
 
         event.stopPropagation();
 
-        responderNormal('again');
+        marcarIncorrecta();
 
     };
 
 
+// ================================================================
+// BOTÓN SUPERADA
+// ================================================================
+
 document
-    .getElementById('btn-score-hard')
+    .getElementById('btn-score-correct')
     .onclick =
     event => {
 
         event.stopPropagation();
 
-        responderNormal('hard');
-
-    };
-
-
-document
-    .getElementById('btn-score-easy')
-    .onclick =
-    event => {
-
-        event.stopPropagation();
-
-        responderNormal('easy');
-
-    };
-
-
-// ================================================================
-// MODO DIFÍCIL - COMPROBAR
-// ================================================================
-
-document
-    .getElementById('btn-hard-check')
-    .onclick = () => {
-
-        const card =
-            state.activeSessionCards[
-                state.currentCardIndex
-            ];
-
-
-        const limpiarTexto = text => {
-
-            return text
-                .trim()
-                .toLowerCase()
-                .replace(
-                    /[.,\/#!$%\^&\*;:{}=\-_`~()?¿]/g,
-                    ''
-                )
-                .replace(
-                    /\s+/g,
-                    ' '
-                );
-
-        };
-
-
-        const inputElement =
-            document.getElementById(
-                'input-hard-answer'
-            );
-
-
-        const userAnswer =
-            limpiarTexto(
-                inputElement.value
-            );
-
-
-        const correctSolution =
-            limpiarTexto(
-                card.back
-            );
-
-
-        const resultBox =
-            document.getElementById(
-                'hard-result-box'
-            );
-
-
-        const statusText =
-            document.getElementById(
-                'hard-result-status'
-            );
-
-
-        resultBox.classList.remove(
-            'hidden'
-        );
-
-        resultBox.classList.add(
-            'flex'
-        );
-
-
-        document.getElementById(
-            'hard-correct-sentence'
-        ).innerText =
-            card.back;
-
-
-        document.getElementById(
-            'hard-correct-ipa'
-        ).innerText =
-            card.ipa;
-
-
-        if (
-            !state.cardsProgress[
-                card.id
-            ]
-        ) {
-
-            state.cardsProgress[
-                card.id
-            ] = {
-
-                easyBox: 0,
-
-                hardMastered: false
-
-            };
-
-        }
-
-
-        if (
-            userAnswer ===
-            correctSolution
-        ) {
-
-            statusText.innerText =
-                '🎉 ¡EXCELENTE! PERFECTO';
-
-
-            statusText.className =
-                'font-bold text-sm text-emerald-600';
-
-
-            resultBox.className =
-                'p-4 rounded-xl flex flex-col gap-2 border border-emerald-200 bg-emerald-50/50';
-
-
-            inputElement.className =
-                'w-full px-4 py-3 border border-emerald-300 bg-emerald-50 text-emerald-900 rounded-xl focus:outline-none text-lg transition-colors';
-
-
-            inputElement.disabled = true;
-
-
-            document
-                .getElementById(
-                    'btn-hard-check'
-                )
-                .classList.add('hidden');
-
-
-            document
-                .getElementById(
-                    'btn-hard-retry'
-                )
-                .classList.add('hidden');
-
-
-            document
-                .getElementById(
-                    'btn-hard-skip'
-                )
-                .classList.add('hidden');
-
-
-            state.cardsProgress[
-                card.id
-            ].hardMastered = true;
-
-
-            guardarProgreso();
-
-
-        } else {
-
-            statusText.innerText =
-                '❌ CASI... COMPARA Y CORRIGE TU INPUT:';
-
-
-            statusText.className =
-                'font-bold text-sm text-amber-600';
-
-
-            resultBox.className =
-                'p-4 rounded-xl flex flex-col gap-2 border border-amber-200 bg-amber-50/50';
-
-
-            inputElement.className =
-                'w-full px-4 py-3 border border-amber-300 bg-amber-50 rounded-xl focus:outline-none text-lg transition-colors';
-
-
-            document
-                .getElementById(
-                    'btn-hard-check'
-                )
-                .classList.add('hidden');
-
-
-            document
-                .getElementById(
-                    'btn-hard-retry'
-                )
-                .classList.remove('hidden');
-
-
-            document
-                .getElementById(
-                    'btn-hard-skip'
-                )
-                .classList.remove('hidden');
-
-        }
-
-    };
-
-
-// ================================================================
-// MODO DIFÍCIL - REINTENTAR
-// ================================================================
-
-document
-    .getElementById('btn-hard-retry')
-    .onclick = () => {
-
-        const inputElement =
-            document.getElementById(
-                'input-hard-answer'
-            );
-
-
-        inputElement.value = '';
-
-        inputElement.disabled = false;
-
-
-        inputElement.className =
-            'w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-lg transition-colors';
-
-
-        document
-            .getElementById(
-                'hard-result-box'
-            )
-            .classList.add('hidden');
-
-
-        document
-            .getElementById(
-                'hard-result-box'
-            )
-            .classList.remove('flex');
-
-
-        document
-            .getElementById(
-                'btn-hard-check'
-            )
-            .classList.remove('hidden');
-
-
-        document
-            .getElementById(
-                'btn-hard-retry'
-            )
-            .classList.add('hidden');
-
-
-        document
-            .getElementById(
-                'btn-hard-skip'
-            )
-            .classList.remove('hidden');
-
-    };
-
-
-// ================================================================
-// MODO DIFÍCIL - SIGUIENTE
-// ================================================================
-
-document
-    .getElementById('btn-hard-next')
-    .onclick = () => {
-
-        state.currentCardIndex++;
-
-        renderCard();
-
-    };
-
-
-// ================================================================
-// MODO DIFÍCIL - SALTAR
-// ================================================================
-
-document
-    .getElementById('btn-hard-skip')
-    .onclick = () => {
-
-        state.currentCardIndex++;
-
-        renderCard();
+        marcarSuperada();
 
     };
 
@@ -1647,31 +1378,6 @@ document
         if (texto) {
 
             ejecutarTTS(texto);
-
-        }
-
-    };
-
-
-// ================================================================
-// AUDIO MODO DIFÍCIL
-// ================================================================
-
-document
-    .getElementById('btn-hard-audio')
-    .onclick = () => {
-
-        const card =
-            state.activeSessionCards[
-                state.currentCardIndex
-            ];
-
-
-        if (card?.back) {
-
-            ejecutarTTS(
-                card.back
-            );
 
         }
 
@@ -1755,74 +1461,6 @@ function cargarProgreso() {
         );
 
         state.cardsProgress = {};
-
-    }
-
-}
-
-
-// ================================================================
-// MODO DIFÍCIL
-// ================================================================
-
-const toggleBtn =
-    document.getElementById(
-        'toggle-hard-mode'
-    );
-
-
-toggleBtn.onclick = () => {
-
-    state.isHardModeActive =
-        !state.isHardModeActive;
-
-
-    updateToggleUI();
-
-
-    if (state.currentMazo) {
-
-        renderCard();
-
-    }
-
-};
-
-
-function updateToggleUI() {
-
-    const circle =
-        document.getElementById(
-            'toggle-circle'
-        );
-
-
-    if (
-        state.isHardModeActive
-    ) {
-
-        toggleBtn.classList.replace(
-            'bg-slate-200',
-            'bg-indigo-600'
-        );
-
-
-        circle.classList.add(
-            'translate-x-5'
-        );
-
-
-    } else {
-
-        toggleBtn.classList.replace(
-            'bg-indigo-600',
-            'bg-slate-200'
-        );
-
-
-        circle.classList.remove(
-            'translate-x-5'
-        );
 
     }
 

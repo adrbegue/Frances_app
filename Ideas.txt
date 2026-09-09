@@ -8,3 +8,5 @@ XXXX Boton de teoria siempre disponible
 - Ejercicio de unir conflechas
 - Ejercicos de texto con huecos pero con desplegable en cada hueco cloze dropdown
 - Detectar el error
+- Tarjetas solo facil y dificil o mas bien emoticonos de tick verde o cruz roja
+- Se ha perdido la parte de escribir
