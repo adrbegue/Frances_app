@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b8ef22b-13ff-442d-9d0f-406574b058c8" name="Changes" comment="Teoria pdf actualizada para movil">
-      <change afterPath="$PROJECT_DIR$/js/pdf-viewer.js" afterDir="false" />
+    <list default="true" id="2b8ef22b-13ff-442d-9d0f-406574b058c8" name="Changes" comment="Modulos nuevos fuera de app: pronunciacion y pdf-viewer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ideas.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Ideas.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/pronunciacion.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pronunciacion.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1788945369357</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Modulos nuevos fuera de app: pronunciacion y pdf-viewer">
+      <option name="closed" value="true" />
+      <created>1788946057472</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1788946057472</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -180,6 +187,7 @@
     <MESSAGE value="Teoria anadido" />
     <MESSAGE value="Tarjetas ordenadas" />
     <MESSAGE value="Teoria pdf actualizada para movil" />
-    <option name="LAST_COMMIT_MESSAGE" value="Teoria pdf actualizada para movil" />
+    <MESSAGE value="Modulos nuevos fuera de app: pronunciacion y pdf-viewer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modulos nuevos fuera de app: pronunciacion y pdf-viewer" />
   </component>
 </project>
