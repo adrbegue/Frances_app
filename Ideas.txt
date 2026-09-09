@@ -1,12 +1,14 @@
 Aqui abajo las cosas que quiero implementar
 XXXX Boton con la fonetica para escicharla
-- Meter nuevos tipos de ejercicios para hacerlo mas entretenido
 XXXX Que salgan primero las fichas no resueltas
 XXXX Entrada de teoria
 XXXX Boton de teoria siempre disponible
+- Meter nuevos tipos de ejercicios para hacerlo mas entretenido
 - Cada tema tenga subsecciones
 - Ejercicio de unir conflechas
 - Ejercicos de texto con huecos pero con desplegable en cada hueco cloze dropdown
 - Detectar el error
-- Tarjetas solo facil y dificil o mas bien emoticonos de tick verde o cruz roja
+XXXX Tarjetas solo facil y dificil o mas bien emoticonos de tick verde o cruz roja
 - Se ha perdido la parte de escribir
+- Generar archivos de teoria
+

@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b8ef22b-13ff-442d-9d0f-406574b058c8" name="Changes" comment="Solucionado bug pronunciacion.js" />
+    <list default="true" id="2b8ef22b-13ff-442d-9d0f-406574b058c8" name="Changes" comment="Solucionado bug - Repasar tema">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ideas.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Ideas.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -184,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1788946712832</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Solucionado bug - Repasar tema">
+      <option name="closed" value="true" />
+      <created>1788946891457</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1788946891457</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -194,6 +205,7 @@
     <MESSAGE value="Teoria pdf actualizada para movil" />
     <MESSAGE value="Modulos nuevos fuera de app: pronunciacion y pdf-viewer" />
     <MESSAGE value="Solucionado bug pronunciacion.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="Solucionado bug pronunciacion.js" />
+    <MESSAGE value="Solucionado bug - Repasar tema" />
+    <option name="LAST_COMMIT_MESSAGE" value="Solucionado bug - Repasar tema" />
   </component>
 </project>
