@@ -10,5 +10,5 @@ XXXX Boton de teoria siempre disponible
 - Detectar el error
 XXXX Tarjetas solo facil y dificil o mas bien emoticonos de tick verde o cruz roja
 - Se ha perdido la parte de escribir
-- Generar archivos de teoria
+XXXX Generar archivos de teoria
 
