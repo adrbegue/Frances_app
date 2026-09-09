@@ -1,69 +1,114 @@
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Le Petit Pont - Avanzado</title>
+    <title>Le Petit Pont - Avanzado</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-<style>
-    .perspective-1000 {
-        perspective: 1000px;
-    }
+    <!-- PDF.js para visualizar teoría también en móviles -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
-    .preserve-3d {
-        transform-style: preserve-3d;
-    }
-
-    .backface-hidden {
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-    }
-
-    .rotate-y-180 {
-        transform: rotateY(180deg);
-    }
-
-    .pronunciation-card {
-        transition:
-            transform 0.15s ease,
-            box-shadow 0.15s ease,
-            border-color 0.15s ease;
-    }
-
-    .pronunciation-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
-    }
-
-    .theory-overlay {
-        animation: theoryFadeIn 0.15s ease-out;
-    }
-
-    @keyframes theoryFadeIn {
-        from {
-            opacity: 0;
+    <style>
+        .perspective-1000 {
+            perspective: 1000px;
         }
 
-        to {
-            opacity: 1;
+        .preserve-3d {
+            transform-style: preserve-3d;
         }
-    }
-</style>
-```
+
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        .pronunciation-card {
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.15s ease,
+                border-color 0.15s ease;
+        }
+
+        .pronunciation-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+        }
+
+        .theory-overlay {
+            animation: theoryFadeIn 0.15s ease-out;
+        }
+
+        @keyframes theoryFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* =====================================================
+           VISOR PDF
+           ===================================================== */
+
+        #theory-pdf-container {
+            background: #525659;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .pdf-page-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+
+        .pdf-page {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        .pdf-loading {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        @media (max-width: 640px) {
+            .pdf-page-wrapper {
+                padding: 6px 0;
+            }
+
+            .pdf-page {
+                width: 100%;
+            }
+        }
+    </style>
 
 </head>
 
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
 
-```
 <!-- ========================================================= -->
-<!-- HEADER                                                     -->
+<!-- HEADER                                                    -->
 <!-- ========================================================= -->
 
 <header class="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-sm">
@@ -89,7 +134,6 @@
 
         </div>
 
-
         <div class="flex items-center gap-2">
 
             <button
@@ -97,10 +141,10 @@
                 class="flex items-center gap-2 px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-xl font-semibold text-sm transition shadow-sm">
 
                 <i data-lucide="audio-lines" class="w-4 h-4"></i>
+
                 <span>Pronunciación</span>
 
             </button>
-
 
             <div
                 id="sync-status"
@@ -127,9 +171,8 @@
 
 <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6">
 
-
     <!-- ===================================================== -->
-    <!-- LOBBY                                                  -->
+    <!-- LOBBY                                                   -->
     <!-- ===================================================== -->
 
     <section
@@ -149,7 +192,6 @@
 
         </div>
 
-
         <div
             id="mazos-container"
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -159,13 +201,12 @@
 
 
     <!-- ===================================================== -->
-    <!-- ESTUDIO                                                -->
+    <!-- ESTUDIO                                                 -->
     <!-- ===================================================== -->
 
     <section
         id="section-study"
         class="hidden flex-col gap-6">
-
 
         <div class="flex items-center justify-between gap-4 flex-wrap">
 
@@ -181,7 +222,6 @@
 
             </button>
 
-
             <div class="flex items-center gap-2 flex-wrap">
 
                 <button
@@ -195,7 +235,6 @@
                     </span>
 
                 </button>
-
 
                 <button
                     id="btn-pronunciation-study"
@@ -215,13 +254,12 @@
 
 
         <!-- ================================================= -->
-        <!-- CONTENIDO DE TARJETA                              -->
+        <!-- CONTENIDO TARJETA                                 -->
         <!-- ================================================= -->
 
         <div class="flex flex-col items-center justify-center py-2 w-full">
 
-
-            <!-- MAZO TERMINADO -->
+            <!-- TEMA TERMINADO -->
 
             <div
                 id="empty-deck-view"
@@ -257,7 +295,6 @@
                 id="active-card-container"
                 class="w-full max-w-xl hidden flex-col gap-5">
 
-
                 <!-- ESTADO Y PROGRESO -->
 
                 <div class="flex justify-between items-center text-xs px-1">
@@ -290,9 +327,7 @@
                 </div>
 
 
-                <!-- ================================================= -->
-                <!-- TARJETA                                            -->
-                <!-- ================================================= -->
+                <!-- TARJETA -->
 
                 <div
                     id="wrapper-normal-card"
@@ -301,7 +336,6 @@
                     <div
                         id="card-inner"
                         class="preserve-3d w-full h-full relative transition-transform duration-500 ease-out">
-
 
                         <!-- FRENTE -->
 
@@ -366,9 +400,7 @@
                 </div>
 
 
-                <!-- ================================================= -->
-                <!-- BOTONES RESPUESTA                                 -->
-                <!-- ================================================= -->
+                <!-- BOTONES RESPUESTA -->
 
                 <div
                     id="normal-feedback-buttons"
@@ -382,7 +414,6 @@
 
                     </button>
 
-
                     <button
                         id="btn-score-correct"
                         class="h-20 bg-white border-2 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300 text-emerald-600 rounded-2xl font-bold text-4xl transition shadow-sm active:scale-95">
@@ -394,9 +425,7 @@
                 </div>
 
 
-                <!-- ================================================= -->
-                <!-- PRÁCTICA ORAL                                    -->
-                <!-- ================================================= -->
+                <!-- PRÁCTICA ORAL -->
 
                 <div
                     class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
@@ -423,7 +452,6 @@
 
                         </div>
 
-
                         <button
                             id="btn-global-mic"
                             class="w-12 h-12 flex-shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full flex items-center justify-center shadow-md transition">
@@ -446,7 +474,7 @@
 
 
 <!-- ========================================================= -->
-<!-- OVERLAY PRONUNCIACIÓN                                     -->
+<!-- OVERLAY PRONUNCIACIÓN                                    -->
 <!-- ========================================================= -->
 
 <div
@@ -492,35 +520,12 @@
         </div>
 
 
+        <!-- IMPORTANTE:
+             Aquí ya NO está el bloque:
+             "Tabla de sonidos / Pulsa una casilla..."
+        -->
+
         <div class="max-w-6xl mx-auto px-4 py-6">
-
-            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-5 sm:p-6 mb-6">
-
-                <div class="flex items-start gap-3">
-
-                    <div
-                        class="w-10 h-10 flex-shrink-0 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center">
-
-                        <i data-lucide="info" class="w-5 h-5"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h3 class="font-bold text-slate-900 mb-1">
-                            Tabla de sonidos
-                        </h3>
-
-                        <p class="text-sm text-slate-500 leading-relaxed">
-                            Pulsa una casilla para escuchar la palabra de ejemplo.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
 
             <div
                 id="pronunciation-container"
@@ -540,7 +545,7 @@
 
 
 <!-- ========================================================= -->
-<!-- OVERLAY TEORÍA                                            -->
+<!-- OVERLAY TEORÍA                                           -->
 <!-- ========================================================= -->
 
 <div
@@ -548,6 +553,8 @@
     class="theory-overlay hidden fixed inset-0 z-[110] bg-slate-100">
 
     <div class="h-screen flex flex-col">
+
+        <!-- CABECERA -->
 
         <div
             class="flex-shrink-0 bg-white border-b border-slate-200 shadow-sm">
@@ -559,32 +566,59 @@
 
                     <button
                         id="btn-close-theory"
-                        class="flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl font-semibold text-sm transition flex-shrink-0">
+                        class="flex items-center gap-2 px-3 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl font-semibold text-sm transition flex-shrink-0">
 
                         <i data-lucide="arrow-left" class="w-4 h-4"></i>
 
-                        <span>
+                        <span class="hidden sm:inline">
                             Volver
                         </span>
 
                     </button>
 
-
                     <div class="min-w-0">
 
                         <h2
                             id="theory-title"
-                            class="font-bold text-slate-900 truncate">
-
+                            class="text-base sm:text-lg font-bold text-slate-900 truncate">
                             Teoría
-
                         </h2>
 
-                        <p class="text-xs text-slate-500 hidden sm:block">
-                            Puedes consultar esta teoría y volver a la sesión cuando quieras.
+                        <p class="text-xs text-slate-500">
+                            Material teórico
                         </p>
 
                     </div>
+
+                </div>
+
+                <div class="flex items-center gap-2">
+
+                    <button
+                        id="btn-theory-zoom-out"
+                        class="w-9 h-9 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition"
+                        title="Alejar">
+
+                        <i data-lucide="zoom-out" class="w-4 h-4"></i>
+
+                    </button>
+
+                    <button
+                        id="btn-theory-zoom-reset"
+                        class="hidden sm:flex h-9 px-3 items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition text-xs font-semibold">
+
+                        100%
+
+                    </button>
+
+                    <button
+                        id="btn-theory-zoom-in"
+                        class="w-9 h-9 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition"
+                        title="Acercar">
+
+                        <i data-lucide="zoom-in" class="w-4 h-4"></i>
+
+                    </button>
 
                 </div>
 
@@ -593,14 +627,29 @@
         </div>
 
 
-        <div class="flex-1 min-h-0 bg-slate-200">
+        <!-- VISOR -->
 
-            <iframe
-                id="theory-pdf"
-                class="w-full h-full border-0"
-                src=""
-                title="Teoría del tema">
-            </iframe>
+        <div
+            id="theory-pdf-container"
+            class="flex-1 min-h-0 w-full">
+
+            <div
+                id="theory-pdf-loading"
+                class="pdf-loading">
+
+                <div class="flex flex-col items-center gap-4 px-6 text-center">
+
+                    <div
+                        class="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin">
+                    </div>
+
+                    <p class="font-semibold">
+                        Cargando teoría...
+                    </p>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -612,13 +661,15 @@
 <script type="module" src="js/app.js"></script>
 
 <script>
-    window.addEventListener('load', () => {
-        if (window.lucide) {
-            lucide.createIcons();
-        }
-    });
+    if (window.pdfjsLib) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
 </script>
 
 </body>
-
 </html>

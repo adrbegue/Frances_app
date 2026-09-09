@@ -31,6 +31,14 @@ let state = {
 
 
 // ================================================================
+// VISOR PDF
+// ================================================================
+
+let theoryPdfDocument = null;
+let theoryZoom = 1.0;
+
+
+// ================================================================
 // ELEMENTOS PRINCIPALES
 // ================================================================
 
@@ -45,9 +53,6 @@ const pronunciationOverlay =
 
 const theoryOverlay =
     document.getElementById('theory-overlay');
-
-const theoryPdf =
-    document.getElementById('theory-pdf');
 
 
 // ================================================================
@@ -172,7 +177,7 @@ function closePronunciation() {
 // TEORÍA
 // ================================================================
 
-function abrirTeoria(nombreMazo) {
+async function abrirTeoria(nombreMazo) {
 
     if (!nombreMazo) {
         return;
@@ -183,8 +188,6 @@ function abrirTeoria(nombreMazo) {
 
     const rutaPdf =
         `teoria/${encodeURIComponent(nombrePdf)}`;
-
-    theoryPdf.src = rutaPdf;
 
     const titulo =
         nombreMazo.replace(/\.txt$/i, '');
@@ -197,14 +200,347 @@ function abrirTeoria(nombreMazo) {
 
     document.body.classList.add('overflow-hidden');
 
+    theoryZoom = 1.0;
+
+    actualizarBotonZoom();
+
+    await cargarPDFTeoria(rutaPdf);
+
 }
+
+
+async function cargarPDFTeoria(rutaPdf) {
+
+    const container =
+        document.getElementById(
+            'theory-pdf-container'
+        );
+
+    container.innerHTML = `
+        <div
+            id="theory-pdf-loading"
+            class="pdf-loading">
+
+            <div class="flex flex-col items-center gap-4 px-6 text-center">
+
+                <div
+                    class="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin">
+                </div>
+
+                <p class="font-semibold">
+                    Cargando teoría...
+                </p>
+
+            </div>
+
+        </div>
+    `;
+
+    theoryPdfDocument = null;
+
+    if (!window.pdfjsLib) {
+
+        container.innerHTML = `
+            <div class="min-h-full flex items-center justify-center p-6">
+
+                <div class="bg-white rounded-3xl p-8 max-w-md text-center shadow-xl">
+
+                    <div class="text-4xl mb-3">
+                        ⚠️
+                    </div>
+
+                    <h3 class="font-bold text-slate-900 mb-2">
+                        No se pudo cargar el visor PDF
+                    </h3>
+
+                    <p class="text-sm text-slate-500">
+                        El visor PDF no está disponible en este navegador.
+                    </p>
+
+                </div>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    try {
+
+        const loadingTask =
+            pdfjsLib.getDocument({
+                url: rutaPdf
+            });
+
+        theoryPdfDocument =
+            await loadingTask.promise;
+
+
+        container.innerHTML = '';
+
+
+        for (
+            let pageNumber = 1;
+            pageNumber <= theoryPdfDocument.numPages;
+            pageNumber++
+        ) {
+
+            await renderPDFPage(
+                pageNumber
+            );
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            '❌ Error cargando PDF:',
+            error
+        );
+
+        container.innerHTML = `
+            <div class="min-h-full flex items-center justify-center p-6">
+
+                <div class="bg-white rounded-3xl p-8 max-w-md text-center shadow-xl">
+
+                    <div class="text-4xl mb-3">
+                        ⚠️
+                    </div>
+
+                    <h3 class="font-bold text-slate-900 mb-2">
+                        No se pudo cargar la teoría
+                    </h3>
+
+                    <p class="text-sm text-slate-500 mb-4">
+                        Comprueba que existe el archivo PDF en la carpeta
+                        <span class="font-mono">
+                            teoria/
+                        </span>.
+                    </p>
+
+                    <p class="text-xs text-slate-400 break-all">
+                        ${rutaPdf}
+                    </p>
+
+                </div>
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+async function renderPDFPage(pageNumber) {
+
+    if (!theoryPdfDocument) {
+        return;
+    }
+
+    const page =
+        await theoryPdfDocument.getPage(
+            pageNumber
+        );
+
+
+    const container =
+        document.getElementById(
+            'theory-pdf-container'
+        );
+
+
+    const wrapper =
+        document.createElement('div');
+
+    wrapper.className =
+        'pdf-page-wrapper';
+
+    wrapper.dataset.page =
+        pageNumber;
+
+
+    const canvas =
+        document.createElement('canvas');
+
+    canvas.className =
+        'pdf-page';
+
+
+    wrapper.appendChild(canvas);
+
+    container.appendChild(wrapper);
+
+
+    const baseViewport =
+        page.getViewport({
+            scale: 1
+        });
+
+
+    const containerWidth =
+        Math.max(
+            container.clientWidth,
+            300
+        );
+
+
+    const horizontalPadding =
+        window.innerWidth <= 640
+            ? 0
+            : 24;
+
+
+    const fitScale =
+        (containerWidth - horizontalPadding) /
+        baseViewport.width;
+
+
+    const scale =
+        fitScale * theoryZoom;
+
+
+    const viewport =
+        page.getViewport({
+            scale
+        });
+
+
+    canvas.width =
+        Math.floor(viewport.width);
+
+    canvas.height =
+        Math.floor(viewport.height);
+
+
+    canvas.style.width =
+        `${viewport.width}px`;
+
+    canvas.style.height =
+        `${viewport.height}px`;
+
+
+    const context =
+        canvas.getContext('2d');
+
+
+    await page.render({
+        canvasContext: context,
+        viewport
+    }).promise;
+
+}
+
+
+async function rerenderPDF() {
+
+    if (!theoryPdfDocument) {
+        return;
+    }
+
+    const container =
+        document.getElementById(
+            'theory-pdf-container'
+        );
+
+    container.innerHTML = '';
+
+
+    for (
+        let pageNumber = 1;
+        pageNumber <= theoryPdfDocument.numPages;
+        pageNumber++
+    ) {
+
+        await renderPDFPage(
+            pageNumber
+        );
+
+    }
+
+}
+
+
+function actualizarBotonZoom() {
+
+    const resetButton =
+        document.getElementById(
+            'btn-theory-zoom-reset'
+        );
+
+    if (!resetButton) {
+        return;
+    }
+
+    resetButton.innerText =
+        `${Math.round(theoryZoom * 100)}%`;
+
+}
+
+
+document
+    .getElementById('btn-theory-zoom-in')
+    .onclick = async () => {
+
+        theoryZoom =
+            Math.min(
+                theoryZoom + 0.15,
+                2.5
+            );
+
+        actualizarBotonZoom();
+
+        await rerenderPDF();
+
+    };
+
+
+document
+    .getElementById('btn-theory-zoom-out')
+    .onclick = async () => {
+
+        theoryZoom =
+            Math.max(
+                theoryZoom - 0.15,
+                0.6
+            );
+
+        actualizarBotonZoom();
+
+        await rerenderPDF();
+
+    };
+
+
+document
+    .getElementById('btn-theory-zoom-reset')
+    .onclick = async () => {
+
+        theoryZoom = 1.0;
+
+        actualizarBotonZoom();
+
+        await rerenderPDF();
+
+    };
 
 
 function closeTheory() {
 
     theoryOverlay.classList.add('hidden');
 
-    theoryPdf.src = '';
+    theoryPdfDocument = null;
+
+    const container =
+        document.getElementById(
+            'theory-pdf-container'
+        );
+
+    if (container) {
+        container.innerHTML = '';
+    }
 
     document.body.classList.remove('overflow-hidden');
 
@@ -321,81 +657,95 @@ function renderPronunciation() {
     }
 
 
-    pronunciationData.forEach(categoria => {
+    pronunciationData.forEach(
+        categoria => {
 
-        const categorySection =
-            document.createElement('section');
+            const categorySection =
+                document.createElement(
+                    'section'
+                );
 
-        categorySection.className =
-            'flex flex-col gap-3';
-
-
-        const categoryHeader =
-            document.createElement('div');
-
-
-        categoryHeader.innerHTML = `
-            <div class="flex items-center gap-3 mb-1">
-
-                <div class="h-px flex-1 bg-slate-300"></div>
-
-                <h3 class="text-base sm:text-lg font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
-                    ${categoria.nombre || ''}
-                </h3>
-
-                <div class="h-px flex-1 bg-slate-300"></div>
-
-            </div>
-
-            ${
-                categoria.descripcion
-                    ? `
-                        <p class="text-center text-xs sm:text-sm text-slate-400 mb-2">
-                            ${categoria.descripcion}
-                        </p>
-                    `
-                    : ''
-            }
-        `;
+            categorySection.className =
+                'flex flex-col gap-3';
 
 
-        categorySection.appendChild(
-            categoryHeader
-        );
+            const categoryHeader =
+                document.createElement(
+                    'div'
+                );
 
 
-        const grid =
-            document.createElement('div');
+            categoryHeader.innerHTML = `
+                <div class="flex items-center gap-3 mb-1">
 
-        grid.className =
-            'grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-2 sm:gap-3';
+                    <div class="h-px flex-1 bg-slate-300"></div>
+
+                    <h3 class="text-base sm:text-lg font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                        ${categoria.nombre || ''}
+                    </h3>
+
+                    <div class="h-px flex-1 bg-slate-300"></div>
+
+                </div>
+
+                ${
+                    categoria.descripcion
+                        ? `
+                            <p class="text-center text-xs sm:text-sm text-slate-400 mb-2">
+                                ${categoria.descripcion}
+                            </p>
+                        `
+                        : ''
+                }
+            `;
 
 
-        const sonidos =
-            categoria.sonidos || [];
-
-
-        sonidos.forEach(sonido => {
-
-            grid.appendChild(
-                crearTarjetaPronunciacion(
-                    sonido
-                )
+            categorySection.appendChild(
+                categoryHeader
             );
 
-        });
+
+            const grid =
+                document.createElement(
+                    'div'
+                );
+
+            grid.className =
+                'grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-2 sm:gap-3';
 
 
-        categorySection.appendChild(grid);
-
-        container.appendChild(
-            categorySection
-        );
-
-    });
+            const sonidos =
+                categoria.sonidos || [];
 
 
-    lucide.createIcons();
+            sonidos.forEach(
+                sonido => {
+
+                    grid.appendChild(
+                        crearTarjetaPronunciacion(
+                            sonido
+                        )
+                    );
+
+                }
+            );
+
+
+            categorySection.appendChild(
+                grid
+            );
+
+            container.appendChild(
+                categorySection
+            );
+
+        }
+    );
+
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
 
 }
 
@@ -404,10 +754,14 @@ function renderPronunciation() {
 // TARJETA DE PRONUNCIACIÓN
 // ================================================================
 
-function crearTarjetaPronunciacion(sonido) {
+function crearTarjetaPronunciacion(
+    sonido
+) {
 
     const card =
-        document.createElement('button');
+        document.createElement(
+            'button'
+        );
 
     card.type = 'button';
 
@@ -416,7 +770,9 @@ function crearTarjetaPronunciacion(sonido) {
 
 
     const ipaText =
-        document.createElement('div');
+        document.createElement(
+            'div'
+        );
 
     ipaText.className =
         'text-xl sm:text-2xl font-mono font-bold text-indigo-700 leading-tight text-center';
@@ -426,7 +782,9 @@ function crearTarjetaPronunciacion(sonido) {
 
 
     const wordText =
-        document.createElement('div');
+        document.createElement(
+            'div'
+        );
 
     wordText.className =
         'text-sm sm:text-base font-bold text-slate-800 leading-tight text-center break-words';
@@ -436,7 +794,9 @@ function crearTarjetaPronunciacion(sonido) {
 
 
     const wordIPA =
-        document.createElement('div');
+        document.createElement(
+            'div'
+        );
 
     wordIPA.className =
         'text-[10px] sm:text-xs font-mono italic text-emerald-600 leading-tight text-center break-words';
@@ -446,7 +806,9 @@ function crearTarjetaPronunciacion(sonido) {
 
 
     const audioIcon =
-        document.createElement('div');
+        document.createElement(
+            'div'
+        );
 
     audioIcon.className =
         'text-[10px] text-slate-400 mt-1';
@@ -455,10 +817,21 @@ function crearTarjetaPronunciacion(sonido) {
         '🔊';
 
 
-    card.appendChild(ipaText);
-    card.appendChild(wordText);
-    card.appendChild(wordIPA);
-    card.appendChild(audioIcon);
+    card.appendChild(
+        ipaText
+    );
+
+    card.appendChild(
+        wordText
+    );
+
+    card.appendChild(
+        wordIPA
+    );
+
+    card.appendChild(
+        audioIcon
+    );
 
 
     card.onclick = () => {
@@ -677,38 +1050,26 @@ function getCardStatus(card) {
 
 
     if (!progreso) {
-
         return 'new';
-
     }
 
-
-    // Nuevo formato
 
     if (progreso.status) {
-
         return progreso.status;
-
     }
 
 
-    // Compatibilidad con el formato anterior
-
+    // Compatibilidad con el sistema anterior.
     if (
-        progreso.easyBox === 3
+        progreso.easyBox === 3 ||
+        progreso.hardMastered === true
     ) {
-
         return 'mastered';
-
     }
 
 
-    if (
-        progreso.easyBox === 1
-    ) {
-
+    if (progreso.easyBox === 1) {
         return 'failed';
-
     }
 
 
@@ -718,38 +1079,7 @@ function getCardStatus(card) {
 
 
 // ================================================================
-// GUARDAR ESTADO DE TARJETA
-// ================================================================
-
-function setCardStatus(
-    card,
-    status
-) {
-
-    const progresoAnterior =
-        state.cardsProgress[
-            card.id
-        ] || {};
-
-
-    state.cardsProgress[
-        card.id
-    ] = {
-
-        ...progresoAnterior,
-
-        status: status
-
-    };
-
-
-    guardarProgreso();
-
-}
-
-
-// ================================================================
-// RENDER LOBBY
+// RENDERIZAR LOBBY
 // ================================================================
 
 function renderLobby() {
@@ -773,263 +1103,241 @@ function renderLobby() {
         ];
 
 
-    nombresMazos.forEach(nombreMazo => {
+    nombresMazos.forEach(
+        nombreMazo => {
 
-        const tarjetasMazo =
-            globalFlashcards.filter(
-                card =>
-                    card.mazo === nombreMazo
-            );
-
-
-        const totalMazo =
-            tarjetasMazo.length;
+            const tarjetasMazo =
+                globalFlashcards.filter(
+                    card =>
+                        card.mazo === nombreMazo
+                );
 
 
-        const superadas =
-            tarjetasMazo.filter(
-                card =>
-                    getCardStatus(card) === 'mastered'
-            ).length;
+            const total =
+                tarjetasMazo.length;
 
 
-        const incorrectas =
-            tarjetasMazo.filter(
-                card =>
-                    getCardStatus(card) === 'failed'
-            ).length;
+            const superadas =
+                tarjetasMazo.filter(
+                    card =>
+                        getCardStatus(card) === 'mastered'
+                ).length;
 
 
-        const noEstudiadas =
-            tarjetasMazo.filter(
-                card =>
-                    getCardStatus(card) === 'new'
-            ).length;
+            const incorrectas =
+                tarjetasMazo.filter(
+                    card =>
+                        getCardStatus(card) === 'failed'
+                ).length;
 
 
-        const porcentaje =
-            totalMazo > 0
-                ? Math.round(
-                    (
-                        superadas /
-                        totalMazo
-                    ) * 100
-                )
-                : 0;
+            const nuevas =
+                tarjetasMazo.filter(
+                    card =>
+                        getCardStatus(card) === 'new'
+                ).length;
 
 
-        const nombreSinExtension =
-            nombreMazo.replace(
-                '.txt',
-                ''
-            );
+            const porcentaje =
+                total > 0
+                    ? Math.round(
+                        (superadas / total) * 100
+                    )
+                    : 0;
 
 
-        let tituloTema =
-            nombreSinExtension;
-
-        let descripcionTema =
-            'Práctica de vocabulario y estructuras.';
-
-
-        if (
-            tituloTema.includes('_')
-        ) {
-
-            const partes =
-                tituloTema.split('_');
+            const card =
+                document.createElement(
+                    'div'
+                );
 
 
-            tituloTema =
-                partes[0].trim();
+            card.className =
+                'bg-white rounded-3xl border border-slate-200 shadow-sm p-5 flex flex-col gap-4';
 
 
-            descripcionTema =
-                partes[1].trim();
-
-        }
-
-
-        const box =
-            document.createElement('div');
+            const titulo =
+                nombreMazo.replace(
+                    /\.txt$/i,
+                    ''
+                );
 
 
-        box.className =
-            'bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition flex flex-col gap-5';
+            card.innerHTML = `
 
+                <div>
 
-        box.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
 
-            <div>
+                        <h3 class="font-bold text-lg text-slate-900 leading-tight">
+                            ${titulo}
+                        </h3>
 
-                <h4 class="text-lg font-bold text-slate-800 truncate">
-                    ${tituloTema}
-                </h4>
+                        <span class="text-xs font-bold bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-full whitespace-nowrap">
+                            ${total} tarjetas
+                        </span>
 
-                <p class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                    ${descripcionTema}
-                </p>
-
-            </div>
-
-
-            <div class="space-y-3">
-
-                <div class="flex justify-between items-center text-[11px] font-bold">
-
-                    <span class="text-emerald-600">
-                        🟢 ${superadas} superadas
-                    </span>
-
-                    <span class="font-mono text-slate-500">
-                        ${superadas}/${totalMazo}
-                    </span>
-
-                </div>
-
-
-                <div class="w-full bg-slate-100 rounded-full h-2">
-
-                    <div
-                        class="bg-emerald-500 h-2 rounded-full transition-all"
-                        style="width: ${porcentaje}%">
                     </div>
 
                 </div>
 
 
-                <div class="flex justify-between text-[10px] font-semibold">
+                <div class="space-y-2">
 
-                    <span class="text-red-500">
-                        🔴 ${incorrectas} incorrectas
-                    </span>
+                    <div class="flex items-center justify-between text-xs">
 
-                    <span class="text-slate-400">
-                        ⚪ ${noEstudiadas} no estudiadas
-                    </span>
+                        <span class="font-bold text-emerald-600">
+                            🟢 ${superadas}/${total} superadas
+                        </span>
+
+                        <span class="font-semibold text-slate-500">
+                            ${porcentaje}%
+                        </span>
+
+                    </div>
+
+
+                    <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+
+                        <div
+                            class="h-full bg-emerald-500 rounded-full transition-all"
+                            style="width: ${porcentaje}%">
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex items-center gap-3 text-[11px] text-slate-400">
+
+                        <span>
+                            🔴 ${incorrectas} incorrectas
+                        </span>
+
+                        <span>
+                            ⚪ ${nuevas} no estudiadas
+                        </span>
+
+                    </div>
 
                 </div>
 
-            </div>
+
+                <div class="grid grid-cols-2 gap-2 mt-auto">
+
+                    <button
+                        class="btn-theory-mazo flex items-center justify-center gap-2 px-3 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 rounded-xl font-semibold text-xs transition">
+
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+
+                        Teoría
+
+                    </button>
 
 
-            <!-- SECCIONES DEL TEMA -->
+                    <button
+                        class="btn-cards-mazo flex items-center justify-center gap-2 px-3 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold text-xs transition shadow-sm">
 
-            <div class="grid grid-cols-2 gap-2 pt-1">
+                        <i data-lucide="layers-3" class="w-4 h-4"></i>
 
-                <button
-                    class="btn-theory-mazo flex items-center justify-center gap-2 py-3 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 rounded-xl text-xs font-bold transition"
-                    data-mazo="${nombreMazo}">
+                        Tarjetas
 
-                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    </button>
 
-                    TEORÍA
+                </div>
 
-                </button>
-
-
-                <button
-                    class="btn-entrar-mazo flex items-center justify-center gap-2 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-sm transition"
-                    data-mazo="${nombreMazo}">
-
-                    <i data-lucide="layers-3" class="w-4 h-4"></i>
-
-                    TARJETAS
-
-                </button>
-
-            </div>
-
-        `;
+            `;
 
 
-        container.appendChild(box);
+            card
+                .querySelector(
+                    '.btn-theory-mazo'
+                )
+                .onclick = () => {
 
-    });
+                    abrirTeoria(
+                        nombreMazo
+                    );
 
-
-    document
-        .querySelectorAll('.btn-entrar-mazo')
-        .forEach(button => {
-
-            button.onclick = () => {
-
-                showStudyView(
-                    button.getAttribute(
-                        'data-mazo'
-                    )
-                );
-
-            };
-
-        });
+                };
 
 
-    document
-        .querySelectorAll('.btn-theory-mazo')
-        .forEach(button => {
+            card
+                .querySelector(
+                    '.btn-cards-mazo'
+                )
+                .onclick = () => {
 
-            button.onclick = () => {
+                    showStudyView(
+                        nombreMazo
+                    );
 
-                abrirTeoria(
-                    button.getAttribute(
-                        'data-mazo'
-                    )
-                );
-
-            };
-
-        });
+                };
 
 
-    lucide.createIcons();
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
 
 }
 
 
 // ================================================================
-// INICIAR SESIÓN
+// INICIAR SESIÓN DE ESTUDIO
 // ================================================================
 
 function startStudySession(
     filtroMazo
 ) {
 
-    const tarjetasMazo =
+    const cards =
         globalFlashcards.filter(
             card =>
                 card.mazo === filtroMazo
         );
 
 
-    const tarjetasNuevas =
-        tarjetasMazo.filter(
+    const nuevas =
+        cards.filter(
             card =>
                 getCardStatus(card) === 'new'
         );
 
 
-    const tarjetasIncorrectas =
-        tarjetasMazo.filter(
+    const falladas =
+        cards.filter(
             card =>
                 getCardStatus(card) === 'failed'
         );
 
 
-    // Primero las no estudiadas y después
-    // las que estaban incorrectas.
+    /*
+     * ORDEN DE LA SESIÓN:
+     *
+     * 1. NO ESTUDIADA
+     * 2. INCORRECTA
+     *
+     * Las SUPERADAS no vuelven a aparecer.
+     */
 
-    state.activeSessionCards = [
-        ...tarjetasNuevas,
-        ...tarjetasIncorrectas
-    ];
+    state.activeSessionCards =
+        [
+            ...nuevas,
+            ...falladas
+        ];
 
 
-    state.currentCardIndex =
-        0;
+    state.currentCardIndex = 0;
 
+    state.isFlipped = false;
 
-    resetFlip();
 
     renderCard();
 
@@ -1037,16 +1345,15 @@ function startStudySession(
 
 
 // ================================================================
-// RENDER TARJETA
+// RENDERIZAR TARJETA ACTUAL
 // ================================================================
 
 function renderCard() {
 
-    const container =
+    const activeContainer =
         document.getElementById(
             'active-card-container'
         );
-
 
     const emptyView =
         document.getElementById(
@@ -1055,25 +1362,51 @@ function renderCard() {
 
 
     if (
-        state.activeSessionCards.length === 0 ||
         state.currentCardIndex >=
         state.activeSessionCards.length
     ) {
 
-        container.classList.add('hidden');
+        activeContainer.classList.add(
+            'hidden'
+        );
 
-        emptyView.classList.remove('hidden');
-        emptyView.classList.add('flex');
+        activeContainer.classList.remove(
+            'flex'
+        );
+
+
+        emptyView.classList.remove(
+            'hidden'
+        );
+
+        emptyView.classList.add(
+            'flex'
+        );
+
+
+        renderLobby();
 
         return;
 
     }
 
 
-    container.classList.remove('hidden');
-    container.classList.add('flex');
+    emptyView.classList.add(
+        'hidden'
+    );
 
-    emptyView.classList.add('hidden');
+    emptyView.classList.remove(
+        'flex'
+    );
+
+
+    activeContainer.classList.remove(
+        'hidden'
+    );
+
+    activeContainer.classList.add(
+        'flex'
+    );
 
 
     const card =
@@ -1082,78 +1415,18 @@ function renderCard() {
         ];
 
 
-    const nombreSinExtension =
-        card.mazo.replace(
-            '.txt',
-            ''
-        );
+    state.isFlipped = false;
 
 
-    const tituloLimpio =
-        nombreSinExtension.includes('_')
-            ? nombreSinExtension
-                .split('_')[0]
-                .trim()
-            : nombreSinExtension;
-
-
-    document.getElementById(
-        'card-badge-deck'
-    ).innerText =
-        tituloLimpio;
-
-
-    document.getElementById(
-        'card-progress-indicator'
-    ).innerText =
-        `${state.currentCardIndex + 1} / ${state.activeSessionCards.length}`;
-
-
-    // ============================================================
-    // ESTADO DE LA TARJETA
-    // ============================================================
-
-    const status =
-        getCardStatus(card);
-
-    const statusElement =
+    const cardInner =
         document.getElementById(
-            'card-status-indicator'
+            'card-inner'
         );
 
+    cardInner.classList.remove(
+        'rotate-y-180'
+    );
 
-    if (status === 'new') {
-
-        statusElement.innerText =
-            '⚪ NO ESTUDIADA';
-
-        statusElement.className =
-            'font-bold px-3 py-1.5 rounded-full uppercase tracking-wide bg-slate-100 text-slate-500';
-
-
-    } else if (status === 'failed') {
-
-        statusElement.innerText =
-            '🔴 INCORRECTA';
-
-        statusElement.className =
-            'font-bold px-3 py-1.5 rounded-full uppercase tracking-wide bg-red-50 text-red-600';
-
-
-    } else {
-
-        statusElement.innerText =
-            '🟢 SUPERADA';
-
-        statusElement.className =
-            'font-bold px-3 py-1.5 rounded-full uppercase tracking-wide bg-emerald-50 text-emerald-600';
-
-    }
-
-
-    // ============================================================
-    // CONTENIDO
-    // ============================================================
 
     document.getElementById(
         'card-front-text'
@@ -1170,82 +1443,111 @@ function renderCard() {
     document.getElementById(
         'card-back-ipa'
     ).innerText =
-        card.ipa;
+        card.ipa
+            ? `/${card.ipa}/`
+            : '';
 
-
-    resetFlip();
-
-
-    // ============================================================
-    // PRÁCTICA ORAL
-    // ============================================================
 
     document.getElementById(
-        'voice-status-indicator'
+        'card-badge-deck'
     ).innerText =
-        '🎙️ PRÁCTICA DE ORAL (MANTÉN PULSADO EL MICRO)';
-
-
-    document.getElementById(
-        'voice-status-indicator'
-    ).className =
-        'text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5';
-
-
-    document.getElementById(
-        'voice-interpreted-text'
-    ).innerText =
-        'Listo para escuchar...';
-
-
-    document.getElementById(
-        'voice-interpreted-text'
-    ).className =
-        'text-sm font-medium text-slate-500 italic truncate';
-
-}
-
-
-// ================================================================
-// RESET FLIP
-// ================================================================
-
-function resetFlip() {
-
-    state.isFlipped =
-        false;
-
-
-    document
-        .getElementById(
-            'card-inner'
-        )
-        .classList.remove(
-            'rotate-y-180'
+        card.mazo.replace(
+            /\.txt$/i,
+            ''
         );
 
+
+    document.getElementById(
+        'card-progress-indicator'
+    ).innerText =
+        `${state.currentCardIndex + 1} / ${state.activeSessionCards.length}`;
+
+
+    actualizarIndicadorEstado(
+        card
+    );
+
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+
 }
 
 
 // ================================================================
-// CLICK EN TARJETA
+// INDICADOR DE ESTADO
+// ================================================================
+
+function actualizarIndicadorEstado(
+    card
+) {
+
+    const indicator =
+        document.getElementById(
+            'card-status-indicator'
+        );
+
+
+    const status =
+        getCardStatus(card);
+
+
+    indicator.className =
+        'font-bold px-3 py-1.5 rounded-full uppercase tracking-wide';
+
+
+    if (status === 'mastered') {
+
+        indicator.innerText =
+            '🟢 SUPERADA';
+
+        indicator.classList.add(
+            'bg-emerald-100',
+            'text-emerald-700'
+        );
+
+
+    } else if (status === 'failed') {
+
+        indicator.innerText =
+            '🔴 INCORRECTA';
+
+        indicator.classList.add(
+            'bg-red-100',
+            'text-red-700'
+        );
+
+
+    } else {
+
+        indicator.innerText =
+            '⚪ NO ESTUDIADA';
+
+        indicator.classList.add(
+            'bg-slate-100',
+            'text-slate-600'
+        );
+
+    }
+
+}
+
+
+// ================================================================
+// GIRAR TARJETA
 // ================================================================
 
 document
-    .getElementById(
-        'wrapper-normal-card'
-    )
-    .onclick =
-    event => {
+    .getElementById('wrapper-normal-card')
+    .onclick = event => {
 
         if (
             event.target.closest(
                 '#btn-audio-speak'
             )
         ) {
-
             return;
-
         }
 
 
@@ -1253,23 +1555,56 @@ document
             !state.isFlipped;
 
 
-        document
-            .getElementById(
+        const cardInner =
+            document.getElementById(
                 'card-inner'
-            )
-            .classList.toggle(
-                'rotate-y-180',
-                state.isFlipped
             );
+
+
+        cardInner.classList.toggle(
+            'rotate-y-180',
+            state.isFlipped
+        );
 
     };
 
 
 // ================================================================
-// RESPUESTA: INCORRECTA
+// AUDIO DE TARJETA
 // ================================================================
 
-function marcarIncorrecta() {
+document
+    .getElementById('btn-audio-speak')
+    .onclick = event => {
+
+        event.stopPropagation();
+
+
+        const card =
+            state.activeSessionCards[
+                state.currentCardIndex
+            ];
+
+
+        if (!card) {
+            return;
+        }
+
+
+        ejecutarTTS(
+            card.back
+        );
+
+    };
+
+
+// ================================================================
+// RESPUESTA NORMAL
+// ================================================================
+
+function responderNormal(
+    resultado
+) {
 
     const card =
         state.activeSessionCards[
@@ -1282,43 +1617,40 @@ function marcarIncorrecta() {
     }
 
 
-    setCardStatus(
-        card,
-        'failed'
-    );
+    state.cardsProgress[
+        card.id
+    ] = {
+
+        ...state.cardsProgress[
+            card.id
+        ],
+
+        status:
+            resultado
+
+    };
 
 
-    state.currentCardIndex++;
-
-    renderCard();
-
-}
+    guardarProgreso();
 
 
-// ================================================================
-// RESPUESTA: SUPERADA
-// ================================================================
-
-function marcarSuperada() {
-
-    const card =
-        state.activeSessionCards[
-            state.currentCardIndex
-        ];
-
-
-    if (!card) {
-        return;
-    }
-
-
-    setCardStatus(
-        card,
-        'mastered'
-    );
-
+    /*
+     * IMPORTANTE:
+     *
+     * No volvemos a meter la tarjeta
+     * en la sesión actual.
+     *
+     * Si es incorrecta:
+     * aparecerá en la siguiente sesión.
+     *
+     * Si es superada:
+     * no volverá a aparecer.
+     */
 
     state.currentCardIndex++;
+
+    state.isFlipped = false;
+
 
     renderCard();
 
@@ -1331,12 +1663,11 @@ function marcarSuperada() {
 
 document
     .getElementById('btn-score-wrong')
-    .onclick =
-    event => {
+    .onclick = () => {
 
-        event.stopPropagation();
-
-        marcarIncorrecta();
+        responderNormal(
+            'failed'
+        );
 
     };
 
@@ -1347,45 +1678,17 @@ document
 
 document
     .getElementById('btn-score-correct')
-    .onclick =
-    event => {
+    .onclick = () => {
 
-        event.stopPropagation();
-
-        marcarSuperada();
-
-    };
-
-
-// ================================================================
-// AUDIO TARJETA NORMAL
-// ================================================================
-
-document
-    .getElementById('btn-audio-speak')
-    .onclick =
-    event => {
-
-        event.stopPropagation();
-
-
-        const texto =
-            document.getElementById(
-                'card-back-text'
-            ).innerText;
-
-
-        if (texto) {
-
-            ejecutarTTS(texto);
-
-        }
+        responderNormal(
+            'mastered'
+        );
 
     };
 
 
 // ================================================================
-// OBTENER FRASE PARA EL MICRO
+// OBTENER FRASE ACTUAL PARA EL MICRÓFONO
 // ================================================================
 
 function obtenerFraseTarjetaActual() {
@@ -1396,27 +1699,35 @@ function obtenerFraseTarjetaActual() {
         ];
 
 
-    return card
-        ? card.back
-        : '';
+    if (!card) {
+        return '';
+    }
+
+
+    return card.back;
 
 }
 
 
 // ================================================================
-// GUARDAR PROGRESO
+// LOCAL STORAGE
 // ================================================================
+
+const STORAGE_KEY =
+    'petit_pont_local_prog_v2';
+
 
 function guardarProgreso() {
 
     try {
 
         localStorage.setItem(
-            'petit_pont_local_prog_v2',
+            STORAGE_KEY,
             JSON.stringify(
                 state.cardsProgress
             )
         );
+
 
     } catch (error) {
 
@@ -1430,28 +1741,28 @@ function guardarProgreso() {
 }
 
 
-// ================================================================
-// CARGAR PROGRESO
-// ================================================================
-
 function cargarProgreso() {
 
     try {
 
-        const guardado =
+        const saved =
             localStorage.getItem(
-                'petit_pont_local_prog_v2'
+                STORAGE_KEY
             );
 
 
-        if (guardado) {
+        if (!saved) {
 
-            state.cardsProgress =
-                JSON.parse(
-                    guardado
-                );
+            state.cardsProgress = {};
+
+            return;
 
         }
+
+
+        state.cardsProgress =
+            JSON.parse(saved) || {};
+
 
     } catch (error) {
 
@@ -1468,24 +1779,104 @@ function cargarProgreso() {
 
 
 // ================================================================
-// INICIALIZACIÓN
+// TECLADO
 // ================================================================
 
-window.addEventListener(
-    'load',
-    async () => {
+document.addEventListener(
+    'keydown',
+    event => {
 
-        cargarProgreso();
+        if (
+            event.key === 'Escape'
+        ) {
 
-        await cargarTodosLosMazos();
+            if (
+                !theoryOverlay.classList.contains(
+                    'hidden'
+                )
+            ) {
 
-        await cargarPronunciacion();
+                closeTheory();
 
-        inicializarMicrofonoGlobal(
-            obtenerFraseTarjetaActual
-        );
+                return;
 
-        lucide.createIcons();
+            }
+
+
+            if (
+                !pronunciationOverlay.classList.contains(
+                    'hidden'
+                )
+            ) {
+
+                closePronunciation();
+
+                return;
+
+            }
+
+        }
+
+
+        if (
+            sectionStudy.classList.contains(
+                'hidden'
+            )
+        ) {
+            return;
+        }
+
+
+        if (
+            event.key === ' '
+        ) {
+
+            event.preventDefault();
+
+            const cardInner =
+                document.getElementById(
+                    'card-inner'
+                );
+
+
+            state.isFlipped =
+                !state.isFlipped;
+
+
+            cardInner.classList.toggle(
+                'rotate-y-180',
+                state.isFlipped
+            );
+
+        }
 
     }
 );
+
+
+// ================================================================
+// INICIALIZACIÓN
+// ================================================================
+
+async function inicializarApp() {
+
+    cargarProgreso();
+
+    await cargarTodosLosMazos();
+
+    await cargarPronunciacion();
+
+
+    inicializarMicrofonoGlobal(
+        obtenerFraseTarjetaActual
+    );
+
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+
+}
+
+
+inicializarApp();
