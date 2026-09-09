@@ -42,7 +42,10 @@ let state = {
     activeSessionCards: [],
     currentCardIndex: 0,
     isFlipped: false,
-    currentMazo: null
+    currentMazo: null,
+
+    // true cuando estamos repasando un tema ya completado
+    isReviewMode: false
 };
 
 
@@ -159,8 +162,23 @@ function showStudyView(nombreMazo) {
 
     }
 
+    // Comprobar si el tema está completamente superado.
+    const cardsMazo =
+        globalFlashcards.filter(
+            card =>
+                card.mazo === nombreMazo
+        );
+
+    const todasSuperadas =
+        cardsMazo.length > 0 &&
+        cardsMazo.every(
+            card =>
+                getCardStatus(card) === 'mastered'
+        );
+
     startStudySession(
-        nombreMazo
+        nombreMazo,
+        todasSuperadas
     );
 
 }
@@ -463,6 +481,13 @@ function renderLobby() {
                     : 0;
 
 
+            // Si todas están superadas, el botón permitirá
+            // volver a hacer el tema completo.
+            const temaCompletado =
+                total > 0 &&
+                superadas === total;
+
+
             const card =
                 document.createElement('div');
 
@@ -604,8 +629,11 @@ function renderLobby() {
                                flex items-center
                                justify-center gap-2
                                px-3 py-2.5
-                               bg-indigo-600
-                               hover:bg-indigo-700
+                               ${
+                                   temaCompletado
+                                       ? 'bg-emerald-600 hover:bg-emerald-700'
+                                       : 'bg-indigo-600 hover:bg-indigo-700'
+                               }
                                text-white
                                rounded-xl
                                font-semibold text-xs
@@ -613,11 +641,19 @@ function renderLobby() {
                                shadow-sm">
 
                         <i
-                            data-lucide="layers-3"
+                            data-lucide="${
+                                temaCompletado
+                                    ? 'rotate-ccw'
+                                    : 'layers-3'
+                            }"
                             class="w-4 h-4">
                         </i>
 
-                        Tarjetas
+                        ${
+                            temaCompletado
+                                ? 'Repasar'
+                                : 'Tarjetas'
+                        }
 
                     </button>
 
@@ -680,7 +716,8 @@ function renderLobby() {
 // ================================================================
 
 function startStudySession(
-    filtroMazo
+    filtroMazo,
+    reviewMode = false
 ) {
 
     const cards =
@@ -690,27 +727,60 @@ function startStudySession(
         );
 
 
-    const nuevas =
-        cards.filter(
-            card =>
-                getCardStatus(card)
-                === 'new'
-        );
+    state.isReviewMode =
+        reviewMode;
 
 
-    const falladas =
-        cards.filter(
-            card =>
-                getCardStatus(card)
-                === 'failed'
-        );
+    // ------------------------------------------------------------
+    // MODO REPASO
+    // ------------------------------------------------------------
+    //
+    // Si el tema ya está completamente superado,
+    // mostramos TODAS las tarjetas desde el principio.
+    //
+    // No se modifica ningún progreso por entrar en este modo.
+    //
+    // ------------------------------------------------------------
+
+    if (reviewMode) {
+
+        state.activeSessionCards =
+            [...cards];
+
+    } else {
+
+        // --------------------------------------------------------
+        // MODO ESTUDIO NORMAL
+        // --------------------------------------------------------
+        //
+        // Primero tarjetas nuevas y después las falladas.
+        // Las superadas quedan fuera de la sesión.
+        //
+        // --------------------------------------------------------
+
+        const nuevas =
+            cards.filter(
+                card =>
+                    getCardStatus(card)
+                    === 'new'
+            );
 
 
-    state.activeSessionCards =
-        [
-            ...nuevas,
-            ...falladas
-        ];
+        const falladas =
+            cards.filter(
+                card =>
+                    getCardStatus(card)
+                    === 'failed'
+            );
+
+
+        state.activeSessionCards =
+            [
+                ...nuevas,
+                ...falladas
+            ];
+
+    }
 
 
     state.currentCardIndex =
