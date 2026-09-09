@@ -1,0 +1,288 @@
+[
+    {
+        "nombre": "Vocales orales",
+        "descripcion": "Los principales sonidos vocálicos del francés.",
+        "sonidos": [
+            {
+                "ipa": "i",
+                "ejemplo": "si",
+                "ejemplo_ipa": "/si/",
+                "audio_texto": "i"
+            },
+            {
+                "ipa": "e",
+                "ejemplo": "été",
+                "ejemplo_ipa": "/ete/",
+                "audio_texto": "é"
+            },
+            {
+                "ipa": "ɛ",
+                "ejemplo": "père",
+                "ejemplo_ipa": "/pɛʁ/",
+                "audio_texto": "è"
+            },
+            {
+                "ipa": "a",
+                "ejemplo": "patte",
+                "ejemplo_ipa": "/pat/",
+                "audio_texto": "a"
+            },
+            {
+                "ipa": "ɑ",
+                "ejemplo": "pâte",
+                "ejemplo_ipa": "/pɑt/",
+                "audio_texto": "â"
+            },
+            {
+                "ipa": "y",
+                "ejemplo": "tu",
+                "ejemplo_ipa": "/ty/",
+                "audio_texto": "u"
+            },
+            {
+                "ipa": "ø",
+                "ejemplo": "deux",
+                "ejemplo_ipa": "/dø/",
+                "audio_texto": "eu"
+            },
+            {
+                "ipa": "œ",
+                "ejemplo": "sœur",
+                "ejemplo_ipa": "/sœʁ/",
+                "audio_texto": "œu"
+            },
+            {
+                "ipa": "u",
+                "ejemplo": "tout",
+                "ejemplo_ipa": "/tu/",
+                "audio_texto": "ou"
+            },
+            {
+                "ipa": "o",
+                "ejemplo": "eau",
+                "ejemplo_ipa": "/o/",
+                "audio_texto": "eau"
+            },
+            {
+                "ipa": "ɔ",
+                "ejemplo": "porte",
+                "ejemplo_ipa": "/pɔʁt/",
+                "audio_texto": "o"
+            },
+            {
+                "ipa": "ə",
+                "ejemplo": "petit",
+                "ejemplo_ipa": "/pəti/",
+                "audio_texto": "e"
+            }
+        ]
+    },
+
+    {
+        "nombre": "Vocales nasales",
+        "descripcion": "Sonidos producidos con resonancia nasal.",
+        "sonidos": [
+            {
+                "ipa": "ɑ̃",
+                "ejemplo": "sans",
+                "ejemplo_ipa": "/sɑ̃/",
+                "audio_texto": "an"
+            },
+            {
+                "ipa": "ɛ̃",
+                "ejemplo": "vin",
+                "ejemplo_ipa": "/vɛ̃/",
+                "audio_texto": "in"
+            },
+            {
+                "ipa": "ɔ̃",
+                "ejemplo": "bon",
+                "ejemplo_ipa": "/bɔ̃/",
+                "audio_texto": "on"
+            },
+            {
+                "ipa": "œ̃",
+                "ejemplo": "un",
+                "ejemplo_ipa": "/œ̃/",
+                "audio_texto": "un"
+            }
+        ]
+    },
+
+    {
+        "nombre": "Semi-vocales",
+        "descripcion": "Sonidos de transición entre vocal y consonante.",
+        "sonidos": [
+            {
+                "ipa": "j",
+                "ejemplo": "fille",
+                "ejemplo_ipa": "/fij/",
+                "audio_texto": "y"
+            },
+            {
+                "ipa": "ɥ",
+                "ejemplo": "huit",
+                "ejemplo_ipa": "/ɥit/",
+                "audio_texto": "huit"
+            },
+            {
+                "ipa": "w",
+                "ejemplo": "oui",
+                "ejemplo_ipa": "/wi/",
+                "audio_texto": "w"
+            }
+        ]
+    },
+
+    {
+        "nombre": "Consonantes",
+        "descripcion": "Principales sonidos consonánticos del francés.",
+        "sonidos": [
+            {
+                "ipa": "p",
+                "ejemplo": "papa",
+                "ejemplo_ipa": "/papa/",
+                "audio_texto": "p"
+            },
+            {
+                "ipa": "b",
+                "ejemplo": "beau",
+                "ejemplo_ipa": "/bo/",
+                "audio_texto": "b"
+            },
+            {
+                "ipa": "t",
+                "ejemplo": "tout",
+                "ejemplo_ipa": "/tu/",
+                "audio_texto": "t"
+            },
+            {
+                "ipa": "d",
+                "ejemplo": "deux",
+                "ejemplo_ipa": "/dø/",
+                "audio_texto": "d"
+            },
+            {
+                "ipa": "k",
+                "ejemplo": "qui",
+                "ejemplo_ipa": "/ki/",
+                "audio_texto": "k"
+            },
+            {
+                "ipa": "ɡ",
+                "ejemplo": "gare",
+                "ejemplo_ipa": "/ɡaʁ/",
+                "audio_texto": "g"
+            },
+            {
+                "ipa": "f",
+                "ejemplo": "fou",
+                "ejemplo_ipa": "/fu/",
+                "audio_texto": "f"
+            },
+            {
+                "ipa": "v",
+                "ejemplo": "vous",
+                "ejemplo_ipa": "/vu/",
+                "audio_texto": "v"
+            },
+            {
+                "ipa": "s",
+                "ejemplo": "sac",
+                "ejemplo_ipa": "/sak/",
+                "audio_texto": "s"
+            },
+            {
+                "ipa": "z",
+                "ejemplo": "zéro",
+                "ejemplo_ipa": "/zeʁo/",
+                "audio_texto": "z"
+            },
+            {
+                "ipa": "ʃ",
+                "ejemplo": "chat",
+                "ejemplo_ipa": "/ʃa/",
+                "audio_texto": "ch"
+            },
+            {
+                "ipa": "ʒ",
+                "ejemplo": "jour",
+                "ejemplo_ipa": "/ʒuʁ/",
+                "audio_texto": "j"
+            },
+            {
+                "ipa": "m",
+                "ejemplo": "maman",
+                "ejemplo_ipa": "/mamɑ̃/",
+                "audio_texto": "m"
+            },
+            {
+                "ipa": "n",
+                "ejemplo": "nous",
+                "ejemplo_ipa": "/nu/",
+                "audio_texto": "n"
+            },
+            {
+                "ipa": "ɲ",
+                "ejemplo": "montagne",
+                "ejemplo_ipa": "/mɔ̃taɲ/",
+                "audio_texto": "gn"
+            },
+            {
+                "ipa": "ŋ",
+                "ejemplo": "parking",
+                "ejemplo_ipa": "/paʁkiŋ/",
+                "audio_texto": "ng"
+            },
+            {
+                "ipa": "ʁ",
+                "ejemplo": "rue",
+                "ejemplo_ipa": "/ʁy/",
+                "audio_texto": "r"
+            },
+            {
+                "ipa": "l",
+                "ejemplo": "lire",
+                "ejemplo_ipa": "/liʁ/",
+                "audio_texto": "l"
+            }
+        ]
+    },
+
+    {
+        "nombre": "Sonidos especiales",
+        "descripcion": "Algunos contrastes especialmente importantes para estudiantes hispanohablantes.",
+        "sonidos": [
+            {
+                "ipa": "y",
+                "ejemplo": "lune",
+                "ejemplo_ipa": "/lyn/",
+                "audio_texto": "u"
+            },
+            {
+                "ipa": "u",
+                "ejemplo": "loup",
+                "ejemplo_ipa": "/lu/",
+                "audio_texto": "ou"
+            },
+            {
+                "ipa": "ø",
+                "ejemplo": "peu",
+                "ejemplo_ipa": "/pø/",
+                "audio_texto": "eu"
+            },
+            {
+                "ipa": "œ",
+                "ejemplo": "peur",
+                "ejemplo_ipa": "/pœʁ/",
+                "audio_texto": "œu"
+            },
+            {
+                "ipa": "ʁ",
+                "ejemplo": "Paris",
+                "ejemplo_ipa": "/paʁi/",
+                "audio_texto": "r"
+            }
+        ]
+    }
+]

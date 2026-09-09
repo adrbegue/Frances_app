@@ -1,0 +1,10 @@
+Aqui abajo las cosas que quiero implementar
+XXXX Boton con la fonetica para escicharla
+- Meter nuevos tipos de ejercicios para hacerlo mas entretenido
+- Que salgan primero las fichas no resueltas
+- Entrada de teoria
+- Boton de teoria siempre disponible
+- Cada tema tenga subsecciones
+- Ejercicio de unir conflechas
+- Ejercicos de texto con huecos pero con desplegable en cada hueco cloze dropdown
+- Detectar el error
