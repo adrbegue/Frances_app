@@ -13,7 +13,6 @@ import {
 // ================================================================
 
 let globalFlashcards = [];
-
 let pronunciationData = [];
 
 let state = {
@@ -28,10 +27,7 @@ let state = {
 
     currentMazo: null,
 
-    isHardModeActive: false,
-
-    // Desde dónde se abrió la pronunciación
-    pronunciationOpenedFrom: 'lobby'
+    isHardModeActive: false
 
 };
 
@@ -48,6 +44,12 @@ const sectionStudy =
 
 const pronunciationOverlay =
     document.getElementById('pronunciation-overlay');
+
+const theoryOverlay =
+    document.getElementById('theory-overlay');
+
+const theoryPdf =
+    document.getElementById('theory-pdf');
 
 
 // ================================================================
@@ -79,8 +81,10 @@ document
 function showLobbyView() {
 
     closePronunciation();
+    closeTheory();
 
     sectionStudy.classList.add('hidden');
+    sectionStudy.classList.remove('flex');
 
     sectionLobby.classList.remove('hidden');
 
@@ -104,6 +108,7 @@ function showStudyView(nombreMazo) {
     sectionLobby.classList.add('hidden');
 
     sectionStudy.classList.remove('hidden');
+    sectionStudy.classList.add('flex');
 
     document
         .getElementById('app-subtitle')
@@ -118,36 +123,23 @@ function showStudyView(nombreMazo) {
 // PRONUNCIACIÓN
 // ================================================================
 
-
-// BOTÓN DEL HEADER
-
 document
     .getElementById('btn-pronunciation')
     .onclick = () => {
-
-        state.pronunciationOpenedFrom = 'lobby';
 
         openPronunciation();
 
     };
 
-
-// BOTÓN DESDE EL EJERCICIO
 
 document
     .getElementById('btn-pronunciation-study')
     .onclick = () => {
 
-        state.pronunciationOpenedFrom = 'study';
-
         openPronunciation();
 
     };
 
-
-// ================================================================
-// ABRIR PRONUNCIACIÓN
-// ================================================================
 
 function openPronunciation() {
 
@@ -160,10 +152,6 @@ function openPronunciation() {
 }
 
 
-// ================================================================
-// CERRAR PRONUNCIACIÓN
-// ================================================================
-
 document
     .getElementById('btn-back-from-pronunciation')
     .onclick = () => {
@@ -172,10 +160,6 @@ document
 
     };
 
-
-// ================================================================
-// VOLVER AL SITIO ANTERIOR
-// ================================================================
 
 function closePronunciation() {
 
@@ -187,7 +171,74 @@ function closePronunciation() {
 
 
 // ================================================================
-// CARGAR DATOS DE PRONUNCIACIÓN
+// TEORÍA
+// ================================================================
+
+function abrirTeoria(nombreMazo) {
+
+    if (!nombreMazo) {
+        return;
+    }
+
+    const nombrePdf =
+        nombreMazo.replace(/\.txt$/i, '.pdf');
+
+    const rutaPdf =
+        `teoria/${encodeURIComponent(nombrePdf)}`;
+
+    theoryPdf.src = rutaPdf;
+
+    const titulo =
+        nombreMazo.replace(/\.txt$/i, '');
+
+    document
+        .getElementById('theory-title')
+        .innerText = titulo;
+
+    theoryOverlay.classList.remove('hidden');
+
+    document.body.classList.add('overflow-hidden');
+
+}
+
+
+function closeTheory() {
+
+    theoryOverlay.classList.add('hidden');
+
+    theoryPdf.src = '';
+
+    document.body.classList.remove('overflow-hidden');
+
+}
+
+
+document
+    .getElementById('btn-close-theory')
+    .onclick = () => {
+
+        closeTheory();
+
+    };
+
+
+// ================================================================
+// TEORÍA DESDE LA SESIÓN
+// ================================================================
+
+document
+    .getElementById('btn-theory-study')
+    .onclick = () => {
+
+        if (state.currentMazo) {
+            abrirTeoria(state.currentMazo);
+        }
+
+    };
+
+
+// ================================================================
+// CARGAR PRONUNCIACIÓN
 // ================================================================
 
 async function cargarPronunciacion() {
@@ -195,10 +246,7 @@ async function cargarPronunciacion() {
     try {
 
         const response =
-            await fetch(
-                'datos/pronunciacion.json'
-            );
-
+            await fetch('datos/pronunciacion.json');
 
         if (!response.ok) {
 
@@ -208,10 +256,8 @@ async function cargarPronunciacion() {
 
         }
 
-
         pronunciationData =
             await response.json();
-
 
     } catch (error) {
 
@@ -232,124 +278,197 @@ async function cargarPronunciacion() {
 // ================================================================
 
 function renderPronunciation() {
+
     const container =
-        document.getElementById('pronunciation-container');
+        document.getElementById(
+            'pronunciation-container'
+        );
 
     container.innerHTML = '';
 
+
     if (!pronunciationData.length) {
+
         container.innerHTML = `
             <div class="bg-white rounded-3xl border border-red-200 p-8 text-center">
-                <div class="text-4xl mb-3">⚠️</div>
+
+                <div class="text-4xl mb-3">
+                    ⚠️
+                </div>
+
                 <h3 class="font-bold text-slate-900 mb-2">
                     No se ha podido cargar la fonética
                 </h3>
+
                 <p class="text-sm text-slate-500">
-                    Comprueba que existe el archivo
+                    Comprueba que existe
                     <span class="font-mono">
                         datos/pronunciacion.json
                     </span>.
                 </p>
+
             </div>
         `;
+
         return;
     }
 
-    pronunciationData.forEach(categoria => {
-        const categorySection = document.createElement('section');
-        categorySection.className = 'flex flex-col gap-3';
 
-        const categoryHeader = document.createElement('div');
+    pronunciationData.forEach(categoria => {
+
+        const categorySection =
+            document.createElement('section');
+
+        categorySection.className =
+            'flex flex-col gap-3';
+
+
+        const categoryHeader =
+            document.createElement('div');
+
 
         categoryHeader.innerHTML = `
-            <div class="flex items-center gap-3">
-                <div class="h-px flex-grow bg-slate-200"></div>
+            <div class="flex items-center gap-3 mb-1">
 
-                <h3 class="text-sm sm:text-base font-bold uppercase tracking-wider text-slate-500 whitespace-nowrap">
+                <div class="h-px flex-1 bg-slate-300"></div>
+
+                <h3 class="text-base sm:text-lg font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
                     ${categoria.nombre || ''}
                 </h3>
 
-                <div class="h-px flex-grow bg-slate-200"></div>
+                <div class="h-px flex-1 bg-slate-300"></div>
+
             </div>
+
+            ${
+                categoria.descripcion
+                    ? `
+                        <p class="text-center text-xs sm:text-sm text-slate-400 mb-2">
+                            ${categoria.descripcion}
+                        </p>
+                    `
+                    : ''
+            }
         `;
 
-        categorySection.appendChild(categoryHeader);
 
-        const grid = document.createElement('div');
+        categorySection.appendChild(
+            categoryHeader
+        );
+
+
+        const grid =
+            document.createElement('div');
 
         grid.className =
             'grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-2 sm:gap-3';
 
-        const sonidos = categoria.sonidos || [];
+
+        const sonidos =
+            categoria.sonidos || [];
+
 
         sonidos.forEach(sonido => {
+
             grid.appendChild(
-                crearTarjetaPronunciacion(sonido)
+                crearTarjetaPronunciacion(
+                    sonido
+                )
             );
+
         });
 
+
         categorySection.appendChild(grid);
-        container.appendChild(categorySection);
+
+        container.appendChild(
+            categorySection
+        );
+
     });
 
+
     lucide.createIcons();
+
 }
 
 
 // ================================================================
-// CREAR TARJETA DE PRONUNCIACIÓN
-// ================================================================
-//
-// Cada tarjeta muestra únicamente:
-//
-//              /y/
-//
-//             lune
-//             /lyn/
-//
-// No es clicable.
-// No reproduce ningún sonido.
+// TARJETA DE PRONUNCIACIÓN
 // ================================================================
 
 function crearTarjetaPronunciacion(sonido) {
-    const card = document.createElement('button');
+
+    const card =
+        document.createElement('button');
 
     card.type = 'button';
+
     card.className =
         'pronunciation-card bg-white border border-slate-200 rounded-xl px-3 py-3 shadow-sm flex flex-col items-center justify-center gap-1 min-h-[105px] cursor-pointer hover:border-indigo-300 hover:bg-indigo-50/30 active:scale-95 transition';
 
-    const ipaText = document.createElement('div');
+
+    const ipaText =
+        document.createElement('div');
+
     ipaText.className =
         'text-xl sm:text-2xl font-mono font-bold text-indigo-700 leading-tight text-center';
-    ipaText.innerText = `/${sonido.ipa}/`;
 
-    const wordText = document.createElement('div');
+    ipaText.innerText =
+        `/${sonido.ipa}/`;
+
+
+    const wordText =
+        document.createElement('div');
+
     wordText.className =
         'text-sm sm:text-base font-bold text-slate-800 leading-tight text-center break-words';
-    wordText.innerText = sonido.ejemplo;
 
-    const wordIPA = document.createElement('div');
+    wordText.innerText =
+        sonido.ejemplo;
+
+
+    const wordIPA =
+        document.createElement('div');
+
     wordIPA.className =
         'text-[10px] sm:text-xs font-mono italic text-emerald-600 leading-tight text-center break-words';
-    wordIPA.innerText = sonido.ejemplo_ipa || '';
 
-    const audioIcon = document.createElement('div');
+    wordIPA.innerText =
+        sonido.ejemplo_ipa || '';
+
+
+    const audioIcon =
+        document.createElement('div');
+
     audioIcon.className =
         'text-[10px] text-slate-400 mt-1';
-    audioIcon.innerText = '🔊';
+
+    audioIcon.innerText =
+        '🔊';
+
 
     card.appendChild(ipaText);
     card.appendChild(wordText);
     card.appendChild(wordIPA);
     card.appendChild(audioIcon);
 
+
     card.onclick = () => {
+
         if (sonido.ejemplo) {
-            ejecutarTTS(sonido.ejemplo);
+
+            ejecutarTTS(
+                sonido.ejemplo
+            );
+
         }
+
     };
 
+
     return card;
+
 }
 
 
@@ -490,52 +609,50 @@ function parsearCSV(
     let index = 0;
 
 
-    lines.forEach(
-        line => {
+    lines.forEach(line => {
 
-            line =
-                line.trim();
-
-
-            if (!line) {
-                return;
-            }
+        line =
+            line.trim();
 
 
-            const partes =
-                line.split(';');
+        if (!line) {
+            return;
+        }
 
 
-            if (partes.length >= 2) {
-
-                globalFlashcards.push({
-
-                    id:
-                        `${filename}_${index}`,
-
-                    mazo:
-                        filename,
-
-                    front:
-                        partes[0].trim(),
-
-                    back:
-                        partes[1].trim(),
-
-                    ipa:
-                        partes[2]
-                            ? partes[2].trim()
-                            : ''
-
-                });
+        const partes =
+            line.split(';');
 
 
-                index++;
+        if (partes.length >= 2) {
 
-            }
+            globalFlashcards.push({
+
+                id:
+                    `${filename}_${index}`,
+
+                mazo:
+                    filename,
+
+                front:
+                    partes[0].trim(),
+
+                back:
+                    partes[1].trim(),
+
+                ipa:
+                    partes[2]
+                        ? partes[2].trim()
+                        : ''
+
+            });
+
+
+            index++;
 
         }
-    );
+
+    });
 
 }
 
@@ -565,226 +682,240 @@ function renderLobby() {
         ];
 
 
-    nombresMazos.forEach(
-        nombreMazo => {
+    nombresMazos.forEach(nombreMazo => {
 
-            const tarjetasMazo =
-                globalFlashcards.filter(
-                    card =>
-                        card.mazo === nombreMazo
-                );
-
-
-            const totalMazo =
-                tarjetasMazo.length;
+        const tarjetasMazo =
+            globalFlashcards.filter(
+                card =>
+                    card.mazo === nombreMazo
+            );
 
 
-            const facilesCompletados =
-                tarjetasMazo.filter(
-                    card =>
-                        state.cardsProgress[
-                            card.id
-                        ]?.easyBox === 3
-                ).length;
+        const totalMazo =
+            tarjetasMazo.length;
 
 
-            const dificilesCompletados =
-                tarjetasMazo.filter(
-                    card =>
-                        state.cardsProgress[
-                            card.id
-                        ]?.hardMastered === true
-                ).length;
+        const facilesCompletados =
+            tarjetasMazo.filter(
+                card =>
+                    state.cardsProgress[
+                        card.id
+                    ]?.easyBox === 3
+            ).length;
 
 
-            const porcFacil =
-                totalMazo > 0
-                    ? Math.round(
-                        (
-                            facilesCompletados /
-                            totalMazo
-                        ) * 100
-                    )
-                    : 0;
+        const dificilesCompletados =
+            tarjetasMazo.filter(
+                card =>
+                    state.cardsProgress[
+                        card.id
+                    ]?.hardMastered === true
+            ).length;
 
 
-            const porcDificil =
-                totalMazo > 0
-                    ? Math.round(
-                        (
-                            dificilesCompletados /
-                            totalMazo
-                        ) * 100
-                    )
-                    : 0;
+        const porcFacil =
+            totalMazo > 0
+                ? Math.round(
+                    (
+                        facilesCompletados /
+                        totalMazo
+                    ) * 100
+                )
+                : 0;
 
 
-            const nombreSinExtension =
-                nombreMazo.replace(
-                    '.txt',
-                    ''
-                );
+        const porcDificil =
+            totalMazo > 0
+                ? Math.round(
+                    (
+                        dificilesCompletados /
+                        totalMazo
+                    ) * 100
+                )
+                : 0;
 
 
-            let tituloTema =
-                nombreSinExtension;
+        const nombreSinExtension =
+            nombreMazo.replace(
+                '.txt',
+                ''
+            );
 
 
-            let descripcionTema =
-                'Práctica de vocabulario y estructuras.';
+        let tituloTema =
+            nombreSinExtension;
+
+        let descripcionTema =
+            'Práctica de vocabulario y estructuras.';
 
 
-            if (
-                tituloTema.includes('_')
-            ) {
+        if (
+            tituloTema.includes('_')
+        ) {
 
-                const partes =
-                    tituloTema.split('_');
-
-
-                tituloTema =
-                    partes[0].trim();
+            const partes =
+                tituloTema.split('_');
 
 
-                descripcionTema =
-                    partes[1].trim();
-
-            }
+            tituloTema =
+                partes[0].trim();
 
 
-            const box =
-                document.createElement(
-                    'div'
-                );
+            descripcionTema =
+                partes[1].trim();
+
+        }
 
 
-            box.className =
-                'bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between gap-4';
+        const box =
+            document.createElement('div');
 
 
-            box.innerHTML = `
-
-                <div>
-
-                    <h4
-                        class="text-lg font-bold text-slate-800 truncate">
-
-                        ${tituloTema}
-
-                    </h4>
+        box.className =
+            'bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition flex flex-col gap-5';
 
 
-                    <p
-                        class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+        box.innerHTML = `
 
-                        ${descripcionTema}
+            <div>
 
-                    </p>
+                <h4 class="text-lg font-bold text-slate-800 truncate">
+                    ${tituloTema}
+                </h4>
 
-                </div>
+                <p class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                    ${descripcionTema}
+                </p>
 
-
-                <div class="space-y-3 my-2">
-
-
-                    <div class="space-y-1">
-
-                        <div
-                            class="flex justify-between text-[11px] font-bold text-slate-500">
-
-                            <span>
-                                🟢 MODO TARJETAS
-                            </span>
-
-                            <span class="font-mono text-slate-700">
-                                ${facilesCompletados}/${totalMazo}
-                            </span>
-
-                        </div>
+            </div>
 
 
-                        <div
-                            class="w-full bg-slate-100 rounded-full h-1.5">
+            <div class="space-y-3">
 
-                            <div
-                                class="bg-emerald-500 h-1.5 rounded-full"
-                                style="width: ${porcFacil}%">
-                            </div>
+                <div class="space-y-1">
 
-                        </div>
+                    <div class="flex justify-between text-[11px] font-bold text-slate-500">
+
+                        <span>
+                            🟢 MODO TARJETAS
+                        </span>
+
+                        <span class="font-mono text-slate-700">
+                            ${facilesCompletados}/${totalMazo}
+                        </span>
 
                     </div>
 
-
-                    <div class="space-y-1">
-
-                        <div
-                            class="flex justify-between text-[11px] font-bold text-slate-500">
-
-                            <span>
-                                💪 MODO ESCRITURA
-                            </span>
-
-                            <span class="font-mono text-slate-700">
-                                ${dificilesCompletados}/${totalMazo}
-                            </span>
-
-                        </div>
-
+                    <div class="w-full bg-slate-100 rounded-full h-1.5">
 
                         <div
-                            class="w-full bg-slate-100 rounded-full h-1.5">
-
-                            <div
-                                class="bg-indigo-600 h-1.5 rounded-full"
-                                style="width: ${porcDificil}%">
-                            </div>
-
+                            class="bg-emerald-500 h-1.5 rounded-full"
+                            style="width: ${porcFacil}%">
                         </div>
 
                     </div>
 
                 </div>
 
+
+                <div class="space-y-1">
+
+                    <div class="flex justify-between text-[11px] font-bold text-slate-500">
+
+                        <span>
+                            💪 MODO ESCRITURA
+                        </span>
+
+                        <span class="font-mono text-slate-700">
+                            ${dificilesCompletados}/${totalMazo}
+                        </span>
+
+                    </div>
+
+                    <div class="w-full bg-slate-100 rounded-full h-1.5">
+
+                        <div
+                            class="bg-indigo-600 h-1.5 rounded-full"
+                            style="width: ${porcDificil}%">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECCIONES DEL TEMA -->
+
+            <div class="grid grid-cols-2 gap-2 pt-1">
 
                 <button
-                    class="btn-entrar-mazo w-full py-2.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-2xl text-xs font-bold tracking-wide shadow-sm transition"
+                    class="btn-theory-mazo flex items-center justify-center gap-2 py-3 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 rounded-xl text-xs font-bold transition"
                     data-mazo="${nombreMazo}">
 
-                    ABRIR SESIÓN
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+
+                    TEORÍA
 
                 </button>
 
-            `;
+
+                <button
+                    class="btn-entrar-mazo flex items-center justify-center gap-2 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-sm transition"
+                    data-mazo="${nombreMazo}">
+
+                    <i data-lucide="layers-3" class="w-4 h-4"></i>
+
+                    TARJETAS
+
+                </button>
+
+            </div>
+
+        `;
 
 
-            container.appendChild(
-                box
-            );
+        container.appendChild(box);
 
-        }
-    );
+    });
 
 
     document
-        .querySelectorAll(
-            '.btn-entrar-mazo'
-        )
-        .forEach(
-            button => {
+        .querySelectorAll('.btn-entrar-mazo')
+        .forEach(button => {
 
-                button.onclick = () => {
+            button.onclick = () => {
 
-                    showStudyView(
-                        button.getAttribute(
-                            'data-mazo'
-                        )
-                    );
+                showStudyView(
+                    button.getAttribute(
+                        'data-mazo'
+                    )
+                );
 
-                };
+            };
 
-            }
-        );
+        });
+
+
+    document
+        .querySelectorAll('.btn-theory-mazo')
+        .forEach(button => {
+
+            button.onclick = () => {
+
+                abrirTeoria(
+                    button.getAttribute(
+                        'data-mazo'
+                    )
+                );
+
+            };
+
+        });
+
+
+    lucide.createIcons();
 
 }
 
@@ -809,7 +940,6 @@ function startStudySession(
 
 
     resetFlip();
-
 
     renderCard();
 
@@ -840,39 +970,20 @@ function renderCard() {
         state.activeSessionCards.length
     ) {
 
-        container.classList.add(
-            'hidden'
-        );
+        container.classList.add('hidden');
 
-
-        emptyView.classList.remove(
-            'hidden'
-        );
-
-
-        emptyView.classList.add(
-            'flex'
-        );
-
+        emptyView.classList.remove('hidden');
+        emptyView.classList.add('flex');
 
         return;
 
     }
 
 
-    container.classList.remove(
-        'hidden'
-    );
+    container.classList.remove('hidden');
+    container.classList.add('flex');
 
-
-    container.classList.add(
-        'flex'
-    );
-
-
-    emptyView.classList.add(
-        'hidden'
-    );
+    emptyView.classList.add('hidden');
 
 
     const card =
@@ -908,10 +1019,6 @@ function renderCard() {
         `${state.currentCardIndex + 1} / ${state.activeSessionCards.length}`;
 
 
-    // ============================================================
-    // MODO DIFÍCIL
-    // ============================================================
-
     if (
         state.isHardModeActive
     ) {
@@ -920,27 +1027,21 @@ function renderCard() {
             .getElementById(
                 'wrapper-normal-card'
             )
-            .classList.add(
-                'hidden'
-            );
+            .classList.add('hidden');
 
 
         document
             .getElementById(
                 'normal-feedback-buttons'
             )
-            .classList.add(
-                'hidden'
-            );
+            .classList.add('hidden');
 
 
         document
             .getElementById(
                 'wrapper-hard-card'
             )
-            .classList.remove(
-                'hidden'
-            );
+            .classList.remove('hidden');
 
 
         document.getElementById(
@@ -955,12 +1056,8 @@ function renderCard() {
             );
 
 
-        inputElement.value =
-            '';
-
-
-        inputElement.disabled =
-            false;
+        inputElement.value = '';
+        inputElement.disabled = false;
 
 
         inputElement.className =
@@ -971,69 +1068,51 @@ function renderCard() {
             .getElementById(
                 'hard-result-box'
             )
-            .classList.add(
-                'hidden'
-            );
+            .classList.add('hidden');
 
 
         document
             .getElementById(
                 'btn-hard-check'
             )
-            .classList.remove(
-                'hidden'
-            );
+            .classList.remove('hidden');
 
 
         document
             .getElementById(
                 'btn-hard-retry'
             )
-            .classList.add(
-                'hidden'
-            );
+            .classList.add('hidden');
 
 
         document
             .getElementById(
                 'btn-hard-skip'
             )
-            .classList.remove(
-                'hidden'
-            );
+            .classList.remove('hidden');
 
 
     } else {
-
-        // ========================================================
-        // MODO NORMAL
-        // ========================================================
 
         document
             .getElementById(
                 'wrapper-hard-card'
             )
-            .classList.add(
-                'hidden'
-            );
+            .classList.add('hidden');
 
 
         document
             .getElementById(
                 'wrapper-normal-card'
             )
-            .classList.remove(
-                'hidden'
-            );
+            .classList.remove('hidden');
 
 
         document
             .getElementById(
                 'normal-feedback-buttons'
             )
-            .classList.remove(
-                'hidden'
-            );
+            .classList.remove('hidden');
 
 
         document.getElementById(
@@ -1058,10 +1137,6 @@ function renderCard() {
 
     }
 
-
-    // ============================================================
-    // ESTADO DEL MICRO
-    // ============================================================
 
     document.getElementById(
         'voice-status-indicator'
@@ -1121,7 +1196,6 @@ document
     .onclick =
     event => {
 
-
         if (
             event.target.closest(
                 '#btn-audio-speak'
@@ -1162,9 +1236,7 @@ document
 // RESPUESTA NORMAL
 // ================================================================
 
-function responderNormal(
-    tipo
-) {
+function responderNormal(tipo) {
 
     const card =
         state.activeSessionCards[
@@ -1191,9 +1263,7 @@ function responderNormal(
     }
 
 
-    if (
-        tipo === 'easy'
-    ) {
+    if (tipo === 'easy') {
 
         state.cardsProgress[
             card.id
@@ -1201,10 +1271,7 @@ function responderNormal(
 
     }
 
-
-    else if (
-        tipo === 'hard'
-    ) {
+    else if (tipo === 'hard') {
 
         state.cardsProgress[
             card.id
@@ -1216,9 +1283,7 @@ function responderNormal(
     guardarProgreso();
 
 
-    if (
-        tipo === 'again'
-    ) {
+    if (tipo === 'again') {
 
         state.activeSessionCards.push(
             card
@@ -1228,7 +1293,6 @@ function responderNormal(
 
 
     state.currentCardIndex++;
-
 
     renderCard();
 
@@ -1240,49 +1304,37 @@ function responderNormal(
 // ================================================================
 
 document
-    .getElementById(
-        'btn-score-again'
-    )
+    .getElementById('btn-score-again')
     .onclick =
     event => {
 
         event.stopPropagation();
 
-        responderNormal(
-            'again'
-        );
+        responderNormal('again');
 
     };
 
 
 document
-    .getElementById(
-        'btn-score-hard'
-    )
+    .getElementById('btn-score-hard')
     .onclick =
     event => {
 
         event.stopPropagation();
 
-        responderNormal(
-            'hard'
-        );
+        responderNormal('hard');
 
     };
 
 
 document
-    .getElementById(
-        'btn-score-easy'
-    )
+    .getElementById('btn-score-easy')
     .onclick =
     event => {
 
         event.stopPropagation();
 
-        responderNormal(
-            'easy'
-        );
+        responderNormal('easy');
 
     };
 
@@ -1292,12 +1344,8 @@ document
 // ================================================================
 
 document
-    .getElementById(
-        'btn-hard-check'
-    )
-    .onclick =
-    () => {
-
+    .getElementById('btn-hard-check')
+    .onclick = () => {
 
         const card =
             state.activeSessionCards[
@@ -1305,20 +1353,21 @@ document
             ];
 
 
-        const limpiarTexto =
-            texto =>
+        const limpiarTexto = text => {
 
-                texto
-                    .trim()
-                    .toLowerCase()
-                    .replace(
-                        /[.,\/#!$%\^&\*;:{}=\-_`~()?¿]/g,
-                        ''
-                    )
-                    .replace(
-                        /\s+/g,
-                        ' '
-                    );
+            return text
+                .trim()
+                .toLowerCase()
+                .replace(
+                    /[.,\/#!$%\^&\*;:{}=\-_`~()?¿]/g,
+                    ''
+                )
+                .replace(
+                    /\s+/g,
+                    ' '
+                );
+
+        };
 
 
         const inputElement =
@@ -1353,6 +1402,10 @@ document
 
         resultBox.classList.remove(
             'hidden'
+        );
+
+        resultBox.classList.add(
+            'flex'
         );
 
 
@@ -1392,7 +1445,6 @@ document
             correctSolution
         ) {
 
-
             statusText.innerText =
                 '🎉 ¡EXCELENTE! PERFECTO';
 
@@ -1409,48 +1461,39 @@ document
                 'w-full px-4 py-3 border border-emerald-300 bg-emerald-50 text-emerald-900 rounded-xl focus:outline-none text-lg transition-colors';
 
 
-            inputElement.disabled =
-                true;
+            inputElement.disabled = true;
 
 
             document
                 .getElementById(
                     'btn-hard-check'
                 )
-                .classList.add(
-                    'hidden'
-                );
+                .classList.add('hidden');
 
 
             document
                 .getElementById(
                     'btn-hard-retry'
                 )
-                .classList.add(
-                    'hidden'
-                );
+                .classList.add('hidden');
 
 
             document
                 .getElementById(
                     'btn-hard-skip'
                 )
-                .classList.add(
-                    'hidden'
-                );
+                .classList.add('hidden');
 
 
             state.cardsProgress[
                 card.id
-            ].hardMastered =
-                true;
+            ].hardMastered = true;
 
 
             guardarProgreso();
 
 
         } else {
-
 
             statusText.innerText =
                 '❌ CASI... COMPARA Y CORRIGE TU INPUT:';
@@ -1472,27 +1515,21 @@ document
                 .getElementById(
                     'btn-hard-check'
                 )
-                .classList.add(
-                    'hidden'
-                );
+                .classList.add('hidden');
 
 
             document
                 .getElementById(
                     'btn-hard-retry'
                 )
-                .classList.remove(
-                    'hidden'
-                );
+                .classList.remove('hidden');
 
 
             document
                 .getElementById(
                     'btn-hard-skip'
                 )
-                .classList.remove(
-                    'hidden'
-                );
+                .classList.remove('hidden');
 
         }
 
@@ -1500,21 +1537,22 @@ document
 
 
 // ================================================================
-// REINTENTAR
+// MODO DIFÍCIL - REINTENTAR
 // ================================================================
 
 document
-    .getElementById(
-        'btn-hard-retry'
-    )
-    .onclick =
-    () => {
-
+    .getElementById('btn-hard-retry')
+    .onclick = () => {
 
         const inputElement =
             document.getElementById(
                 'input-hard-answer'
             );
+
+
+        inputElement.value = '';
+
+        inputElement.disabled = false;
 
 
         inputElement.className =
@@ -1525,44 +1563,46 @@ document
             .getElementById(
                 'hard-result-box'
             )
-            .classList.add(
-                'hidden'
-            );
+            .classList.add('hidden');
 
 
         document
             .getElementById(
-                'btn-hard-retry'
+                'hard-result-box'
             )
-            .classList.add(
-                'hidden'
-            );
+            .classList.remove('flex');
 
 
         document
             .getElementById(
                 'btn-hard-check'
             )
-            .classList.remove(
-                'hidden'
-            );
+            .classList.remove('hidden');
 
 
-        inputElement.focus();
+        document
+            .getElementById(
+                'btn-hard-retry'
+            )
+            .classList.add('hidden');
+
+
+        document
+            .getElementById(
+                'btn-hard-skip'
+            )
+            .classList.remove('hidden');
 
     };
 
 
 // ================================================================
-// SIGUIENTE TARJETA
+// MODO DIFÍCIL - SIGUIENTE
 // ================================================================
 
 document
-    .getElementById(
-        'btn-hard-next'
-    )
-    .onclick =
-    () => {
+    .getElementById('btn-hard-next')
+    .onclick = () => {
 
         state.currentCardIndex++;
 
@@ -1572,30 +1612,14 @@ document
 
 
 // ================================================================
-// SALTAR FRASE
+// MODO DIFÍCIL - SALTAR
 // ================================================================
 
 document
-    .getElementById(
-        'btn-hard-skip'
-    )
-    .onclick =
-    () => {
-
-
-        const card =
-            state.activeSessionCards[
-                state.currentCardIndex
-            ];
-
-
-        state.activeSessionCards.push(
-            card
-        );
-
+    .getElementById('btn-hard-skip')
+    .onclick = () => {
 
         state.currentCardIndex++;
-
 
         renderCard();
 
@@ -1603,40 +1627,28 @@ document
 
 
 // ================================================================
-// GUARDAR PROGRESO
-// ================================================================
-
-function guardarProgreso() {
-
-    localStorage.setItem(
-        'petit_pont_local_prog_v2',
-        JSON.stringify(
-            state.cardsProgress
-        )
-    );
-
-}
-
-
-// ================================================================
-// AUDIO TARJETA
+// AUDIO TARJETA NORMAL
 // ================================================================
 
 document
-    .getElementById(
-        'btn-audio-speak'
-    )
+    .getElementById('btn-audio-speak')
     .onclick =
     event => {
 
         event.stopPropagation();
 
 
-        ejecutarTTS(
+        const texto =
             document.getElementById(
                 'card-back-text'
-            ).innerText
-        );
+            ).innerText;
+
+
+        if (texto) {
+
+            ejecutarTTS(texto);
+
+        }
 
     };
 
@@ -1646,12 +1658,8 @@ document
 // ================================================================
 
 document
-    .getElementById(
-        'btn-hard-audio'
-    )
-    .onclick =
-    () => {
-
+    .getElementById('btn-hard-audio')
+    .onclick = () => {
 
         const card =
             state.activeSessionCards[
@@ -1659,7 +1667,7 @@ document
             ];
 
 
-        if (card) {
+        if (card?.back) {
 
             ejecutarTTS(
                 card.back
@@ -1671,7 +1679,7 @@ document
 
 
 // ================================================================
-// FRASE ACTUAL PARA MICRO
+// OBTENER FRASE PARA EL MICRO
 // ================================================================
 
 function obtenerFraseTarjetaActual() {
@@ -1684,7 +1692,34 @@ function obtenerFraseTarjetaActual() {
 
     return card
         ? card.back
-        : null;
+        : '';
+
+}
+
+
+// ================================================================
+// GUARDAR PROGRESO
+// ================================================================
+
+function guardarProgreso() {
+
+    try {
+
+        localStorage.setItem(
+            'petit_pont_local_prog_v2',
+            JSON.stringify(
+                state.cardsProgress
+            )
+        );
+
+    } catch (error) {
+
+        console.error(
+            '❌ Error guardando progreso:',
+            error
+        );
+
+    }
 
 }
 
@@ -1693,25 +1728,29 @@ function obtenerFraseTarjetaActual() {
 // CARGAR PROGRESO
 // ================================================================
 
-const saved =
-    localStorage.getItem(
-        'petit_pont_local_prog_v2'
-    );
-
-
-if (saved) {
+function cargarProgreso() {
 
     try {
 
-        state.cardsProgress =
-            JSON.parse(
-                saved
+        const guardado =
+            localStorage.getItem(
+                'petit_pont_local_prog_v2'
             );
+
+
+        if (guardado) {
+
+            state.cardsProgress =
+                JSON.parse(
+                    guardado
+                );
+
+        }
 
     } catch (error) {
 
         console.error(
-            '❌ Error leyendo progreso guardado:',
+            '❌ Error cargando progreso:',
             error
         );
 
@@ -1723,27 +1762,92 @@ if (saved) {
 
 
 // ================================================================
+// MODO DIFÍCIL
+// ================================================================
+
+const toggleBtn =
+    document.getElementById(
+        'toggle-hard-mode'
+    );
+
+
+toggleBtn.onclick = () => {
+
+    state.isHardModeActive =
+        !state.isHardModeActive;
+
+
+    updateToggleUI();
+
+
+    if (state.currentMazo) {
+
+        renderCard();
+
+    }
+
+};
+
+
+function updateToggleUI() {
+
+    const circle =
+        document.getElementById(
+            'toggle-circle'
+        );
+
+
+    if (
+        state.isHardModeActive
+    ) {
+
+        toggleBtn.classList.replace(
+            'bg-slate-200',
+            'bg-indigo-600'
+        );
+
+
+        circle.classList.add(
+            'translate-x-5'
+        );
+
+
+    } else {
+
+        toggleBtn.classList.replace(
+            'bg-indigo-600',
+            'bg-slate-200'
+        );
+
+
+        circle.classList.remove(
+            'translate-x-5'
+        );
+
+    }
+
+}
+
+
+// ================================================================
 // INICIALIZACIÓN
 // ================================================================
 
-window.onload =
+window.addEventListener(
+    'load',
     async () => {
 
+        cargarProgreso();
 
-        await Promise.all([
+        await cargarTodosLosMazos();
 
-            cargarTodosLosMazos(),
-
-            cargarPronunciacion()
-
-        ]);
-
+        await cargarPronunciacion();
 
         inicializarMicrofonoGlobal(
             obtenerFraseTarjetaActual
         );
 
-
         lucide.createIcons();
 
-    };
+    }
+);

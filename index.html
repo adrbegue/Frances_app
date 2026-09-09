@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,6 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-
         .perspective-1000 {
             perspective: 1000px;
         }
@@ -28,7 +28,6 @@
             transform: rotateY(180deg);
         }
 
-        /* Tarjetas de pronunciación */
         .pronunciation-card {
             transition:
                 transform 0.15s ease,
@@ -41,6 +40,19 @@
             box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
         }
 
+        .theory-overlay {
+            animation: theoryFadeIn 0.15s ease-out;
+        }
+
+        @keyframes theoryFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -59,26 +71,18 @@
             <div class="flex items-center gap-3">
 
                 <div class="bg-indigo-600 text-white p-2.5 rounded-2xl shadow-md flex items-center justify-center">
-
                     <i data-lucide="graduation-cap" class="w-6 h-6"></i>
-
                 </div>
 
-
                 <div>
-
                     <h1 class="font-bold text-xl text-slate-900 tracking-tight">
                         Le Petit Pont
                     </h1>
 
-                    <p
-                        id="app-subtitle"
-                        class="text-xs text-indigo-600 font-semibold uppercase tracking-wider">
-
+                    <p id="app-subtitle"
+                       class="text-xs text-indigo-600 font-semibold uppercase tracking-wider">
                         Mis Temas de Francés
-
                     </p>
-
                 </div>
 
             </div>
@@ -86,13 +90,11 @@
 
             <div class="flex items-center gap-2">
 
-                <!-- BOTÓN PRONUNCIACIÓN -->
                 <button
                     id="btn-pronunciation"
                     class="flex items-center gap-2 px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-xl font-semibold text-sm transition shadow-sm">
 
                     <i data-lucide="audio-lines" class="w-4 h-4"></i>
-
                     <span>Pronunciación</span>
 
                 </button>
@@ -121,7 +123,7 @@
     <!-- CONTENIDO PRINCIPAL                                       -->
     <!-- ========================================================= -->
 
-    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
+    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6">
 
 
         <!-- ===================================================== -->
@@ -132,21 +134,16 @@
             id="section-lobby"
             class="flex flex-col gap-6">
 
-
             <div
-                class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
 
-                <div>
+                <h3 class="text-xl font-bold text-slate-900 mb-1">
+                    ¡Bonjour! 👋
+                </h3>
 
-                    <h3 class="text-xl font-bold text-slate-900 mb-1">
-                        ¡Bonjour! 👋
-                    </h3>
-
-                    <p class="text-sm text-slate-500">
-                        Practica tus mazos en modo normal o ponte a prueba con el Modo Difícil de escritura.
-                    </p>
-
-                </div>
+                <p class="text-sm text-slate-500">
+                    Elige un tema y decide si quieres estudiar la teoría o practicar con las tarjetas.
+                </p>
 
             </div>
 
@@ -165,13 +162,10 @@
 
         <section
             id="section-study"
-            class="hidden flex flex-col gap-6">
+            class="hidden flex-col gap-6">
 
-
-            <!-- CABECERA DEL EJERCICIO -->
 
             <div class="flex items-center justify-between gap-4 flex-wrap">
-
 
                 <button
                     id="btn-back-to-lobby"
@@ -186,10 +180,20 @@
                 </button>
 
 
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 flex-wrap">
 
+                    <button
+                        id="btn-theory-study"
+                        class="flex items-center gap-2 px-4 py-2 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 rounded-xl font-semibold text-sm transition">
 
-                    <!-- PRONUNCIACIÓN -->
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+
+                        <span>
+                            Teoría
+                        </span>
+
+                    </button>
+
 
                     <button
                         id="btn-pronunciation-study"
@@ -204,15 +208,12 @@
                     </button>
 
 
-                    <!-- MODO DIFÍCIL -->
-
                     <div
                         class="flex items-center gap-3 bg-white border border-slate-200 px-4 py-1.5 rounded-xl shadow-sm">
 
                         <span class="text-xs font-bold uppercase tracking-wider text-slate-600">
-                            💪 Modo Dificil (Escribir)
+                            💪 Modo Difícil
                         </span>
-
 
                         <button
                             id="toggle-hard-mode"
@@ -247,21 +248,16 @@
 
                     <div
                         class="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center text-4xl mb-2">
-
                         🎉
-
                     </div>
-
 
                     <h3 class="text-2xl font-bold text-slate-900">
                         ¡Mazo Terminado!
                     </h3>
 
-
                     <p class="text-slate-600 text-sm">
                         Has completado la sesión actual en este modo.
                     </p>
-
 
                     <button
                         id="btn-empty-return"
@@ -281,25 +277,18 @@
                     class="w-full max-w-xl hidden flex-col gap-5">
 
 
-                    <!-- INDICADOR -->
-
                     <div class="flex justify-between items-center text-xs text-slate-500 px-1">
 
                         <span
                             id="card-badge-deck"
                             class="bg-indigo-50 text-indigo-700 font-bold px-2.5 py-1 rounded-full uppercase">
-
                             TEMA
-
                         </span>
-
 
                         <span
                             id="card-progress-indicator"
                             class="font-mono">
-
                             0 / 0
-
                         </span>
 
                     </div>
@@ -312,7 +301,6 @@
                     <div
                         id="wrapper-normal-card"
                         class="perspective-1000 cursor-pointer w-full h-72 relative select-none">
-
 
                         <div
                             id="card-inner"
@@ -328,12 +316,10 @@
                                     Frente (Español)
                                 </span>
 
-
                                 <p
                                     id="card-front-text"
                                     class="text-2xl text-center font-semibold text-slate-800 my-auto px-4">
                                 </p>
-
 
                                 <span class="text-center text-xs text-slate-400">
                                     Haz clic para dar la vuelta
@@ -347,11 +333,9 @@
                             <div
                                 class="backface-hidden rotate-y-180 absolute inset-0 bg-indigo-900 text-white rounded-3xl p-8 flex flex-col justify-between shadow-xl">
 
-
                                 <span class="text-xs font-bold text-indigo-300 uppercase">
                                     Dorso (Francés + IPA)
                                 </span>
-
 
                                 <div class="text-center my-auto flex flex-col gap-3 px-2">
 
@@ -360,7 +344,6 @@
                                         class="text-2xl font-bold text-white leading-relaxed">
                                     </p>
 
-
                                     <p
                                         id="card-back-ipa"
                                         class="text-base text-emerald-300 font-mono italic">
@@ -368,17 +351,13 @@
 
                                 </div>
 
-
                                 <div class="flex justify-center gap-3">
 
                                     <button
                                         id="btn-audio-speak"
                                         class="p-3 bg-indigo-800 hover:bg-indigo-700 rounded-full text-white shadow transition">
 
-                                        <i
-                                            data-lucide="volume-2"
-                                            class="w-5 h-5">
-                                        </i>
+                                        <i data-lucide="volume-2" class="w-5 h-5"></i>
 
                                     </button>
 
@@ -397,13 +376,11 @@
 
                     <div
                         id="wrapper-hard-card"
-                        class="hidden w-full bg-white rounded-3xl border border-slate-200 p-6 flex flex-col gap-4 shadow-lg">
-
+                        class="hidden w-full bg-white rounded-3xl border border-slate-200 p-6 flex-col gap-4 shadow-lg">
 
                         <span class="text-xs font-bold text-slate-400 uppercase">
                             Escribe en Francés (¡Ojo con los acentos!)
                         </span>
-
 
                         <div
                             class="bg-slate-50 p-4 rounded-xl border border-slate-100 min-h-[70px] flex items-center justify-center">
@@ -415,7 +392,6 @@
 
                         </div>
 
-
                         <input
                             type="text"
                             id="input-hard-answer"
@@ -424,10 +400,7 @@
                             class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-lg transition-colors">
 
 
-                        <div
-                            id="hard-actions-container"
-                            class="flex flex-col gap-2">
-
+                        <div class="flex flex-col gap-2">
 
                             <button
                                 id="btn-hard-check"
@@ -451,8 +424,7 @@
 
                         <div
                             id="hard-result-box"
-                            class="hidden p-4 rounded-xl flex flex-col gap-2 border">
-
+                            class="hidden p-4 rounded-xl flex-col gap-2 border">
 
                             <div class="flex justify-between items-center">
 
@@ -461,37 +433,28 @@
                                     class="font-bold text-sm">
                                 </span>
 
-
                                 <button
                                     id="btn-hard-audio"
                                     class="p-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 transition">
 
-                                    <i
-                                        data-lucide="volume-2"
-                                        class="w-4 h-4">
-                                    </i>
+                                    <i data-lucide="volume-2" class="w-4 h-4"></i>
 
                                 </button>
 
                             </div>
-
 
                             <p
                                 id="hard-correct-sentence"
                                 class="text-base font-bold tracking-wide">
                             </p>
 
-
                             <p
                                 id="hard-correct-ipa"
                                 class="text-xs font-mono italic text-slate-500">
                             </p>
 
-
                             <div
-                                class="grid grid-cols-2 gap-2 mt-2"
-                                id="hard-result-navigation">
-
+                                class="grid grid-cols-2 gap-2 mt-2">
 
                                 <button
                                     id="btn-hard-skip"
@@ -501,12 +464,11 @@
 
                                 </button>
 
-
                                 <button
                                     id="btn-hard-next"
                                     class="py-2 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-lg text-xs tracking-wide transition">
 
-                                    SIGUIENTE TARJETA
+                                    SIGUIENTE
 
                                 </button>
 
@@ -518,37 +480,34 @@
 
 
                     <!-- ================================================= -->
-                    <!-- FEEDBACK                                         -->
+                    <!-- BOTONES RESPUESTA NORMAL                         -->
                     <!-- ================================================= -->
 
                     <div
                         id="normal-feedback-buttons"
-                        class="grid grid-cols-3 gap-3">
-
+                        class="grid grid-cols-3 gap-2">
 
                         <button
                             id="btn-score-again"
-                            class="bg-red-50 text-red-700 py-3.5 rounded-xl text-xs font-bold border border-red-200 hover:bg-red-100 transition">
+                            class="py-3 bg-white border border-red-200 hover:bg-red-50 text-red-600 font-bold rounded-xl text-xs transition">
 
-                            🔄 REPETIR
+                            🔴 OTRA VEZ
 
                         </button>
-
 
                         <button
                             id="btn-score-hard"
-                            class="bg-amber-50 text-amber-700 py-3.5 rounded-xl text-xs font-bold border border-amber-200 hover:bg-amber-100 transition">
+                            class="py-3 bg-white border border-amber-200 hover:bg-amber-50 text-amber-600 font-bold rounded-xl text-xs transition">
 
-                            😐 DIFÍCIL
+                            🟠 DIFÍCIL
 
                         </button>
 
-
                         <button
                             id="btn-score-easy"
-                            class="bg-emerald-50 text-emerald-700 py-3.5 rounded-xl text-xs font-bold border border-emerald-200 hover:bg-emerald-100 transition">
+                            class="py-3 bg-white border border-emerald-200 hover:bg-emerald-50 text-emerald-600 font-bold rounded-xl text-xs transition">
 
-                            😎 FÁCIL
+                            🟢 FÁCIL
 
                         </button>
 
@@ -556,50 +515,42 @@
 
 
                     <!-- ================================================= -->
-                    <!-- MICRO                                               -->
+                    <!-- PRÁCTICA ORAL                                    -->
                     <!-- ================================================= -->
 
                     <div
-                        class="bg-white border border-slate-200 rounded-3xl p-4 flex flex-col gap-3 shadow-sm select-none">
+                        class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
 
+                        <div class="flex items-center justify-between gap-3">
 
-                        <div class="flex items-center gap-4">
-
-
-                            <button
-                                id="btn-global-mic"
-                                class="w-14 h-14 bg-emerald-600 text-white rounded-2xl flex flex-shrink-0 items-center justify-center transition-all shadow-md active:scale-95 touch-none">
-
-                                <i
-                                    data-lucide="mic"
-                                    class="w-6 h-6">
-                                </i>
-
-                            </button>
-
-
-                            <div
-                                class="flex-grow min-w-0 bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-center min-h-[56px]">
-
+                            <div class="min-w-0">
 
                                 <span
                                     id="voice-status-indicator"
                                     class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">
 
-                                    🎙️ PRÁCTICA DE ORAL (MANTÉN PULSADO EL MICRO)
+                                    🎙️ PRÁCTICA DE ORAL
 
                                 </span>
 
-
-                                <p
+                                <span
                                     id="voice-interpreted-text"
-                                    class="text-sm font-medium text-slate-500 italic truncate">
+                                    class="text-sm font-medium text-slate-500 italic truncate block">
 
                                     Listo para escuchar...
 
-                                </p>
+                                </span>
 
                             </div>
+
+
+                            <button
+                                id="btn-global-mic"
+                                class="w-12 h-12 flex-shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full flex items-center justify-center shadow-md transition">
+
+                                <i data-lucide="mic" class="w-5 h-5"></i>
+
+                            </button>
 
                         </div>
 
@@ -615,53 +566,38 @@
 
 
     <!-- ========================================================= -->
-    <!-- PANEL AUXILIAR DE PRONUNCIACIÓN                           -->
+    <!-- OVERLAY PRONUNCIACIÓN                                     -->
     <!-- ========================================================= -->
 
     <div
         id="pronunciation-overlay"
         class="hidden fixed inset-0 z-[100] bg-slate-50 overflow-y-auto">
 
-
         <div class="min-h-screen">
 
+            <div class="sticky top-0 z-20 bg-white border-b border-slate-200 shadow-sm">
 
-            <!-- CABECERA -->
-
-            <div
-                class="sticky top-0 z-20 bg-white border-b border-slate-200 shadow-sm">
-
-
-                <div
-                    class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
-
+                <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
 
                     <div class="flex items-center gap-3">
-
 
                         <button
                             id="btn-back-from-pronunciation"
                             class="flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl font-semibold text-sm transition">
 
-                            <i
-                                data-lucide="arrow-left"
-                                class="w-4 h-4">
-                            </i>
+                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
 
-
-                            <span id="pronunciation-back-text">
+                            <span>
                                 Volver
                             </span>
 
                         </button>
-
 
                         <div class="hidden sm:block">
 
                             <h2 class="text-lg font-bold text-slate-900">
                                 Pronunciación francesa
                             </h2>
-
 
                             <p class="text-xs text-slate-500">
                                 Fonemas y ejemplos
@@ -676,29 +612,18 @@
             </div>
 
 
-            <!-- CONTENIDO -->
+            <div class="max-w-6xl mx-auto px-4 py-6">
 
-            <div
-                class="max-w-6xl mx-auto px-4 py-6">
-
-
-                <div
-                    class="bg-white rounded-3xl border border-slate-200 shadow-sm p-5 sm:p-6 mb-6">
-
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-5 sm:p-6 mb-6">
 
                     <div class="flex items-start gap-3">
-
 
                         <div
                             class="w-10 h-10 flex-shrink-0 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center">
 
-                            <i
-                                data-lucide="info"
-                                class="w-5 h-5">
-                            </i>
+                            <i data-lucide="info" class="w-5 h-5"></i>
 
                         </div>
-
 
                         <div>
 
@@ -706,9 +631,8 @@
                                 Tabla de sonidos
                             </h3>
 
-
                             <p class="text-sm text-slate-500 leading-relaxed">
-                                Cada casilla muestra el fonema, una palabra de ejemplo y su transcripción fonética.
+                                Pulsa una casilla para escuchar la palabra de ejemplo.
                             </p>
 
                         </div>
@@ -736,13 +660,85 @@
 
 
     <!-- ========================================================= -->
-    <!-- JAVASCRIPT                                                 -->
+    <!-- OVERLAY TEORÍA                                            -->
     <!-- ========================================================= -->
 
-    <script
-        type="module"
-        src="./js/app.js">
+    <div
+        id="theory-overlay"
+        class="theory-overlay hidden fixed inset-0 z-[110] bg-slate-100">
+
+        <div class="h-screen flex flex-col">
+
+            <div
+                class="flex-shrink-0 bg-white border-b border-slate-200 shadow-sm">
+
+                <div
+                    class="max-w-7xl mx-auto w-full px-4 py-3 flex items-center justify-between gap-3">
+
+                    <div class="flex items-center gap-3 min-w-0">
+
+                        <button
+                            id="btn-close-theory"
+                            class="flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl font-semibold text-sm transition flex-shrink-0">
+
+                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+
+                            <span>
+                                Volver
+                            </span>
+
+                        </button>
+
+
+                        <div class="min-w-0">
+
+                            <h2
+                                id="theory-title"
+                                class="font-bold text-slate-900 truncate">
+
+                                Teoría
+
+                            </h2>
+
+                            <p class="text-xs text-slate-500 hidden sm:block">
+                                Puedes consultar esta teoría y volver a la sesión cuando quieras.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="flex-1 min-h-0 bg-slate-200">
+
+                <iframe
+                    id="theory-pdf"
+                    class="w-full h-full border-0"
+                    src=""
+                    title="Teoría del tema">
+                </iframe>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script type="module" src="js/app.js"></script>
+
+    <script>
+        window.addEventListener('load', () => {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        });
     </script>
 
 </body>
+
 </html>
