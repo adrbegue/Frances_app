@@ -364,6 +364,35 @@ function parsearCSV(
 
 
 // ================================================================
+// FORMATO DE TRANSCRIPCIÓN FONÉTICA
+// ================================================================
+
+function formatearIPA(transcripcion) {
+
+    const texto =
+        (transcripcion || '')
+            .trim();
+
+    if (!texto) {
+        return '';
+    }
+
+    // Las tarjetas antiguas usan [ ... ] y otras fuentes pueden usar
+    // / ... /. Mostramos siempre una única notación IPA coherente.
+    const sinDelimitadores =
+        texto
+            .replace(/^\s*[\[\/]\s*/, '')
+            .replace(/\s*[\]\/]\s*$/, '')
+            .trim();
+
+    return sinDelimitadores
+        ? `/${sinDelimitadores}/`
+        : '';
+
+}
+
+
+// ================================================================
 // ESTADO DE TARJETA
 // ================================================================
 
@@ -928,10 +957,8 @@ function renderCard() {
 
     if (ipa) {
 
-        ipa.innerText =
-            card.ipa
-                ? `/${card.ipa}/`
-                : '';
+        ipa.textContent =
+            formatearIPA(card.ipa);
 
     }
 
@@ -1057,6 +1084,12 @@ if (wrapperNormalCard) {
 
     wrapperNormalCard.onclick =
         event => {
+
+            // Al arrastrar para seleccionar o copiar texto no se debe
+            // interpretar el gesto como un giro de tarjeta.
+            if (window.getSelection()?.toString()) {
+                return;
+            }
 
             if (
                 event.target.closest(
