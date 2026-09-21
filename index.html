@@ -10,9 +10,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- PDF.js para visualizar teoría también en móviles -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
     <style>
         .perspective-1000 {
             perspective: 1000px;
@@ -57,50 +54,48 @@
             }
         }
 
-        /* =====================================================
-           VISOR PDF
-           ===================================================== */
-
-        #theory-pdf-container {
-            background: #525659;
+        /* Visor de teoría HTML seleccionable */
+        #theory-html-container {
+            background: #e2e8f0;
             overflow-y: auto;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
         }
 
-        .pdf-page-wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding: 12px;
-            box-sizing: border-box;
-        }
-
-        .pdf-page {
+        #theory-html-frame {
             display: block;
-            max-width: 100%;
-            height: auto;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            width: 100%;
+            height: 100%;
+            border: 0;
+            background: #f7f9fc;
         }
 
-        .pdf-loading {
+        .theory-html-status {
             min-height: 50vh;
             display: flex;
+            flex-direction: column;
+            gap: 1rem;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #334155;
+            text-align: center;
+            padding: 2rem;
         }
 
-        @media (max-width: 640px) {
-            .pdf-page-wrapper {
-                padding: 6px 0;
-            }
-
-            .pdf-page {
-                width: 100%;
-            }
+        .theory-html-spinner {
+            width: 3rem;
+            height: 3rem;
+            border: 4px solid #cbd5e1;
+            border-top-color: #4f46e5;
+            border-radius: 9999px;
+            animation: spin 0.8s linear infinite;
         }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .theory-html-error { color: #b91c1c; }
     </style>
 
 </head>
@@ -630,17 +625,16 @@
         <!-- VISOR -->
 
         <div
-            id="theory-pdf-container"
+            id="theory-html-container"
             class="flex-1 min-h-0 w-full">
 
             <div
-                id="theory-pdf-loading"
-                class="pdf-loading">
+                class="theory-html-status">
 
                 <div class="flex flex-col items-center gap-4 px-6 text-center">
 
                     <div
-                        class="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin">
+                        class="theory-html-spinner">
                     </div>
 
                     <p class="font-semibold">
@@ -661,11 +655,6 @@
 <script type="module" src="js/app.js"></script>
 
 <script>
-    if (window.pdfjsLib) {
-        pdfjsLib.GlobalWorkerOptions.workerSrc =
-            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    }
-
     if (window.lucide) {
         lucide.createIcons();
     }

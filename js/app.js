@@ -12,7 +12,7 @@
 // - micrófono
 //
 // La teoría y la pronunciación están separadas en:
-//   pdf-viewer.js
+//   html-viewer.js
 //   pronunciacion.js
 //
 // ================================================================
@@ -24,7 +24,7 @@ import {
 
 import {
     abrirTeoria
-} from './pdf-viewer.js';
+} from './html-viewer.js';
 
 import {
     inicializarPronunciacion
