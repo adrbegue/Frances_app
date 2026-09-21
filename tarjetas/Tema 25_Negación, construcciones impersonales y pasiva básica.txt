@@ -9,7 +9,7 @@ Tampoco hemos recibido respuesta;Nous n'avons pas reçu de réponse non plus;[nu
 ¿Está incluida la bebida?;La boisson est incluse ?;[la bwasɔ̃ ɛt ɛ̃klyz]
 La puerta fue cerrada ayer;La porte a été fermée hier;[la pɔʁt a ete fɛʁme jɛʁ]
 No queda ningún asiento libre en este vagón;Il ne reste aucune place libre dans ce wagon;[il nə ʁɛst okyn plas libʁ dɑ̃ sə vaɡɔ̃]
-La entrada no está permitida después de medianoche;L'entrée n'est pas autorisée après minuit;[lɑ̃tʁe nɛ pa otoʁize apʁɛ minɥi]
+La entrada está permitida hasta medianoche;L'entrée est autorisée jusqu'à minuit;[lɑ̃tʁe ɛt otoʁize ʒyska minɥi]
 ¿No viene nunca tu vecino a estas reuniones?;Ton voisin ne vient jamais à ces réunions ?;[tɔ̃ vwazɛ̃ nə vjɛ̃ ʒamɛ a se ʁeynjɔ̃]
 El premio fue entregado por una actriz famosa;Le prix a été remis par une actrice célèbre;[lə pʁi a ete ʁəmi paʁ yn aktʁis selɛbʁ]
 No se debe tocar ninguna obra del museo;Il ne faut toucher aucune œuvre du musée;[il nə fo tuʃe okyn œvʁ dy myze]
